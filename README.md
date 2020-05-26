@@ -3,7 +3,7 @@
 * Clone the repository
 * make sure that Node.js is installed
 * cd into public-idea-list
-* Install Node.js module list with npm
+* Install Node.js module list with [npm](www.npmjs.com)
  
  > npm install
 
