@@ -1,4 +1,5 @@
 import React from 'react';
+import store from './store'
 
 
 function App() {
@@ -8,5 +9,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
