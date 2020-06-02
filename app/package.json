@@ -1,5 +1,5 @@
 {
-  "name": "public-idea-list",
+  "name": "idea-directory",
   "description": "Repository for tech related ideas",
   "version": "0.1.0",
   "private": true,
@@ -38,8 +38,7 @@
     "printWidth": 85,
     "semi": true,
     "tabWidth": 2,
-    "singleQuote": true,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "browserslist": {
     "production": [

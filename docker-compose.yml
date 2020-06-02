@@ -7,7 +7,7 @@ services:
     tty: true
     image: idea-directory-image
     volumes:
-      - ./public-idea-list:/usr/src/idea-directory
+      - ./app:/usr/src/idea-directory
     ports:
       - 3000:3000
 
