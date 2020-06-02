@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  idea-directory:
+    container_name: idea-directory
+    build: .
+    stdin_open: true
+    tty: true
+    image: idea-directory-image
+    volumes:
+      - ./app:/usr/src/idea-directory
+    ports:
+      - 3000:3000
+
