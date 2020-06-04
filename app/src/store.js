@@ -5,7 +5,7 @@ import loggerMiddleware from './middleware/logger'
 import monitorReducerEnhancer from './enhancers/monitorReducer'
 
 const middlewareEnhancer = applyMiddleware(loggerMiddleware, thunkMiddleware)
-
+const composedEnhancers  = compose(middlewareEnhancer, monitorReducerEnhancer)
 
 
 
