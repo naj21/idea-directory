@@ -1,8 +1,8 @@
 # Installation
-### Installlation without docker
+### Installation without docker
 * Clone the repository
 * make sure that Node.js is installed
-* cd into public-idea-list
+* cd into app
 * Install Node.js module list with [npm](www.npmjs.com)
  
  > npm install
