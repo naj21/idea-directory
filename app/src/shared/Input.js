@@ -31,16 +31,13 @@ const Label = styled.p`
 `;
 
 const InputGroup = styled.div`
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-// :focus-within{ 
-//   border: 1px solid ${themes.colors.primary}; 
-//  }
-
-  
-
+  // :focus-within{ 
+  //   border: 1px solid ${themes.colors.primary}; 
+  //  }
 `;
 
 const InputContainer = styled.div`

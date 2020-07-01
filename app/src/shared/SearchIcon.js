@@ -3,6 +3,7 @@ import StyledIcon from './StyledIcon';
 import styled, { css } from 'styled-components';
 import { Search } from '@styled-icons/material-outlined/Search';
 import Input from './Input';
+
 const SearchContainer = styled.div`
   display: flex;
   position: relative;
@@ -10,12 +11,8 @@ const SearchContainer = styled.div`
   height: 40px;
 `;
 const SearchInput = styled(Input)`
-
-width: 365px;
-height: 40px;
-
-}
- 
+  width: 365px;
+  height: 40px;
 `;
 
 const SearchIcon = () => {
