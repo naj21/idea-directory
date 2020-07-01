@@ -7,26 +7,31 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "styled-icons": "^10.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "react-styleguidist": "^11.0.8"
   },
   "eslintConfig": {
     "extends": [
@@ -70,5 +75,15 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "heroku": {
+    "staging": {
+      "id": "7da47108-9ecd-4606-b26b-75bb7ac3b4e5",
+      "url": "https://bepro-qa.netlify.com/"
+    },
+    "production": {
+      "id": "e14cfb04-8d9e-402a-ab7b-0dce7956eda0",
+      "url": "https://bepro-production.netlify.com/"
+    }
   }
 }
