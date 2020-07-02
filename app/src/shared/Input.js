@@ -6,21 +6,18 @@ const IInput = styled.input`
   width: 100%;
   height: 98%%;
   border: none;
-  outline:none;
+  outline: none;
 
-  ::placeholder {   
-    
+  ::placeholder {
     font-size: 15px;
     line-height: 22px;
     padding-left: 10px;
     color: #acb5bb;
-
   }
 
-  :focus{  
+  :focus {
     border: 0;
-    } 
-
+  }
 `;
 
 const Label = styled.p`

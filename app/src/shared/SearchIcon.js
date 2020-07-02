@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import StyledIcon from './StyledIcon';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Search } from '@styled-icons/material-outlined/Search';
 import Input from './Input';
 
