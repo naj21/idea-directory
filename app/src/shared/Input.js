@@ -48,11 +48,11 @@ const InputContainer = styled.div`
 `;
 
 const Input = (props) => {
-  const { hideLabel, placeholder, icon } = props;
+  const { hideLabel, placeholder, icon, label } = props;
   return (
     <InputGroup>
-      {!hideLabel && <Label>Username</Label>}
-      <InputContainer>
+      {!hideLabel && <Label>{label}</Label>}
+      <InputContainer {...props}>
         {icon}
         <IInput placeholder={placeholder} icon={icon} />
       </InputContainer>

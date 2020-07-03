@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from 'global/images/logo.svg';
+import logo from '../../globals/images/Vector.svg';
 import Link from '../Link';
 import Button from '../Button';
 import SearchIcon from '../SearchIcon';
@@ -9,6 +9,7 @@ import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
+import SignUp from '../../Scenes/SignUp';
 
 const MenuContainer = styled.div`
   height: 72px;
@@ -36,23 +37,24 @@ const HomeMenu = (props) => {
 
 const UserMenu = (props) => {
   return (
-    <MenuContainer>
-      <img src={logo} alt="logo" />
-      <div>
-        <SearchIcon />
-        <Dropdown>
-          <Options>
-            <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
-          </Options>
-          <Options>
-            <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
-          </Options>
-          <Options>
-            <StyledIcon icon={<Exit />}></StyledIcon> Sign out
-          </Options>
-        </Dropdown>
-      </div>
-    </MenuContainer>
+    // <MenuContainer>
+    //   <img src={logo} alt="logo" />
+    //   <div>
+    //     <SearchIcon />
+    //     <Dropdown>
+    //       <Options>
+    //         <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
+    //       </Options>
+    //       <Options>
+    //         <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
+    //       </Options>
+    //       <Options>
+    //         <StyledIcon icon={<Exit />}></StyledIcon> Sign out
+    //       </Options>
+    //     </Dropdown>
+    //   </div>
+    // </MenuContainer>
+    <div></div>
   );
 };
 

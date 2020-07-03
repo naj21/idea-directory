@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './globals/themes';
 import withMenu from './globals/utils/withMenu';
+import SignUp from './Scenes/SignUp';
 
 function App() {
   useEffect(() => {
@@ -28,15 +29,7 @@ function App() {
     window.unfocus();
   });
 
-  return (
-    <ThemeProvider theme={theme} className="App">
-      <h1>Welcome</h1>
-      <Input></Input>
-      <Button>Get Started</Button>
-      <Card rounded></Card>
-      <SearchIcon></SearchIcon>
-    </ThemeProvider>
-  );
+  return <SignUp></SignUp>;
 }
 
 export default withMenu(App);
