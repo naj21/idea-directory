@@ -8,9 +8,9 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   > * {
-    color: ${themes.colors.gray};
-    height: 20px;
-    width: 20px;
+    color: ${(props) => props.color || themes.colors.gray};
+    height: 16px;
+    width: 16ppx;
   }
 `;
 

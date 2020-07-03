@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 import themes from '../globals/themes';
 
+/**
+ * Button examples
+ *
+ * @example ./docs/Button.md
+ */
+
 const Button = styled.button`
   min-height: 40px;
   color: white;
@@ -15,9 +21,10 @@ const Button = styled.button`
     props.outline &&
     css`
       border: 1px solid ${themes.colors.primary};
-      color: ${themes.color.primary};
+      color: ${themes.colors.primary};
       background: white;
     `}
 `;
 
+/** @component */
 export default Button;

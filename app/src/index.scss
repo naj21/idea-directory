@@ -20,6 +20,11 @@ html {
   --darkBlue: #033046;
   --lightBlue: #D5F1FF;
   --lighterBlue: #e1e6eb59;
+
+  .no-focus-outline a:focus,
+  .no-focus-outline button:focus {
+    outline: none;
+  }
 }
 
 body {
