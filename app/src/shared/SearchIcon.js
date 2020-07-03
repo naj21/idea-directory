@@ -10,6 +10,7 @@ const SearchContainer = styled.div`
   align-content: center;
   height: 40px;
 `;
+
 const SearchInput = styled(Input)`
   width: 365px;
   height: 40px;

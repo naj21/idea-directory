@@ -3,18 +3,15 @@ import styled from 'styled-components';
 import themes from '../globals/themes';
 
 const IInput = styled.input`
-  width: 100%;
+   width: 100%;
   height: 98%%;
   border: none;
   outline:none;
 
   ::placeholder {   
-    
-    font-size: 15px;
     line-height: 22px;
     padding-left: 10px;
     color: #acb5bb;
-
   }
 
   :focus{  
@@ -28,6 +25,7 @@ const Label = styled.p`
   line-height: 17px;
   text-align: center;
   margin-bottom: 17px;
+  color: #5a646a;
 `;
 
 const InputGroup = styled.div`
@@ -51,11 +49,11 @@ const InputContainer = styled.div`
 `;
 
 const Input = (props) => {
-  const { hideLabel, placeholder, icon } = props;
+  const { hideLabel, placeholder, icon, label } = props;
   return (
     <InputGroup>
-      {!hideLabel && <Label>Username</Label>}
-      <InputContainer>
+      {!hideLabel && <Label>{label}</Label>}
+      <InputContainer {...props}>
         {icon}
         <IInput placeholder={placeholder} icon={icon} />
       </InputContainer>
