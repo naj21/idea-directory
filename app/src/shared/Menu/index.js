@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from 'global/images/logo.svg';
+import logo from '../../globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
 import SearchIcon from '../SearchIcon';

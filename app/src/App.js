@@ -1,9 +1,4 @@
 import React from 'react';
-import Button from './shared/Button';
-import Input from './shared/Input';
-import Card from './shared/Card';
-import SearchIcon from './shared/SearchIcon';
-import SignUp from './Scenes/SignUp';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './globals/themes';
@@ -29,11 +24,7 @@ function App() {
     window.unfocus();
   });
 
-  return (
-    <div className="App">
-      <SignUp></SignUp>
-    </div>
-  );
+  return <div className="App"></div>;
 }
 
 export default withMenu(App);

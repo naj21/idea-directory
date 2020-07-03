@@ -18,12 +18,8 @@ const LinkContainer = styled.a`
  * Link examples
  * @example ./docs/Link.md
  */
-const Link = ({ children, secondary, size }) => {
-  return (
-    <LinkContainer secondary={secondary} size={size}>
-      {children}
-    </LinkContainer>
-  );
+const Link = ({ children, props }) => {
+  return <LinkContainer {...props}>{children}</LinkContainer>;
 };
 
 /** @component */
