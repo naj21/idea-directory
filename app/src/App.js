@@ -3,13 +3,10 @@ import Button from './shared/Button';
 import Input from './shared/Input';
 import Card from './shared/Card';
 import SearchIcon from './shared/SearchIcon';
-import Dropdown, { Options } from './shared/Dropdown';
 import { useEffect } from 'react';
-import { Stack } from '@styled-icons/remix-line/Stack';
-import StyledIcon from './shared/StyledIcon';
-import { Pencil } from '@styled-icons/evil/Pencil';
 import { ThemeProvider } from 'styled-components';
 import theme from './globals/themes';
+import withMenu from './globals/utils/withMenu';
 
 function App() {
   useEffect(() => {
@@ -38,16 +35,8 @@ function App() {
       <Button>Get Started</Button>
       <Card rounded></Card>
       <SearchIcon></SearchIcon>
-      <Dropdown>
-        <Options href="">
-          <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
-        </Options>
-        <Options>
-          <StyledIcon icon={<Stack />}></StyledIcon> Edit
-        </Options>
-      </Dropdown>
     </ThemeProvider>
   );
 }
 
-export default App;
+export default withMenu(App);
