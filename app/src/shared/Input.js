@@ -48,6 +48,10 @@ const InputContainer = styled.div`
   border-radius: ${themes.border.radius.small};
 `;
 
+/**
+ * Input examples
+ * @example ./docs/Input.md
+ */
 const Input = (props) => {
   const { hideLabel, placeholder, icon, label } = props;
   return (
@@ -61,4 +65,5 @@ const Input = (props) => {
   );
 };
 
+/** @component */
 export default Input;
