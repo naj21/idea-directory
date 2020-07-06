@@ -5,6 +5,8 @@ import Button from '../../shared/Button';
 import Vector from '../../globals/images/Vector.svg';
 import Link from '../../shared/Link';
 
+import { connect } from 'react-redux';
+
 import './SignUp.scss';
 
 const FormInput = styled(Input)`
@@ -51,4 +53,12 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(SignUp);
