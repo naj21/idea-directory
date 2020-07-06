@@ -25,6 +25,7 @@ const Label = styled.p`
   line-height: 17px;
   text-align: center;
   margin-bottom: 17px;
+  color: #5a646a;
 `;
 
 const InputGroup = styled.div`
@@ -37,6 +38,13 @@ const InputGroup = styled.div`
   //  }
 `;
 
+const Error = styled.div`
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 6px;
+  color: red;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
@@ -47,11 +55,16 @@ const InputContainer = styled.div`
   border-radius: ${themes.border.radius.small};
 `;
 
+/**
+ * Input examples
+ * @example ./docs/Input.md
+ */
 const Input = (props) => {
-  const { hideLabel, placeholder, icon, label } = props;
+  const { hideLabel, placeholder, icon, label, errors } = props;
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
+      <Error>{errors}</Error>
       <InputContainer {...props}>
         {icon}
         <IInput placeholder={placeholder} icon={icon} />
@@ -60,4 +73,5 @@ const Input = (props) => {
   );
 };
 
+/** @component */
 export default Input;

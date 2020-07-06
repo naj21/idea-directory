@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../globals/images/Vector.svg';
+import logo from '../../globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
 import SearchIcon from '../SearchIcon';
@@ -9,7 +9,7 @@ import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
-import SignUp from '../../Scenes/SignUp';
+import SignUp from '../../scenes/signup/SignUp';
 
 const MenuContainer = styled.div`
   height: 72px;
