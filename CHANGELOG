@@ -1,7 +1,10 @@
 # WIP
 
+- Setup docker
 - Setup ESlint and Prettier with a precommit
 - Set up redux by creating a 2 middlewares and one enhancer
 - The redux-thunk middleware, which allows simple asynchronous use of dispatch.
 - A middleware which logs dispatched actions and the resulting new state(logger)
 - An enhancer which logs the time taken for the reducers to process each action(monitor reducer)
+- Setup react styleguidist
+
