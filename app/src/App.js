@@ -1,12 +1,10 @@
 import React from 'react';
-import Button from './shared/Button';
-import Input from './shared/Input';
-import Card from './shared/Card';
-import SearchIcon from './shared/SearchIcon';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './globals/themes';
 import withMenu from './globals/utils/withMenu';
+import AppRoutes from './routes';
+import { Switch } from 'react-router-dom';
 
 function App() {
   useEffect(() => {
@@ -30,11 +28,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme} className="App">
-      <h1>Welcome</h1>
-      <Input></Input>
-      <Button>Get Started</Button>
-      <Card rounded></Card>
-      <SearchIcon></SearchIcon>
+      <Switch>{AppRoutes}</Switch>
     </ThemeProvider>
   );
 }

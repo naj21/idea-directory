@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
-import StyledIcon from './StyledIcon';
 
 const LinkContainer = styled.a`
   color: ${(props) =>
-    props.secondary ? themes.colors.darkerGray : themes.colors.primary};
+    props.secondary || props.size === 'lg'
+      ? themes.colors.darkerGray
+      : themes.colors.primary};
   font-size: ${(props) =>
     props.size === 'sm' ||
     (props.primary && '13px') ||

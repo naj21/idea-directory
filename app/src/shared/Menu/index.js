@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from 'global/images/logo.svg';
+import logo from 'globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
 import SearchIcon from '../SearchIcon';
@@ -11,20 +11,34 @@ import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
 
 const MenuContainer = styled.div`
-  height: 72px;
+  position: sticky;
+  height: ${(props) => (props.home ? '90px' : '72px')};
   width: 100%;
-  dispaly: flex;
+  display: flex;
   justify-content: space-between;
-  padding: 100px 0;
-  align-content: center;
+  padding: 0 100px;
+  align-items: ${(props) => (props.home ? 'flex-end' : 'center')};
+  background: ${(props) => props.home && '#E6D3DF'};
 
   > div {
-    marign-left: 25px;
+    display: flex;
+    * {
+      margin-left: 30px;
+    }
+  }
+
+  a {
+    align-self: center;
+  }
+
+  button {
+    padding: 0 40px;
+    font-size: 18px;
   }
 `;
 const HomeMenu = (props) => {
   return (
-    <MenuContainer>
+    <MenuContainer home>
       <img src={logo} alt="logo" />
       <div>
         <Link size="lg">Sign In</Link>
@@ -34,7 +48,7 @@ const HomeMenu = (props) => {
   );
 };
 
-const UserMenu = (props) => {
+export const UserMenu = (props) => {
   return (
     <MenuContainer>
       <img src={logo} alt="logo" />
@@ -56,8 +70,9 @@ const UserMenu = (props) => {
   );
 };
 
-const Menu = () => {
-  return <UserMenu />;
+const Menu = (props) => {
+  console.log(props);
+  return <HomeMenu />;
 };
 
 export default Menu;
