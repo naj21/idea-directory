@@ -16,6 +16,10 @@ const SearchInput = styled(Input)`
   height: 40px;
 `;
 
+/**
+ * Search example
+ * @example ./docs/Search.md
+ */
 const SearchIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
   const icon = <StyledIcon icon={<Search />} />;
@@ -47,4 +51,5 @@ const SearchIcon = () => {
   );
 };
 
+/** @component */
 export default SearchIcon;
