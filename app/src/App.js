@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './globals/themes';
 import withMenu from './globals/utils/withMenu';
+import AppRoutes from './routes';
+import { Switch } from 'react-router-dom';
 
 function App() {
   useEffect(() => {
@@ -24,7 +26,11 @@ function App() {
     window.unfocus();
   });
 
-  return <div className="App"></div>;
+  return (
+    <ThemeProvider theme={theme} className="App">
+      <Switch>{AppRoutes}</Switch>
+    </ThemeProvider>
+  );
 }
 
 export default withMenu(App);
