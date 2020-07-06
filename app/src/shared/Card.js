@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 import themes from '../globals/themes';
 
+/**
+ * Card examples
+ * @example ./docs/Card.md
+ */
 const Card = styled.div`
   position: relative;
   background: #ffffff;
@@ -14,4 +18,5 @@ const Card = styled.div`
     `}
 `;
 
+/** @component */
 export default Card;

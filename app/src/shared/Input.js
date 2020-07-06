@@ -25,6 +25,7 @@ const Label = styled.p`
   line-height: 17px;
   text-align: center;
   margin-bottom: 17px;
+  color: #5a646a;
 `;
 
 const InputGroup = styled.div`
@@ -47,12 +48,16 @@ const InputContainer = styled.div`
   border-radius: ${themes.border.radius.small};
 `;
 
+/**
+ * Input examples
+ * @example ./docs/Input.md
+ */
 const Input = (props) => {
-  const { hideLabel, placeholder, icon } = props;
+  const { hideLabel, placeholder, icon, label } = props;
   return (
     <InputGroup>
-      {!hideLabel && <Label>Username</Label>}
-      <InputContainer>
+      {!hideLabel && <Label>{label}</Label>}
+      <InputContainer {...props}>
         {icon}
         <IInput placeholder={placeholder} icon={icon} />
       </InputContainer>
@@ -60,4 +65,5 @@ const Input = (props) => {
   );
 };
 
+/** @component */
 export default Input;
