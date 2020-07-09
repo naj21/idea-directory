@@ -60,14 +60,30 @@ const InputContainer = styled.div`
  * @example ./docs/Input.md
  */
 const Input = (props) => {
-  const { hideLabel, placeholder, icon, label, errors } = props;
+  const {
+    hideLabel,
+    placeholder,
+    icon,
+    label,
+    errors,
+    type,
+    value,
+    onChange,
+  } = props;
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
       <Error>{errors}</Error>
       <InputContainer {...props}>
         {icon}
-        <IInput placeholder={placeholder} icon={icon} />
+        <IInput
+          onChange={onChange}
+          value={value}
+          placeholder={placeholder}
+          icon={icon}
+          type={type}
+          required
+        />
       </InputContainer>
     </InputGroup>
   );

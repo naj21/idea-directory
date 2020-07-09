@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
-import StyledIcon from './StyledIcon';
 
 const LinkContainer = styled.a`
   color: ${(props) =>

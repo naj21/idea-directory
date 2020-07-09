@@ -24,6 +24,7 @@
   background: #ffffff;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  overflow: scroll;
 
   hr {
     height: 0px;
@@ -53,11 +54,14 @@
   position: relative;
 
   p {
-  color: rgba(90, 100, 106, 0.5);
-  padding-top: 10px;
-  padding-right: 10px;
-  font-size: 13px;
-  line-height: 19px;
+    color: rgba(90, 100, 106, 0.5);
+    padding-top: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+    line-height: 19px;
+  }
+  a {
+    padding-top: 10px; 
   }
 
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import withMenu from './globals/utils/withMenu';
 import SignUp from './scenes/signup/SignUp';
 
 function App() {
@@ -10,4 +9,4 @@ function App() {
   );
 }
 
-export default withMenu(App);
+export default App;
