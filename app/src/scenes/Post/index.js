@@ -28,6 +28,7 @@ const Post = (props) => {
       <NavBar></NavBar>
       <div className="post">
         <p className="topic"> Paper Making machine</p>
+        <div className="avatar">bs</div>
         <p className="person"> By Babatunde Sanya</p>
         <p className="date"> July 8th 2020</p>
 

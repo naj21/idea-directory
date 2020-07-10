@@ -14,12 +14,14 @@
     padding-top: 25px;
     font-size: 15px;
     line-height: 18px;
+    padding-left:50px;
 }
 
 .date {
     font-size: 12px;
     line-height: 14px;
     padding-top: 7px;
+    padding-left:50px;
 }
 
 .content {
@@ -59,9 +61,14 @@
     }
 }
 
-// like-post.active { 
-//      background:url(../icons/like-red.svg) center no-repeat;
-//      background-size:cover;
-//      opacity:1
-//     }
-
+.avatar {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    left: 195px;
+    top: 275px;
+    border: 0.5px solid #832161;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+}
