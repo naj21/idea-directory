@@ -6,9 +6,10 @@ import Input from './Input';
 
 const SearchContainer = styled.div`
   display: flex;
-  position: relative;
+  position: absolute;
   align-content: center;
   height: 40px;
+  width: 100%;
 `;
 
 const SearchInput = styled(Input)`
@@ -20,7 +21,7 @@ const SearchInput = styled(Input)`
  * Search example
  * @example ./docs/Search.md
  */
-const SearchIcon = () => {
+const SearchIcon = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const icon = <StyledIcon icon={<Search />} />;
   const ref = useRef();
@@ -39,7 +40,7 @@ const SearchIcon = () => {
     };
   }, [ref]);
   return (
-    <SearchContainer ref={ref}>
+    <SearchContainer {...props} ref={ref}>
       {!isOpen && (
         <StyledIcon onClick={() => setIsOpen(!isOpen)} icon={<Search />} />
       )}

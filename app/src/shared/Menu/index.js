@@ -32,10 +32,18 @@ const MenuContainer = styled.div`
   }
 
   button {
-    padding: 0 40px;
+    padding: 15 70px;
     font-size: 18px;
   }
 `;
+
+const Search = styled(SearchIcon)`
+  left: 70.25%;
+  right: 17.94%;
+  top: 15px;
+  bottom: 94.73%;
+`;
+
 const HomeMenu = (props) => {
   return (
     <MenuContainer home>
@@ -53,7 +61,7 @@ export const UserMenu = (props) => {
     <MenuContainer>
       <img src={logo} alt="logo" />
       <div>
-        <SearchIcon />
+        <Search />
         <Dropdown>
           <Options>
             <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
@@ -72,7 +80,7 @@ export const UserMenu = (props) => {
 
 const Menu = (props) => {
   console.log(props);
-  return <HomeMenu />;
+  return <UserMenu />;
 };
 
 export default Menu;

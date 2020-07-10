@@ -7,10 +7,12 @@ const IconContainer = styled.div`
   margin-left: 5px;
   display: flex;
   align-items: center;
+  height: 16px;
+  width: 16px;
   > * {
     color: ${(props) => props.color || themes.colors.gray};
-    height: 16px;
-    width: 16ppx;
+    height: inherit;
+    width: inherit;
   }
 `;
 
