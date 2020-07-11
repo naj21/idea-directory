@@ -6,7 +6,7 @@ import Vector from '../../globals/images/Vector.svg';
 import Link from '../../shared/Link';
 
 import { connect } from 'react-redux';
-import { createSignUp } from '../../services/actions/SignUpActions';
+import { createSignUp } from '../../services/auth/actions';
 
 import './SignUp.scss';
 

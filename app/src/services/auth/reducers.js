@@ -1,9 +1,9 @@
 const initialState = {
   loading: false,
-  user: [],
+  data: [],
   error: '',
 };
-const signUpReducers = (state = initialState, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case 'SEND_REQUEST':
       return {
@@ -11,21 +11,21 @@ const signUpReducers = (state = initialState, action) => {
         loading: true,
       };
 
-    case 'FETCH_USER_REQUEST':
+    case 'FETCH_data_REQUEST':
       return {
         ...state,
         loading: true,
       };
-    case 'FETCH_USERS_SUCCESS':
+    case 'FETCH_dataS_SUCCESS':
       return {
         loading: false,
-        user: action.payload,
+        data: action.payload,
         error: '',
       };
-    case 'FETCH_USER_FAILURE':
+    case 'FETCH_data_FAILURE':
       return {
         loading: false,
-        user: [],
+        data: [],
         error: action.payload,
       };
 
@@ -36,4 +36,4 @@ const signUpReducers = (state = initialState, action) => {
   }
 };
 
-export default signUpReducers;
+export default reducers;

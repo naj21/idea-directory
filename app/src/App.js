@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUp from './scenes/signup/SignUp';
+import SignUp from './scenes/SignUp';
 
 function App() {
   return (

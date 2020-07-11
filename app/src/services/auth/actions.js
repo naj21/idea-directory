@@ -5,10 +5,10 @@ const sendRequest = () => {
   };
 };
 
-const fetchUserSuccess = (user) => {
+const fetchUserSuccess = (data) => {
   return {
     type: 'FETCH_USER_SUCCESS',
-    payload: user,
+    payload: data,
   };
 };
 
@@ -20,13 +20,13 @@ const fetchUserFailure = (error) => {
 };
 
 export const createSignUp = (details) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(sendRequest);
     axios
       .post('http://api.hackthievist.com:80/register', details)
       .then((response) => {
-        const user = response.data;
-        dispatch(fetchUserSuccess(user));
+        const data = response.data;
+        dispatch(fetchUserSuccess(data));
       })
       .catch((error) => {
         const errorMsg = error.response.data;
