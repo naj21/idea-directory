@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
 
-const IInput = styled.input`
+const IInput = styled.input.attrs((props) => ({
+  type: props.type || 'text',
+}))`
   width: 100%;
   height: 98%%;
   border: none;
@@ -59,7 +61,7 @@ const Input = (props) => {
       {!hideLabel && <Label>{label}</Label>}
       <InputContainer {...props}>
         {icon}
-        <IInput placeholder={placeholder} icon={icon} />
+        <IInput {...props} placeholder={placeholder} icon={icon} />
       </InputContainer>
     </InputGroup>
   );

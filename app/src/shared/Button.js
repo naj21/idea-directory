@@ -7,7 +7,9 @@ import themes from '../globals/themes';
  * @example ./docs/Button.md
  */
 
-const Button = styled.button`
+const Button = styled.button.attrs((props) => ({
+  type: props.type,
+}))`
   min-height: 40px;
   color: white;
   padding: 0 100px;
