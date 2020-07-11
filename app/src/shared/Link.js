@@ -1,10 +1,17 @@
-import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
+import { NavLink } from 'react-router-dom';
 
-const LinkContainer = styled.a`
+/**
+ * Link examples
+ * @example ./docs/Link.md
+ */
+
+const Link = styled(NavLink)`
   color: ${(props) =>
-    props.secondary ? themes.colors.darkerGray : themes.colors.primary};
+    props.secondary || props.size === 'lg'
+      ? themes.colors.darkerGray
+      : themes.colors.primary};
   font-size: ${(props) =>
     props.size === 'sm' ||
     (props.primary && '13px') ||
@@ -12,15 +19,6 @@ const LinkContainer = styled.a`
     '15px'};
   cursor: default;
 `;
-
-/**
- * Link examples
- * @example ./docs/Link.md
- */
-const Link = (props) => {
-  const { children } = props;
-  return <LinkContainer {...props}>{children}</LinkContainer>;
-};
 
 /** @component */
 export default Link;

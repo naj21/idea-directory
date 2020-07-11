@@ -78,7 +78,7 @@ const SignUp = (props) => {
           <div class="sign-up-bottom">
             <p> Got an account?</p>
             <a href="*">
-              <SignUpLink> Sign In </SignUpLink>
+              <SignUpLink to={'/signin'}> Sign In </SignUpLink>
             </a>
             <Button>Proceed</Button>
           </div>

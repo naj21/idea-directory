@@ -1,4 +1,6 @@
 import axios from 'axios';
+import actionTypes from './actionTypes';
+
 const sendRequest = () => {
   return {
     type: 'SEND_REQUEST',
@@ -35,3 +37,27 @@ export const createSignUp = (details) => {
     dispatch({ type: 'SIGN_UP', details });
   };
 };
+
+export function requestLogin() {
+  return {
+    type: actionTypes.REQUEST_LOGIN,
+  };
+}
+
+export function requestLoginSuccess(data) {
+  return {
+    type: actionTypes.REQUEST_LOGIN_SUCCESS,
+    payload: {
+      data,
+    },
+  };
+}
+
+export function requestLoginFailure(error) {
+  return {
+    type: actionTypes.REQUEST_LOGIN_FAILURE,
+    payload: {
+      error,
+    },
+  };
+}

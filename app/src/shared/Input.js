@@ -2,16 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
 
-const IInput = styled.input`
+const IInput = styled.input.attrs((props) => ({
+  type: props.type || 'text',
+}))`
   width: 100%;
   height: 98%%;
   border: none;
   outline: none;
+  padding-left: 10px;
 
   ::placeholder {
     font-size: 15px;
     line-height: 22px;
-    padding-left: 10px;
     color: #acb5bb;
   }
 
