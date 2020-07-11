@@ -72,7 +72,7 @@ export const UserMenu = (props) => {
 
 const Menu = (props) => {
   console.log(props);
-  return <HomeMenu />;
+  return <UserMenu />;
 };
 
 export default Menu;

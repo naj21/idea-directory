@@ -33,4 +33,4 @@ function App() {
   );
 }
 
-export default withMenu(App);
+export default App;
