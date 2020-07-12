@@ -1,0 +1,47 @@
+.title {
+
+    border-style: none; 
+    border-color: Transparent; 
+    // overflow-y: hidden;
+    margin-top: 93px;     
+    margin-left: 195px;
+    width :1000px;
+    height:65px;
+    outline: none;
+    line-height: 65px;
+    font-size:40px;
+    font-weight:500;
+    resize: none;
+
+    &::placeholder {
+        font-family: 'id-normal';
+        font-weight:'normal';
+        color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+
+
+.idea-text { 
+    
+    border-style: none; 
+    border-color: Transparent; 
+    // overflow-y: hidden;     
+    margin-left: 195px;
+    margin-top:15px;
+    width :1000px;
+    height:300px;
+    outline: none;
+    resize: none;
+    line-height: 55px;
+    font-size:25px;
+    
+
+    &::placeholder{
+        font-family: 'id-normal';     
+        color: rgba(0, 0, 0, 0.3);          
+      }
+    
+  }
+
+  

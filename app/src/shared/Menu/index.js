@@ -53,7 +53,8 @@ export const UserMenu = (props) => {
     <MenuContainer>
       <img src={logo} alt="logo" />
       <div>
-        <SearchIcon />
+        {/* <SearchIcon /> */}
+        <Button>Publish Idea</Button>
         <Dropdown>
           <Options>
             <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
