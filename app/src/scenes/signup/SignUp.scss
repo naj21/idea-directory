@@ -1,17 +1,9 @@
-.message {
-    font-size: 40px;
-    line-height: 50px;
-    color: #0000004d;
-}
-
 .colored-message {
-    font-size: 40px;
-    line-height: 50px;
-    color: #832161;
+  color: #832161;
 }
 
 .img {
-    padding-top: 80px;
+  padding-top: 80px;
 }
 
 .sign-up-form {
@@ -26,10 +18,14 @@
   border-radius: 10px;
   overflow: scroll;
 
-  hr {
-    height: 0px;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
     border: 0.5px solid #e1e6eb;
-    margin-bottom: 34px; 
+    left: 0;
+    top: 85px;
+    transform: skew(-0.6deg);
   }
 }
 
@@ -47,6 +43,7 @@
   line-height: 19px;
   padding-bottom: 15px;
   color: rgba(90, 100, 106, 0.5);
+  margin-bottom: 34px;
 }
 
 .sign-up-bottom {
@@ -61,16 +58,20 @@
     line-height: 19px;
   }
   a {
-    padding-top: 10px; 
+    padding-top: 10px;
   }
-
 }
 
 .welcome {
-    width: 422px;
-    margin-top: 120px;
+  width: 422px;
+  margin-top: 120px;
+  line-height: 65px;
+  color: #0000004d;
+  h1 {
+    font-size: 45px;
+  }
 }
 
 .sign-up-container {
-    padding-left: 150px;
+  padding-left: 150px;
 }

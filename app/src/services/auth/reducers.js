@@ -14,27 +14,18 @@ function signup(state = initialState, action) {
         ...state,
         loading: true,
       };
-
-    case 'FETCH_data_REQUEST':
-      return {
-        ...state,
-        loading: true,
-      };
-    case 'FETCH_dataS_SUCCESS':
+    case 'FETCH_USER_SUCCESS':
       return {
         loading: false,
         data: action.payload,
         error: '',
       };
-    case 'FETCH_data_FAILURE':
+    case 'FETCH_USER_FAILURE':
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
-
-    case 'SIGN_UP':
-      return action.details;
     default:
       return state;
   }

@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 const MenuContainer = styled.div`
   position: sticky;
-  height: ${(props) => (props.home ? '90px' : '75px')};
+  height: 90px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -40,14 +40,12 @@ const HomeMenu = (props) => {
   const { history } = props;
   return (
     <MenuContainer home>
-      <Link to={'/'} exact>
-        <img src={logo} alt="logo" />
-      </Link>
+      <img src={logo} alt="logo" />
       <div>
         <Link size="lg" to={'/signin'}>
           Sign In
         </Link>
-        <Button onClick={history.push('/signup')}>Get Started</Button>
+        <Button onClick={() => history.push('/signup')}>Get Started</Button>
       </div>
     </MenuContainer>
   );
@@ -84,6 +82,7 @@ export const UserMenu = (props) => {
 };
 
 const Menu = (props) => {
+  console.log(props);
   const {
     history: { location },
   } = props;

@@ -7,12 +7,13 @@ import build from 'globals/images/build.png';
 import './About.scss';
 
 const About = (props) => {
+  const { history } = props;
   return (
     <article className="about">
       <div className="about__hero">
         <h1>A penny for your thoughts?</h1>
         <p>Breathe into your imagination, give it life.</p>
-        <Button>Get Started</Button>
+        <Button onClick={() => history.push('/signup')}>Get Started</Button>
       </div>
       <section className="about__section">
         <div
@@ -50,7 +51,7 @@ const About = (props) => {
       <div className="about__footer">
         <h1>Lectus placerat eu.</h1>
         <h1>Lectus placerat eu.</h1>
-        <Button>Get Started</Button>
+        <Button onClick={() => history.push('/signup')}>Get Started</Button>
       </div>
     </article>
   );
