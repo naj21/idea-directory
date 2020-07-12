@@ -5,7 +5,7 @@ export function loginThunk(email, password) {
   return (dispatch) => {
     dispatch(requestLogin());
     axios
-      .post('http://api.hackthievist.herokuapp.com:80/login', { email, password })
+      .post('http://api.hackthievist.com:80/login', { email, password })
       .then((response) => dispatch(requestLoginSuccess(response.data)))
       .catch((error) => dispatch(requestLoginFailure(error)));
   };
