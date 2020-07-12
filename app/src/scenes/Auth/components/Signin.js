@@ -12,7 +12,7 @@ class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
     };
   }
@@ -20,8 +20,8 @@ class Signin extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { login } = this.props;
-    const { email, password } = this.state;
-    login(email, password);
+    const { username, password } = this.state;
+    login(username, password);
   };
 
   header = () => (
@@ -32,7 +32,7 @@ class Signin extends Component {
   );
 
   content = () => {
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     const {
       loginData: { loading },
     } = this.props;
@@ -42,8 +42,8 @@ class Signin extends Component {
         <Input
           label="User Name"
           placeholder="Username or Email"
-          value={email}
-          onChange={(e) => this.setState({ email: e.target.value })}
+          value={username}
+          onChange={(e) => this.setState({ username: e.target.value })}
           required
         />
         <Input

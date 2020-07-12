@@ -82,7 +82,6 @@ export const UserMenu = (props) => {
 };
 
 const Menu = (props) => {
-  console.log(props);
   const {
     history: { location },
   } = props;
