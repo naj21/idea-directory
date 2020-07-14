@@ -2,16 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
 
-const IInput = styled.input`
+const IInput = styled.input.attrs((props) => ({
+  type: props.type || 'text',
+}))`
   width: 100%;
   height: 98%%;
   border: none;
   outline: none;
+  padding-left: 10px;
 
   ::placeholder {
     font-size: 15px;
     line-height: 22px;
-    padding-left: 10px;
     color: #acb5bb;
   }
 
@@ -38,6 +40,13 @@ const InputGroup = styled.div`
   //  }
 `;
 
+const Error = styled.div`
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 6px;
+  color: red;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
@@ -53,13 +62,30 @@ const InputContainer = styled.div`
  * @example ./docs/Input.md
  */
 const Input = (props) => {
-  const { hideLabel, placeholder, icon, label } = props;
+  const {
+    hideLabel,
+    placeholder,
+    icon,
+    label,
+    errors,
+    type,
+    value,
+    onChange,
+  } = props;
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
+      <Error>{errors}</Error>
       <InputContainer {...props}>
         {icon}
-        <IInput placeholder={placeholder} icon={icon} />
+        <IInput
+          onChange={onChange}
+          value={value}
+          placeholder={placeholder}
+          icon={icon}
+          type={type}
+          required
+        />
       </InputContainer>
     </InputGroup>
   );

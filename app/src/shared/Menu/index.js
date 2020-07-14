@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 const MenuContainer = styled.div`
   position: sticky;
-  height: ${(props) => (props.home ? '90px' : '72px')};
+  height: 90px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -45,42 +45,57 @@ const Search = styled(SearchIcon)`
 `;
 
 const HomeMenu = (props) => {
+  const { history } = props;
   return (
     <MenuContainer home>
       <img src={logo} alt="logo" />
       <div>
-        <Link size="lg">Sign In</Link>
-        <Button>Get Started</Button>
+        <Link size="lg" to={'/signin'}>
+          Sign In
+        </Link>
+        <Button onClick={() => history.push('/signup')}>Get Started</Button>
       </div>
     </MenuContainer>
   );
 };
 
 export const UserMenu = (props) => {
+  const {
+    history: { location },
+  } = props;
+  const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
   return (
     <MenuContainer>
-      <img src={logo} alt="logo" />
-      <div>
-        <Search />
-        <Dropdown>
-          <Options>
-            <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
-          </Options>
-          <Options>
-            <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
-          </Options>
-          <Options>
-            <StyledIcon icon={<Exit />}></StyledIcon> Sign out
-          </Options>
-        </Dropdown>
-      </div>
+      <Link to={'/'} exact>
+        <img src={logo} alt="logo" />
+      </Link>
+      {!isAuth && (
+        <div>
+          <SearchIcon />
+          <Dropdown>
+            <Options>
+              <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
+            </Options>
+            <Options>
+              <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
+            </Options>
+            <Options>
+              <StyledIcon icon={<Exit />}></StyledIcon> Sign out
+            </Options>
+          </Dropdown>
+        </div>
+      )}
     </MenuContainer>
   );
 };
 
 const Menu = (props) => {
   console.log(props);
-  return <UserMenu />;
+  const {
+    history: { location },
+  } = props;
+  if (location.pathname === '/') return <HomeMenu {...props} />;
+  return <UserMenu {...props} />;
 };
 
 export default Menu;
