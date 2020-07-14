@@ -77,7 +77,6 @@ const Input = (props) => {
       {!hideLabel && <Label>{label}</Label>}
       <Error>{errors}</Error>
       <InputContainer {...props}>
-        {icon}
         <IInput
           onChange={onChange}
           value={value}
@@ -86,6 +85,7 @@ const Input = (props) => {
           type={type}
           required
         />
+        {icon}
       </InputContainer>
     </InputGroup>
   );

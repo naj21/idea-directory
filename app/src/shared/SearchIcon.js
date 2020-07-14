@@ -6,15 +6,15 @@ import Input from './Input';
 
 const SearchContainer = styled.div`
   display: flex;
-  position: absolute;
-  align-content: center;
+  align-items: center;
   height: 40px;
   width: 100%;
 `;
 
 const SearchInput = styled(Input)`
-  width: 365px;
+  width: 350px;
   height: 40px;
+  align-items: center;
 `;
 
 /**
@@ -23,7 +23,7 @@ const SearchInput = styled(Input)`
  */
 const SearchIcon = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const icon = <StyledIcon icon={<Search />} />;
+  const icon = <StyledIcon icon={<Search />} size={22} />;
   const ref = useRef();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const SearchIcon = (props) => {
   return (
     <SearchContainer {...props} ref={ref}>
       {!isOpen && (
-        <StyledIcon onClick={() => setIsOpen(!isOpen)} icon={<Search />} />
+        <StyledIcon onClick={() => setIsOpen(!isOpen)} icon={<Search />} size={22} />
       )}
 
       {isOpen && (

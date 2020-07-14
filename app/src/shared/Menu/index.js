@@ -12,18 +12,20 @@ import styled from 'styled-components';
 
 const MenuContainer = styled.div`
   position: sticky;
-  height: 90px;
+  height: ${(props) => (props.auth && props.home ? '90px' : '75px')};
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 100px;
   align-items: ${(props) => (props.home ? 'flex-end' : 'center')};
   background: ${(props) => props.home && '#E6D3DF'};
+  box-shadow: ${(props) => !props.auth && '0px 1px 4px rgba(0, 0, 0, 0.25)'};
 
   > div {
     display: flex;
-    * {
-      margin-left: 30px;
+    align-item: center;
+    > :not(:first-child) {
+      margin-left: 20px;
     }
   }
 
@@ -35,13 +37,6 @@ const MenuContainer = styled.div`
     padding: 15 70px;
     font-size: 18px;
   }
-`;
-
-const Search = styled(SearchIcon)`
-  left: 70.25%;
-  right: 17.94%;
-  top: 15px;
-  bottom: 94.73%;
 `;
 
 const HomeMenu = (props) => {
@@ -65,7 +60,7 @@ export const UserMenu = (props) => {
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
   return (
-    <MenuContainer>
+    <MenuContainer auth={isAuth}>
       <Link to={'/'} exact>
         <img src={logo} alt="logo" />
       </Link>

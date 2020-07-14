@@ -7,8 +7,8 @@ const IconContainer = styled.div`
   margin-left: 5px;
   display: flex;
   align-items: center;
-  height: 16px;
-  width: 16px;
+  height: ${(props) => (props.size ? `${props.size}px` : '16px')};
+  width: ${(props) => (props.size ? `${props.size}px` : '16px')};
   > * {
     color: ${(props) => props.color || themes.colors.gray};
     height: inherit;
