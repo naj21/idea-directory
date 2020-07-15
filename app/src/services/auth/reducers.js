@@ -40,8 +40,26 @@ function login(state = initialState, action) {
       return { ...state, data: action.payload.data, loading: false };
 
     case actionTypes.REQUEST_LOGIN_FAILURE:
-      return { ...state, data: action.payload.error, loading: false };
+      return { ...state, error: action.payload.error, loading: false };
 
+    default:
+      return state;
+  }
+}
+
+const initialTagsState = {
+  data: [],
+};
+
+function tags(state = initialTagsState, action) {
+  switch (action.type) {
+    case actionTypes.TOGGLE_TAGS:
+      const containsTags = state.data.indexOf(action.payload.data) > -1;
+      console.log(containsTags);
+      const data = containsTags
+        ? state.data.filter((item) => action.payload.data !== item)
+        : [...state.data, action.payload.data];
+      return { data };
     default:
       return state;
   }
@@ -50,4 +68,5 @@ function login(state = initialState, action) {
 export default combineReducers({
   login,
   signup,
+  tags,
 });
