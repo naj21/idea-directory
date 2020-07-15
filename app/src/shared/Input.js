@@ -7,11 +7,12 @@ const IInput = styled.input`
   height: 98%%;
   border: none;
   outline: none;
+  background-color: inherit;
+  padding-left: 10px;
 
   ::placeholder {
     font-size: 15px;
     line-height: 22px;
-    padding-left: 10px;
     color: #acb5bb;
   }
 
@@ -42,7 +43,8 @@ const InputContainer = styled.div`
   display: flex;
   width: 100%;
   height: 40px;
-  background: ${themes.colors.white};
+  background: ${(props) =>
+    props.colored ? themes.colors.gray : themes.colors.white};
   border: 1px solid #e1e6eb;
   box-sizing: border-box;
   border-radius: ${themes.border.radius.small};
@@ -53,13 +55,30 @@ const InputContainer = styled.div`
  * @example ./docs/Input.md
  */
 const Input = (props) => {
-  const { hideLabel, placeholder, icon, label } = props;
+  const {
+    hideLabel,
+    placeholder,
+    icon,
+    label,
+    value,
+    onChange,
+    type,
+    disable,
+  } = props;
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
       <InputContainer {...props}>
         {icon}
-        <IInput placeholder={placeholder} icon={icon} />
+        <IInput
+          disable={disable}
+          value={value}
+          onChange={onChange}
+          type={type}
+          placeholder={placeholder}
+          icon={icon}
+          required
+        />
       </InputContainer>
     </InputGroup>
   );

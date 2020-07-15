@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import logo from 'globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
@@ -9,6 +9,9 @@ import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
+import { openPublish } from '../../services/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const MenuContainer = styled.div`
   position: sticky;
@@ -49,12 +52,16 @@ const HomeMenu = (props) => {
 };
 
 export const UserMenu = (props) => {
+  const publish = () => {
+    props.openPublish(true);
+  };
+
   return (
     <MenuContainer>
       <img src={logo} alt="logo" />
       <div>
         {/* <SearchIcon /> */}
-        <Button>Publish Idea</Button>
+        <Button onClick={publish}>Publish Idea</Button>
         <Dropdown>
           <Options>
             <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
@@ -71,9 +78,10 @@ export const UserMenu = (props) => {
   );
 };
 
-const Menu = (props) => {
-  console.log(props);
-  return <UserMenu />;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openPublish: bindActionCreators(openPublish, dispatch),
+  };
 };
 
-export default Menu;
+export default connect(null, mapDispatchToProps)(UserMenu);
