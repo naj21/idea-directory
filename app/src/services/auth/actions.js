@@ -60,3 +60,10 @@ export function requestLoginFailure(error) {
     },
   };
 }
+
+export function toggleTags(data) {
+  return {
+    type: actionTypes.TOGGLE_TAGS,
+    payload: { data },
+  };
+}

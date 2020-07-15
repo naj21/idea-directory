@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import About from './scenes/About';
 import Signin from 'scenes/Auth/components/Signin';
 import Signup from 'scenes/Auth/components/Signup';

@@ -22,7 +22,7 @@ const MenuContainer = styled.div`
 
   > div {
     display: flex;
-    * {
+    < * {
       margin-left: 30px;
     }
   }
@@ -56,6 +56,7 @@ export const UserMenu = (props) => {
     history: { location },
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
+
   return (
     <MenuContainer>
       <Link to={'/'} exact>

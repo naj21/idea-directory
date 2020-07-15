@@ -8,6 +8,8 @@ export default {
     overlayGray: '#E5E5E5',
     black: 'black',
     white: 'white',
+    red: '#FF6161',
+    green: '#3EFC8D',
   },
   font: {
     sizes: {
