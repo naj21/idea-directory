@@ -18,6 +18,7 @@ const PublishCard = styled(Card)`
   top: 121px;
   background: #ffffff;
   padding: 0 87px 0 95px;
+  z-index: 1;
 
   section {
     display: grid;
@@ -43,7 +44,7 @@ const SummaryInput = styled(Input)`
   margin-right: 70px;
 `;
 const PublishButton = styled(Button)`
-  margin-top: 35px;
+  margin-top: 85px;
 `;
 
 const Publish = (props) => {
@@ -115,7 +116,7 @@ const Publish = (props) => {
                   options={['tech', 'frontend', 'backend', 'ios']}
                   closeOnSelect={false}
                   selected={tags}
-                  placeholder={'Tags'}
+                  placeholder={'Add tags'}
                   onSelectOption={(opt) => toggleTags(opt)}
                   label={'Add tags so readers know what your idea is about'}
                 />

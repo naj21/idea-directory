@@ -13,7 +13,7 @@ export function publishIdeaThunk(details) {
       .post(
         'http://api.hackthievist.com:80/ideas',
         { ...details, user: user.user.id },
-        { headers: { Authorization: user.token } }
+        { headers: { Authorization: `Bearer ${user.token}` } }
       )
       .then((response) => dispatch(requestPublishIdeaSuccess(response.data)))
       .catch((error) => dispatch(requestPublishIdeaFailure(error.response.data)));

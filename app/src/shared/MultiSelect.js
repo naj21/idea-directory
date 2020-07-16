@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import themes from 'globals/themes';
 import { KeyboardArrowUp as ArrowUp } from '@styled-icons/material/KeyboardArrowUp';
+import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material/KeyboardArrowDown';
 import { MultiSelectEntry } from './MultiSelectEntry';
 import { Label } from './Input';
+import StyledIcon from './StyledIcon';
 
 const MultiSelectSection = styled.div`
   position: absolute;
@@ -28,19 +29,6 @@ const OptionsSection = styled.div`
   }
 `;
 
-const CustomArrowUp = styled(ArrowUp)`
-  top: 100%;
-  position: absolute;
-  left: 20px;
-  z-index: 5;
-`;
-
-const CustomArrowBorder = styled(ArrowUp)`
-  position: absolute;
-  left: 10px;
-  top: calc(100% - 1.5px);
-`;
-
 const MultipleSelectButton = styled.button`
   display: flex;
   align-items: center;
@@ -49,7 +37,8 @@ const MultipleSelectButton = styled.button`
   height: 40px;
   white-space: nowrap;
   padding: 0 10px !important;
-  border: none;
+  border: 1px solid ${themes.border.color.normal};
+  border-radius: ${themes.border.radius.small};
   background: rgb(237, 240, 243);
 
   > div {
@@ -60,6 +49,14 @@ const MultipleSelectButton = styled.button`
     > * {
       margin-right: 15px;
     }
+  }
+
+  > span {
+    color: ${themes.colors.gray}
+  }
+
+  svg {
+    margin: unset;
   }
 
   &:disabled {
@@ -184,7 +181,7 @@ export class MultiSelect extends Component {
   }
 
   render() {
-    const { buttonStyles, selected, className, label } = this.props;
+    const { buttonStyles, selected, className, label, placeholder } = this.props;
     return (
       <div
         ref={this.wrapperRef}
@@ -198,12 +195,16 @@ export class MultiSelect extends Component {
           onClick={this.toggleOptions}
           style={buttonStyles}
         >
-          <div>
-            {selected.map((item, index) => (
-              <div key={index}>{item}</div>
-            ))}
-          </div>
-          <img alt="" src={ArrowUp} />
+          {!selected.length ? (
+            <span>{placeholder}</span>
+          ) : (
+            <div>
+              {selected.map((item, index) => (
+                <div key={index}>{item}</div>
+              ))}
+            </div>
+          )}
+          {!this.state.optionsVisible ? <StyledIcon icon={<ArrowDown />} color={themes.colors.darkGray} /> : <StyledIcon icon={<ArrowUp />} color={themes.colors.darkGray} />}
         </MultipleSelectButton>
         {this.renderOptionsPortal()}
       </div>

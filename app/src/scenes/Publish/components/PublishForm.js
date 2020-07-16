@@ -1,20 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import '../publish.scss';
 import Preview from './Preview';
+import { createPortal } from 'react-dom';
 
 const Idea = ({ isOpen }) => {
+  const portalContainer = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const ref = useRef();
+  const portalElement = document.getElementById('overlay-container');
+
+  useEffect(() => {
+    portalContainer.current = document.createElement('div');
+    portalElement.appendChild(portalContainer.current);
+    return () => {
+      portalElement.removeChild(portalContainer.current);
+    }
+  }, [])
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIdeaChange = (e) => setDescription(e.target.value);
 
   if (isOpen === true) {
-    ref.current.classList.add('overlay');
-  } else if (ref.current && ref.current.classList.contains('overlay')) {
-    ref.current.classList.remove('overlay');
+    portalContainer.current.classList.add('overlay');
+  } else if (portalContainer.current && portalContainer.current.classList.contains('overlay')) {
+    portalContainer.current.classList.remove('overlay');
   }
 
   return (
