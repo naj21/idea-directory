@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
 import NavBar from '../../NavBar';
 import '../publish.scss';
-
-import { connect } from 'react-redux';
-
 import Preview from './Preview';
 
-const Idea = ({ isOpen }) => {
+const Idea = (props) => {
+  const { isOpen } = props;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const ref = useRef();

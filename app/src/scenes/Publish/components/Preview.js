@@ -41,8 +41,6 @@ const PublishButton = styled(Button)`
 `;
 
 const Publish = ({ isOpen, title, description, openPublish, publishIdea }) => {
-  console.log(title);
-
   const ref = useRef();
   const [ideaTitle, setIdeaTitle] = useState(title);
   const summary = description.split('.')[0];

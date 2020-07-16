@@ -5,6 +5,7 @@ import theme from './globals/themes';
 import withMenu from './globals/utils/withMenu';
 import AppRoutes from './routes';
 import { Switch } from 'react-router-dom';
+import Toast from 'scenes/Messaging';
 
 function App() {
   useEffect(() => {
@@ -29,8 +30,9 @@ function App() {
   return (
     <ThemeProvider theme={theme} className="App">
       <Switch>{AppRoutes}</Switch>
+      <Toast />
     </ThemeProvider>
   );
 }
 
-export default App;
+export default withMenu(App);

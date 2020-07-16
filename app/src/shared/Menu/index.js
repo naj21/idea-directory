@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import logo from 'globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
@@ -15,7 +15,7 @@ import { bindActionCreators } from 'redux';
 
 const MenuContainer = styled.div`
   position: sticky;
-  height: ${(props) => (props.home ? '90px' : '72px')};
+  height: 90px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -25,7 +25,7 @@ const MenuContainer = styled.div`
 
   > div {
     display: flex;
-    * {
+    < * {
       margin-left: 30px;
     }
   }
@@ -40,48 +40,67 @@ const MenuContainer = styled.div`
   }
 `;
 const HomeMenu = (props) => {
+  const { history } = props;
   return (
     <MenuContainer home>
       <img src={logo} alt="logo" />
       <div>
-        <Link size="lg">Sign In</Link>
-        <Button>Get Started</Button>
+        <Link size="lg" to={'/signin'}>
+          Sign In
+        </Link>
+        <Button onClick={() => history.push('/signup')}>Get Started</Button>
       </div>
     </MenuContainer>
   );
 };
 
 export const UserMenu = (props) => {
+  const {
+    history: { location },
+  } = props;
+  const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
   const publish = () => {
     props.openPublish(true);
   };
 
   return (
     <MenuContainer>
-      <img src={logo} alt="logo" />
-      <div>
-        {/* <SearchIcon /> */}
-        <Button onClick={publish}>Publish Idea</Button>
-        <Dropdown>
-          <Options>
-            <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
-          </Options>
-          <Options>
-            <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
-          </Options>
-          <Options>
-            <StyledIcon icon={<Exit />}></StyledIcon> Sign out
-          </Options>
-        </Dropdown>
-      </div>
+      <Link to={'/'} exact>
+        <img src={logo} alt="logo" />
+      </Link>
+      {!isAuth && (
+        <div>
+          <SearchIcon />
+          <Button onClick={publish}>Publish Idea</Button>
+          <Dropdown>
+            <Options>
+              <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
+            </Options>
+            <Options>
+              <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
+            </Options>
+            <Options>
+              <StyledIcon icon={<Exit />}></StyledIcon> Sign out
+            </Options>
+          </Dropdown>
+        </div>
+      )}
     </MenuContainer>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const Menu = (props) => {
+  const {
+    history: { location },
+  } = props;
+  if (location.pathname === '/') return <HomeMenu {...props} />;
+  return <UserMenu {...props} />;
+};
+
+function mapDispatchToProps(dispatch) {
   return {
     openPublish: bindActionCreators(openPublish, dispatch),
   };
-};
+}
 
-export default connect(null, mapDispatchToProps)(UserMenu);
+export default connect(null, mapDispatchToProps)(Menu);

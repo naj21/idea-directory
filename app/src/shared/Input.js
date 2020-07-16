@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
 
-const IInput = styled.input`
+const IInput = styled.input.attrs((props) => ({
+  type: props.type || 'text',
+}))`
   width: 100%;
   height: 98%%;
   border: none;
@@ -39,6 +41,13 @@ const InputGroup = styled.div`
   //  }
 `;
 
+const Error = styled.div`
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 6px;
+  color: red;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
@@ -64,10 +73,13 @@ const Input = (props) => {
     onChange,
     type,
     disable,
+    required,
+    errors,
   } = props;
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
+      <Error>{errors}</Error>
       <InputContainer {...props}>
         {icon}
         <IInput
@@ -77,7 +89,7 @@ const Input = (props) => {
           type={type}
           placeholder={placeholder}
           icon={icon}
-          required
+          required={required}
         />
       </InputContainer>
     </InputGroup>
