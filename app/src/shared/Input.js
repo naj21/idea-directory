@@ -23,10 +23,10 @@ const IInput = styled.input.attrs((props) => ({
   }
 `;
 
-const Label = styled.p`
+export const Label = styled.p`
   font-size: ${themes.font.sizes.normal};
   line-height: 17px;
-  text-align: center;
+  // text-align: center;
   margin-bottom: 17px;
   color: #5a646a;
 `;

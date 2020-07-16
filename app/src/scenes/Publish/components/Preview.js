@@ -17,7 +17,12 @@ const PublishCard = styled(Card)`
   left: 195px;
   top: 121px;
   background: #ffffff;
-  padding-left: 87px;
+  padding: 0 87px 0 95px;
+
+  section {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+  }
 `;
 
 const TitleInput = styled(Input)`
@@ -76,7 +81,7 @@ const Publish = (props) => {
       document.removeEventListener('mousedown', handleClickOutside);
       clearTags(tags);
     };
-  }, [openPublish, ref, isOpen, clearTags, tags]);
+  }, [openPublish, ref, isOpen]);
 
   useEffect(() => {
     setIdeaTitle(title);
@@ -88,32 +93,35 @@ const Publish = (props) => {
         <form onSubmit={handleSubmit}>
           <PublishCard ref={ref}>
             <p class="preview">Preview</p>
-            <div>
-              <TitleInput
-                type="text"
-                value={ideaTitle}
-                colored
-                label="Title"
-                name="title"
-                onChange={handleIdeaTitle}
-              />
-              <SummaryInput
-                value={summary}
-                type="text"
-                label="Summary"
-                name="summary"
-              />
-            </div>
-            <div>
-              <MultiSelect
-                options={['tech', 'frontend', 'backend', 'ios']}
-                closeOnSelect={false}
-                selected={tags}
-                placeholder={'Tags'}
-                onSelectOption={(opt) => toggleTags(opt)}
-              />
-              <PublishButton>Publish</PublishButton>
-            </div>
+            <section>
+              <div>
+                <TitleInput
+                  type="text"
+                  value={ideaTitle}
+                  colored
+                  label="Title"
+                  name="title"
+                  onChange={handleIdeaTitle}
+                />
+                <SummaryInput
+                  value={summary}
+                  type="text"
+                  label="Summary"
+                  name="summary"
+                />
+              </div>
+              <div>
+                <MultiSelect
+                  options={['tech', 'frontend', 'backend', 'ios']}
+                  closeOnSelect={false}
+                  selected={tags}
+                  placeholder={'Tags'}
+                  onSelectOption={(opt) => toggleTags(opt)}
+                  label={'Add tags so readers know what your idea is about'}
+                />
+                <PublishButton>Publish</PublishButton>
+              </div>
+            </section>
           </PublishCard>
         </form>
       )}

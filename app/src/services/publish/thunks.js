@@ -10,7 +10,11 @@ export function publishIdeaThunk(details) {
     dispatch(requestPublishIdea);
     let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .post('http://api.hackthievist.com:80/ideas', { ...details, user: user.token })
+      .post(
+        'http://api.hackthievist.com:80/ideas',
+        { ...details, user: user.user.id },
+        { headers: { Authorization: user.token } }
+      )
       .then((response) => dispatch(requestPublishIdeaSuccess(response.data)))
       .catch((error) => dispatch(requestPublishIdeaFailure(error.response.data)));
   };

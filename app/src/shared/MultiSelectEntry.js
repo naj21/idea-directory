@@ -49,6 +49,7 @@ export const MultiSelectOptionInfoSection = styled.div`
   > input,
   > div {
     margin-right: 15px;
+    font-size: calac(${themes.font.sizes.small} + 1px);
   }
 `;
 export const SelectedLabelSection = styled.div`
@@ -62,6 +63,7 @@ export const LabelSection = styled.div`
   flex-direction: column;
   width: calc(100% - 80px);
   text-transform: capitalize;
+  margin-left: 10px;
 `;
 export const MultiSelectOptionLabel = styled.span`
   color: ${themes.colors.darkerGray};

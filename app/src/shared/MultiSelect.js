@@ -4,26 +4,27 @@ import styled from 'styled-components';
 import themes from 'globals/themes';
 import { KeyboardArrowUp as ArrowUp } from '@styled-icons/material/KeyboardArrowUp';
 import { MultiSelectEntry } from './MultiSelectEntry';
+import { Label } from './Input';
 
 const MultiSelectSection = styled.div`
   position: absolute;
 `;
 const OptionsSection = styled.div`
-  background-color: ${themes.border.color.light};
+  background-color: rgb(237, 240, 243);
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid ${themes.border.color.light};
   position: absolute;
-  top: calc(100% + 9px);
   z-index: 100;
+  top: 10px;
   border-radius: ${themes.border.radius.small};
-  width: 400px;
+  width: 360px;
   max-height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 10px 0;
 
-  input {
-    background-color: ${themes.border.color.light};
+  input[type='checkbox'] {
+    background: ${themes.colors.gray};
   }
 `;
 
@@ -49,6 +50,8 @@ const MultipleSelectButton = styled.button`
   white-space: nowrap;
   padding: 0 10px !important;
   border: none;
+  background: rgb(237, 240, 243);
+
   > div {
     display: flex;
     max-width: calc(100% - 25px);
@@ -121,10 +124,10 @@ export class MultiSelect extends Component {
     if (this.props.disabled) {
       return;
     }
-    if (this.wrapperRef.current) {
-      const rect = this.wrapperRef.current.getBoundingClientRect();
-      position = { top: `${rect.top + rect.height}px`, left: `${rect.left}px` };
-    }
+    // if (this.wrapperRef.current) {
+    //   const rect = this.wrapperRef.current.getBoundingClientRect();
+    //   position = { top: `${rect.top + rect.height}px`, left: `${rect.left}px` };
+    // }
 
     this.setState({
       optionsVisible: value !== undefined ? value : !this.state.optionsVisible,
@@ -181,9 +184,14 @@ export class MultiSelect extends Component {
   }
 
   render() {
-    const { buttonStyles, selected, className } = this.props;
+    const { buttonStyles, selected, className, label } = this.props;
     return (
-      <div ref={this.wrapperRef} className={className}>
+      <div
+        ref={this.wrapperRef}
+        className={className}
+        style={{ position: 'relative', width: '100%' }}
+      >
+        <Label>{label}</Label>
         <MultipleSelectButton
           type={'button'}
           disabled={this.props.disabled}
