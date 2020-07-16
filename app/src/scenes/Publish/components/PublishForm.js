@@ -1,11 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import NavBar from '../../NavBar';
 import '../publish.scss';
 import Preview from './Preview';
 
-const Idea = (props) => {
-  const { isOpen } = props;
+const Idea = ({ isOpen }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const ref = useRef();
@@ -22,7 +20,6 @@ const Idea = (props) => {
   return (
     <div>
       <div ref={ref}>
-        <NavBar></NavBar>
         <form>
           <textarea
             onChange={handleTitleChange}
@@ -51,7 +48,7 @@ const Idea = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.reducer.isOpen,
+    isOpen: state.publish.reducer.isOpen,
   };
 };
 

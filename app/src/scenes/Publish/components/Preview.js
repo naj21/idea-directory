@@ -6,8 +6,9 @@ import Input from '../../../shared/Input';
 import '../publish.scss';
 import Button from '../../../shared/Button';
 import { bindActionCreators } from 'redux';
-import { openPublish } from 'services/actions';
-import { publishIdeaThunk } from 'services/thunks';
+import { openPublish, toggleTags, clearTags } from 'services/publish/actions';
+import { publishIdeaThunk } from 'services/publish/thunks';
+import MultiSelect from 'shared/MultiSelect';
 
 const PublishCard = styled(Card)`
   position: absolute;
@@ -40,18 +41,26 @@ const PublishButton = styled(Button)`
   margin-top: 35px;
 `;
 
-const Publish = ({ isOpen, title, description, openPublish, publishIdea }) => {
+const Publish = (props) => {
+  const {
+    isOpen,
+    title,
+    description,
+    openPublish,
+    publishIdea,
+    tags,
+    toggleTags,
+    clearTags,
+  } = props;
   const ref = useRef();
   const [ideaTitle, setIdeaTitle] = useState(title);
   const summary = description.split('.')[0];
-  const [tags, setTags] = useState('');
 
   const handleIdeaTitle = (e) => setIdeaTitle(e.target.value);
-  const handleTags = (e) => setTags(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    publishIdea({ title, description, summary, tags });
+    publishIdea({ title, description, tags });
   };
 
   useEffect(() => {
@@ -63,21 +72,23 @@ const Publish = ({ isOpen, title, description, openPublish, publishIdea }) => {
 
     document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
+    return function () {
       document.removeEventListener('mousedown', handleClickOutside);
+      clearTags(tags);
     };
-  }, [openPublish, ref]);
+  }, [openPublish, ref, isOpen, clearTags, tags]);
 
   useEffect(() => {
     setIdeaTitle(title);
   }, [title]);
+
   return (
     <div>
       {isOpen && (
         <form onSubmit={handleSubmit}>
           <PublishCard ref={ref}>
             <p class="preview">Preview</p>
-            <div style={{ float: 'left' }}>
+            <div>
               <TitleInput
                 type="text"
                 value={ideaTitle}
@@ -86,11 +97,6 @@ const Publish = ({ isOpen, title, description, openPublish, publishIdea }) => {
                 name="title"
                 onChange={handleIdeaTitle}
               />
-            </div>
-
-            <div style={{ float: 'left' }}>{/* this is for the tags */}</div>
-
-            <div style={{ float: 'left' }}>
               <SummaryInput
                 value={summary}
                 type="text"
@@ -98,8 +104,14 @@ const Publish = ({ isOpen, title, description, openPublish, publishIdea }) => {
                 name="summary"
               />
             </div>
-
-            <div style={{ float: 'left' }}>
+            <div>
+              <MultiSelect
+                options={['tech', 'frontend', 'backend', 'ios']}
+                closeOnSelect={false}
+                selected={tags}
+                placeholder={'Tags'}
+                onSelectOption={(opt) => toggleTags(opt)}
+              />
               <PublishButton>Publish</PublishButton>
             </div>
           </PublishCard>
@@ -111,13 +123,16 @@ const Publish = ({ isOpen, title, description, openPublish, publishIdea }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.reducer.isOpen,
+    isOpen: state.publish.reducer.isOpen,
+    tags: state.publish.tags.data,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     openPublish: bindActionCreators(openPublish, dispatch),
     publishIdea: bindActionCreators(publishIdeaThunk, dispatch),
+    toggleTags: bindActionCreators(toggleTags, dispatch),
+    clearTags: bindActionCreators(clearTags, dispatch),
   };
 };
 

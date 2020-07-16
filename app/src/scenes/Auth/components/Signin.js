@@ -17,6 +17,16 @@ class Signin extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.loginData.loading &&
+      !this.props.loginData.loading &&
+      this.props.loginData.data
+    ) {
+      this.props.history.push('/idea');
+    }
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     const { login } = this.props;

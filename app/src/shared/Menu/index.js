@@ -9,36 +9,35 @@ import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
-import { openPublish } from '../../services/actions';
+import { openPublish } from 'services/publish/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const MenuContainer = styled.div`
   position: sticky;
-  height: 90px;
+  height: ${(props) => (props.auth && props.home ? '90px' : '75px')};
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 100px;
   align-items: ${(props) => (props.home ? 'flex-end' : 'center')};
   background: ${(props) => props.home && '#E6D3DF'};
+  box-shadow: ${(props) =>
+    !props.auth && !props.home && '0px 1px 4px rgba(0, 0, 0, 0.25)'};
 
   > div {
     display: flex;
-    < * {
-      margin-left: 30px;
+    align-item: center;
+    > :not(:first-child) {
+      margin-left: 20px;
     }
   }
 
   a {
     align-self: center;
   }
-
-  button {
-    padding: 0 40px;
-    font-size: 18px;
-  }
 `;
+
 const HomeMenu = (props) => {
   const { history } = props;
   return (
@@ -59,21 +58,30 @@ export const UserMenu = (props) => {
     history: { location },
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
+  const isPublish = location.pathname === '/idea';
   const publish = () => {
     props.openPublish(true);
   };
 
   return (
-    <MenuContainer>
+    <MenuContainer auth={isAuth}>
       <Link to={'/'} exact>
         <img src={logo} alt="logo" />
       </Link>
       {!isAuth && (
         <div>
-          <SearchIcon />
-          <Button onClick={publish}>Publish Idea</Button>
+          {!isPublish ? (
+            <SearchIcon />
+          ) : (
+            <Button
+              style={{ padding: '0 40px', fontSize: '15px' }}
+              onClick={publish}
+            >
+              Publish Idea
+            </Button>
+          )}
           <Dropdown>
-            <Options>
+            <Options onClick={() => props.history.push('/idea')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
             <Options>
@@ -90,6 +98,7 @@ export const UserMenu = (props) => {
 };
 
 const Menu = (props) => {
+  console.log(props);
   const {
     history: { location },
   } = props;

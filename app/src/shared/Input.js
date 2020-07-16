@@ -81,7 +81,6 @@ const Input = (props) => {
       {!hideLabel && <Label>{label}</Label>}
       <Error>{errors}</Error>
       <InputContainer {...props}>
-        {icon}
         <IInput
           disable={disable}
           value={value}
@@ -91,6 +90,7 @@ const Input = (props) => {
           icon={icon}
           required={required}
         />
+        {icon}
       </InputContainer>
     </InputGroup>
   );

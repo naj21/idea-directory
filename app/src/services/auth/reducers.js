@@ -47,26 +47,7 @@ function login(state = initialState, action) {
   }
 }
 
-const initialTagsState = {
-  data: [],
-};
-
-function tags(state = initialTagsState, action) {
-  switch (action.type) {
-    case actionTypes.TOGGLE_TAGS:
-      const containsTags = state.data.indexOf(action.payload.data) > -1;
-      console.log(containsTags);
-      const data = containsTags
-        ? state.data.filter((item) => action.payload.data !== item)
-        : [...state.data, action.payload.data];
-      return { data };
-    default:
-      return state;
-  }
-}
-
 export default combineReducers({
   login,
   signup,
-  tags,
 });

@@ -1,4 +1,5 @@
 import actionTypes from './actionTypes';
+import { combineReducers } from 'redux';
 const initialState = {
   loading: false,
   isOpen: '',
@@ -37,4 +38,26 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+const initialTagsState = {
+  data: [],
+};
+
+function tags(state = initialTagsState, action) {
+  switch (action.type) {
+    case actionTypes.TOGGLE_TAGS:
+      const containsTags = state.data.indexOf(action.payload.data) > -1;
+      const data = containsTags
+        ? state.data.filter((item) => action.payload.data !== item)
+        : [...state.data, action.payload.data];
+      return { data };
+    case actionTypes.CLEAR_TAGS:
+      return initialTagsState;
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({
+  reducer,
+  tags,
+});

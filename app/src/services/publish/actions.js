@@ -1,4 +1,4 @@
-import actionTypes from 'services/actionTypes';
+import actionTypes from './actionTypes';
 
 export const openPublish = (isOpen) => {
   return {
@@ -28,5 +28,18 @@ export function requestPublishIdeaFailure(error) {
     payload: {
       error,
     },
+  };
+}
+
+export function toggleTags(data) {
+  return {
+    type: actionTypes.TOGGLE_TAGS,
+    payload: { data },
+  };
+}
+
+export function clearTags() {
+  return {
+    type: actionTypes.CLEAR_TAGS,
   };
 }
