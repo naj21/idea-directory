@@ -7,4 +7,5 @@ export default {
 
   TOGGLE_TAGS: 'toggle_tags',
   CLEAR_TAGS: 'clear_tags',
+  CLEAR_FORMS: 'CLEAR_FORMS'
 };

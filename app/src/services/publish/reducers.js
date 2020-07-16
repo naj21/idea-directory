@@ -7,7 +7,7 @@ const initialState = {
   error: '',
 };
 
-const reducer = (state = initialState, action) => {
+const publishReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.OPEN_PUBLISH:
       return {
@@ -33,8 +33,11 @@ const reducer = (state = initialState, action) => {
         data: [],
         error: action.payload,
       };
+    case actionTypes.CLEAR_FORMS:
+      return initialState;
     default:
       return state;
+
   }
 };
 
@@ -58,6 +61,6 @@ function tags(state = initialTagsState, action) {
 }
 
 export default combineReducers({
-  reducer,
+  publishReducer,
   tags,
 });

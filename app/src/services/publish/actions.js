@@ -43,3 +43,9 @@ export function clearTags() {
     type: actionTypes.CLEAR_TAGS,
   };
 }
+
+export function clearForm() {
+  return {
+    type: actionTypes.CLEAR_FORMS,
+  }
+}

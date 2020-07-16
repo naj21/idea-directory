@@ -21,6 +21,8 @@ function fetchUserFailure(error) {
   };
 }
 
+
+
 export const createSignUp = (details) => {
   return (dispatch) => {
     dispatch(sendRequest());

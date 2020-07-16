@@ -58,15 +58,16 @@ const Publish = (props) => {
     toggleTags,
     clearTags,
   } = props;
+  
   const ref = useRef();
   const [ideaTitle, setIdeaTitle] = useState(title);
-  const summary = description.split('.')[0];
+  const summary = description.substring(0,50)
 
   const handleIdeaTitle = (e) => setIdeaTitle(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    publishIdea({ title, description, tags });
+    publishIdea({ title, description, tags, summary });
   };
 
   useEffect(() => {
@@ -113,7 +114,7 @@ const Publish = (props) => {
               </div>
               <div>
                 <MultiSelect
-                  options={['tech', 'frontend', 'backend', 'ios']}
+                  options={['tech', 'frontend', 'backend', 'ios', 'andriod', 'design', 'illustration']}
                   closeOnSelect={false}
                   selected={tags}
                   placeholder={'Add tags'}
@@ -132,7 +133,7 @@ const Publish = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.publish.reducer.isOpen,
+    isOpen: state.publish.publishReducer.isOpen,
     tags: state.publish.tags.data,
   };
 };

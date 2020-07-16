@@ -17,7 +17,9 @@ const Idea = ({ isOpen }) => {
     return () => {
       portalElement.removeChild(portalContainer.current);
     }
+    
   }, [])
+
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIdeaChange = (e) => setDescription(e.target.value);
@@ -59,7 +61,8 @@ const Idea = ({ isOpen }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.publish.reducer.isOpen,
+    isOpen: state.publish.publishReducer.isOpen,
+    data: state.publish.publishReducer.data
   };
 };
 
