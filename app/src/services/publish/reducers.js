@@ -4,7 +4,7 @@ const initialState = {
   loading: false,
   isOpen: '',
   data: null,
-  error: '',
+  error: null,
 };
 
 const publishReducer = (state = initialState, action) => {
@@ -12,7 +12,6 @@ const publishReducer = (state = initialState, action) => {
     case actionTypes.OPEN_PUBLISH:
       return {
         ...state,
-        loading: false,
         isOpen: action.payload.isOpen,
       };
 
@@ -21,23 +20,23 @@ const publishReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+
     case actionTypes.REQUEST_PUBLISH_IDEA_SUCCESS:
       return {
         loading: false,
-        data: action.payload,
-        error: '',
+        data: action.payload.data,
+        error: null,
       };
+
     case actionTypes.REQUEST_PUBLISH_IDEA_FAILURE:
       return {
+        ...state,
         loading: false,
-        data: [],
         error: action.payload,
       };
-    case actionTypes.CLEAR_FORMS:
-      return initialState;
+
     default:
       return state;
-
   }
 };
 

@@ -2,14 +2,26 @@ import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import '../publish.scss';
 import Preview from './Preview';
-import { createPortal } from 'react-dom';
 
-const Idea = ({ isOpen }) => {
+const Idea = ({ isOpen, publishData }) => {
   const portalContainer = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const ref = useRef();
   const portalElement = document.getElementById('overlay-container');
+  const prevPublishRef = useRef();
+
+  useEffect(() => {
+    prevPublishRef.current = publishData;
+  }, [publishData]);
+  const prevPublish = prevPublishRef.current;
+
+  useEffect(() => {
+    if(prevPublish && prevPublish.loading && !publishData.loading && publishData.data) {
+      setTitle('');
+      setDescription('');
+    }
+  }, [publishData])
 
   useEffect(() => {
     portalContainer.current = document.createElement('div');
@@ -62,7 +74,7 @@ const Idea = ({ isOpen }) => {
 const mapStateToProps = (state) => {
   return {
     isOpen: state.publish.publishReducer.isOpen,
-    data: state.publish.publishReducer.data
+    publishData: state.publish.publishReducer,
   };
 };
 

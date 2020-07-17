@@ -75,6 +75,7 @@ const Input = (props) => {
     disable,
     required,
     errors,
+    maxlength,
   } = props;
   return (
     <InputGroup>
@@ -89,6 +90,7 @@ const Input = (props) => {
           placeholder={placeholder}
           icon={icon}
           required={required}
+          maxlength={maxlength}
         />
         {icon}
       </InputContainer>

@@ -3,24 +3,32 @@ import {
   requestPublishIdea,
   requestPublishIdeaSuccess,
   requestPublishIdeaFailure,
-  clearForm,
 } from './actions';
+import { showMessage } from 'services/messaging/actions';
 
 export function publishIdeaThunk(details) {
-  console.log(details)
   return (dispatch) => {
-    dispatch(requestPublishIdea);
+    dispatch(requestPublishIdea());
     let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
       .post(
         'http://api.hackthievist.com:80/ideas',
-         {...details},
+        { ...details },
         { headers: { Authorization: `Bearer ${user.token}` } }
       )
       .then((response) => {
-        dispatch(requestPublishIdeaSuccess(response.data))
-        dispatch(clearForm())
+        dispatch(
+          showMessage({ data: 'Idea created successfully', type: 'success' })
+        );
+        dispatch(requestPublishIdeaSuccess(response.data));
       })
-      .catch((error) => dispatch(requestPublishIdeaFailure(error.response.data)));
+      .catch((e) => {
+        if (e.response) {
+          const error = e.response.data.message;
+          dispatch(showMessage({ data: error, type: 'warning' }));
+          return dispatch(requestPublishIdeaFailure(error));
+        }
+        dispatch(requestPublishIdeaFailure(e));
+      });
   };
 }

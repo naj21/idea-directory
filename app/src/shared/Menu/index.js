@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from 'globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { openPublish } from 'services/publish/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { logoutThunk } from 'services/auth/thunks';
 
 const MenuContainer = styled.div`
   position: sticky;
@@ -47,7 +48,7 @@ const HomeMenu = (props) => {
         <Link size="lg" to={'/signin'}>
           Sign In
         </Link>
-        <Button onClick={() => history.push('/signup')}>Get Started</Button>
+        <Button onClick={() => history.push('/signup')} style={{padding: '0 30px', fontSize: '18px'}}>Get Started</Button>
       </div>
     </MenuContainer>
   );
@@ -56,6 +57,8 @@ const HomeMenu = (props) => {
 export const UserMenu = (props) => {
   const {
     history: { location },
+    logout,
+    user
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
   const isPublish = location.pathname === '/idea';
@@ -80,14 +83,14 @@ export const UserMenu = (props) => {
               Publish Idea
             </Button>
           )}
-          <Dropdown>
+          <Dropdown text={user && user.username[0].toUpperCase()}>
             <Options onClick={() => props.history.push('/idea')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
             <Options>
               <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
             </Options>
-            <Options>
+            <Options onClick={() => logout()}>
               <StyledIcon icon={<Exit />}></StyledIcon> Sign out
             </Options>
           </Dropdown>
@@ -98,17 +101,26 @@ export const UserMenu = (props) => {
 };
 
 const Menu = (props) => {
-  console.log(props);
   const {
     history: { location },
   } = props;
+  const [auth, setAuth] = useState();
+
+  useEffect(() => {
+    const user = localStorage.getItem('ideaUser');
+    if (!auth) setAuth(JSON.parse(user).user);
+    console.log(JSON.parse(user).user)
+    if (location.pathname !== '/' && location.pathname !== '/signup' && location.pathname !== '/signin' && !user)  props.history.push('/signin');
+  }, [location])
+
   if (location.pathname === '/') return <HomeMenu {...props} />;
-  return <UserMenu {...props} />;
+  return <UserMenu user={auth} {...props} />;
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     openPublish: bindActionCreators(openPublish, dispatch),
+    logout: bindActionCreators(logoutThunk, dispatch),
   };
 }
 

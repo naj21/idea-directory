@@ -32,7 +32,7 @@ const IButton = styled.button.attrs((props) => ({
 
 const Button = (props) => {
   const { children, loading } = props;
-  return <IButton {...props}>{!loading ? children : 'Loading...'}</IButton>;
+  return <IButton {...props} disabled={loading}>{!loading ? children : 'Loading...'}</IButton>;
 };
 
 /** @component */

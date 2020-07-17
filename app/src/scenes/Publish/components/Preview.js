@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import { openPublish, toggleTags, clearTags } from 'services/publish/actions';
 import { publishIdeaThunk } from 'services/publish/thunks';
 import MultiSelect from 'shared/MultiSelect';
+import themes from 'globals/themes';
 
 const PublishCard = styled(Card)`
   position: absolute;
@@ -35,14 +36,17 @@ const TitleInput = styled(Input)`
   margin-right: 70px;
 `;
 
-const SummaryInput = styled(Input)`
+const SummaryField = styled.textarea`
   width: 316px;
   height: 82px;
   border-radius: 3px;
   margin-bottom: 40px;
   background: rgba(225, 230, 235, 0.35);
   margin-right: 70px;
+  border: ${themes.border.color.normal};
+  padding: 10px;
 `;
+
 const PublishButton = styled(Button)`
   margin-top: 85px;
 `;
@@ -57,13 +61,19 @@ const Publish = (props) => {
     tags,
     toggleTags,
     clearTags,
+    publishData,
   } = props;
   
   const ref = useRef();
   const [ideaTitle, setIdeaTitle] = useState(title);
-  const summary = description.substring(0,50)
+  const [summary, setSummary] = useState(description.substring(0,50))
 
   const handleIdeaTitle = (e) => setIdeaTitle(e.target.value);
+  
+  const handleSummary = (e) => {
+    if (e.target.value.length <= 50) {
+      setSummary(e.target.value);}
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +97,8 @@ const Publish = (props) => {
 
   useEffect(() => {
     setIdeaTitle(title);
-  }, [title]);
+    setSummary(description.substring(0,50));
+  }, [title, description]);
 
   return (
     <div>
@@ -105,11 +116,11 @@ const Publish = (props) => {
                   name="title"
                   onChange={handleIdeaTitle}
                 />
-                <SummaryInput
-                  value={summary}
-                  type="text"
-                  label="Summary"
+                <SummaryField
                   name="summary"
+                  maxlength="50"
+                  value={summary}
+                  onChange={handleSummary}
                 />
               </div>
               <div>
@@ -121,7 +132,7 @@ const Publish = (props) => {
                   onSelectOption={(opt) => toggleTags(opt)}
                   label={'Add tags so readers know what your idea is about'}
                 />
-                <PublishButton>Publish</PublishButton>
+                <PublishButton loading={publishData.loading}>Publish</PublishButton>
               </div>
             </section>
           </PublishCard>
@@ -135,6 +146,7 @@ const mapStateToProps = (state) => {
   return {
     isOpen: state.publish.publishReducer.isOpen,
     tags: state.publish.tags.data,
+    publishData: state.publish.publishReducer,
   };
 };
 const mapDispatchToProps = (dispatch) => {

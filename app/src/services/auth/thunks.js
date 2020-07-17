@@ -1,7 +1,28 @@
 import axios from 'axios';
-import { requestLogin, requestLoginSuccess, requestLoginFailure } from './actions';
+import { requestLogin, requestLoginSuccess, requestLoginFailure, logout, sendRequest, fetchUserSuccess, fetchUserFailure } from './actions';
 import { showMessage } from 'services/messaging/actions';
-import { setItem } from 'globals/utils/localStorage';
+import { setItem, removeItem } from 'globals/utils/localStorage';
+
+export function signupThunk(details) {
+  return (dispatch) => {
+    dispatch(sendRequest());
+    axios
+      .post('http://api.hackthievist.com:80/register', details)
+      .then((response) => {
+        const data = response.data;
+        dispatch(showMessage({ data: 'Signup Successfull', type: 'success' }));
+        dispatch(fetchUserSuccess(data));
+      })
+      .catch((e) => {
+        if (e.response) {
+          const error = e.response.data.message;
+          dispatch(showMessage({ data: error, type: 'warning' }));
+          return dispatch(fetchUserFailure(error));
+        }        
+        dispatch(fetchUserFailure(e));
+      });
+  };
+};
 
 export function loginThunk(username, password) {
   return (dispatch) => {
@@ -22,4 +43,12 @@ export function loginThunk(username, password) {
         dispatch(requestLoginFailure(e));
       });
   };
+}
+
+
+export function logoutThunk() {
+  return (dispatch) => {
+    removeItem('ideaUser');
+    dispatch(logout());
+  }
 }
