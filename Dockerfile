@@ -5,9 +5,10 @@ RUN npm cache verify \
     && npm install
 ADD  app /usr/src/idea-directory-app
 RUN npm run build
+WORKDIR /usr/src/idea-directory-app/build
+CMD ["serve", "-s", "build"]
+# FROM nginx
 
-FROM nginx
+# EXPOSE 3000
 
-EXPOSE 3000
-
-COPY --from=builder usr/src/idea-directory-app/build /usr/share/nginx/html
+# COPY --from=builder usr/src/idea-directory-app/build /usr/share/nginx/html
