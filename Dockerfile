@@ -5,4 +5,4 @@ RUN npm cache verify \
     && npm install
 ADD  app /usr/src/idea-directory-app
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "build"]
