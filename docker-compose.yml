@@ -1,13 +1,23 @@
 version: "3.7"
 services:
   idea-directory:
-    container_name: idea-directory
+    container_name: idea-directory-app
     build: .
     stdin_open: true
     tty: true
-    image: idea-directory-image
+    image: idea-directory-app-image
     volumes:
-      - ./app:/usr/src/idea-directory
+      - type: bind
+        source: ./app
+        target: /usr/src/idea-directory-app
+        consistency: delegated
+      - type: volume
+        source: node-modules-volume
+        target: /usr/src/idea-directory-app/node_modules
+        consistency: delegated
     ports:
       - 3000:3000
+volumes: 
+  node-modules-volume:
+    name: idea-directory-app-node-modules
 
