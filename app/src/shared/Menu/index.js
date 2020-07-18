@@ -48,7 +48,12 @@ const HomeMenu = (props) => {
         <Link size="lg" to={'/signin'}>
           Sign In
         </Link>
-        <Button onClick={() => history.push('/signup')} style={{padding: '0 30px', fontSize: '18px'}}>Get Started</Button>
+        <Button
+          onClick={() => history.push('/signup')}
+          style={{ padding: '0 30px', fontSize: '18px' }}
+        >
+          Get Started
+        </Button>
       </div>
     </MenuContainer>
   );
@@ -58,7 +63,7 @@ export const UserMenu = (props) => {
   const {
     history: { location },
     logout,
-    user
+    user,
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
   const isPublish = location.pathname === '/idea';
@@ -108,10 +113,15 @@ const Menu = (props) => {
 
   useEffect(() => {
     const user = localStorage.getItem('ideaUser');
-    if (!auth) setAuth(JSON.parse(user).user);
-    console.log(JSON.parse(user).user)
-    if (location.pathname !== '/' && location.pathname !== '/signup' && location.pathname !== '/signin' && !user)  props.history.push('/signin');
-  }, [location])
+    if (!auth && user) setAuth(JSON.parse(user).user);
+    if (
+      location.pathname !== '/' &&
+      location.pathname !== '/signup' &&
+      location.pathname !== '/signin' &&
+      !user
+    )
+      props.history.push('/signin');
+  }, [auth, location, props.history]);
 
   if (location.pathname === '/') return <HomeMenu {...props} />;
   return <UserMenu user={auth} {...props} />;
