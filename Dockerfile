@@ -1,4 +1,4 @@
-FROM node:14.0.0-alpine
+FROM node:14.0.0-alpine AS builder
 WORKDIR /usr/src/idea-directory-app
 COPY app/package.json /usr/src/idea-directory-app
 RUN npm cache verify \
@@ -10,4 +10,4 @@ FROM nginx
 
 EXPOSE 80
 
-COPY --from=0 app/build/ /usr/share/nginx/html
+COPY --from=builder app/build/ /usr/share/nginx/html
