@@ -4,8 +4,8 @@ COPY app/package.json /usr/src/idea-directory-app
 RUN npm cache verify \
     && npm install
 ADD  app /usr/src/idea-directory-app
-RUN npm run build
-WORKDIR /usr/src/idea-directory-app/build
+RUN npm run build \
+    && npm install -g serve
 CMD ["serve", "-s", "build"]
 # FROM nginx
 
