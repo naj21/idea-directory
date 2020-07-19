@@ -79,8 +79,8 @@ const Idea = ({ isOpen, publishData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.publish.publishReducer.isOpen,
-    publishData: state.publish.publishReducer,
+    isOpen: state.idea.publishReducer.isOpen,
+    publishData: state.idea.publishReducer,
   };
 };
 

@@ -6,6 +6,7 @@ const initialState = {
 };
 
 const commentReducer = (state = initialState, action) => {
+  console.log(action.payload)
   switch (action.type) {
     case actionTypes.OPEN_COMMENT:
       return {

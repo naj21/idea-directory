@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
-import './Post.scss';
 import { Heart } from '@styled-icons/feather/Heart';
 import { Heart as SolidHeart } from '@styled-icons/boxicons-solid/Heart';
 import { Comment } from '@styled-icons/evil/Comment';
 import StyledIcon from '../../shared/StyledIcon';
 import Comments from './Comment';
 import { openComment } from 'services/comment/actions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { getIdeaThunk } from 'services/idea/thunks';
+import './Post.scss';
 
 const Icon = styled(StyledIcon)`
   width: 26px;
@@ -20,7 +21,12 @@ const RedHeart = styled(SolidHeart)`
 `;
 
 const Post = (props) => {
-  const { isOpened } = props;
+  const {
+    isOpened,
+    idea,
+    getIdea,
+    match: { params },
+  } = props;
   const [isOpen, setOpen] = useState(false);
   const portalContainer = useRef();
   const portalElement = document.getElementById('overlay-container');
@@ -51,24 +57,25 @@ const Post = (props) => {
     };
   }, [portalElement]);
 
+  useEffect(() => {
+    getIdea(params.ideaID);
+  }, [getIdea, params.ideaID]);
+
+
   return (
     <div>
-      <div className="post">
-        <p className="topic"> Paper Making machine</p>
-        <div className="avatar">bs</div>
-        <p className="person"> By Babatunde Sanya</p>
-        <p className="date"> July 8th 2020</p>
+      <div className="idea">
+        <p className="idea__title">{idea.data && idea.data.title}</p>
+        <div className="idea__author">
+          <div className="avatar">bs</div>
+          <div>
+            <p className="person"> By Babatunde Sanya</p>
+            <p className="date"> July 8th 2020</p>
+          </div>
+        </div>
 
-        <div className="content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu, sociis
-            tellus a a, rhoncus ullamcorper bibendum a. Adipiscing ipsum quam orci
-            risus, amet. Ipsum magna tellus quis tortor etiam hendrerit nunc.
-            Vulputate semper sapien, enim porttitor tristique egestas at. Sit laoreet
-            massa varius tellus duis vulputate ut ut placerat. Id eget nibh gravida
-            malesuada vivamus dignissim quam sit praesent. Feugiat metus arcu viverra
-            sit dignissim mi risus pharetr
-          </p>
+        <div className="idea__content">
+          <p>{idea.data && idea.data.description}</p>
         </div>
         <div className="icons">
           <div className=" like-icon">
@@ -89,15 +96,17 @@ const Post = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    openComment: bindActionCreators(openComment, dispatch),
-  };
-};
-
 const mapStateToProps = (state) => {
   return {
     isOpened: state.commentReducer.isOpen,
+    idea: state.idea.selectedIdea,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openComment: bindActionCreators(openComment, dispatch),
+    getIdea: bindActionCreators(getIdeaThunk, dispatch),
   };
 };
 
