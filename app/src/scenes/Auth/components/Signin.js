@@ -17,6 +17,16 @@ class Signin extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.loginData.loading &&
+      !this.props.loginData.loading &&
+      this.props.loginData.data
+    ) {
+      this.props.history.push('/idea');
+    }
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     const { login } = this.props;
@@ -40,7 +50,7 @@ class Signin extends Component {
     return (
       <>
         <Input
-          label="User Name"
+          label="Username/Email"
           placeholder="Username or Email"
           value={username}
           onChange={(e) => this.setState({ username: e.target.value })}
@@ -94,7 +104,7 @@ class Signin extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loginData: state.auth.login,
+  loginData: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -9,6 +9,7 @@ const IInput = styled.input.attrs((props) => ({
   height: 98%%;
   border: none;
   outline: none;
+  background-color: inherit;
   padding-left: 10px;
 
   ::placeholder {
@@ -22,10 +23,10 @@ const IInput = styled.input.attrs((props) => ({
   }
 `;
 
-const Label = styled.p`
+export const Label = styled.p`
   font-size: ${themes.font.sizes.normal};
   line-height: 17px;
-  text-align: center;
+  // text-align: center;
   margin-bottom: 17px;
   color: #5a646a;
 `;
@@ -51,7 +52,8 @@ const InputContainer = styled.div`
   display: flex;
   width: 100%;
   height: 40px;
-  background: ${themes.colors.white};
+  background: ${(props) =>
+    props.colored ? themes.colors.gray : themes.colors.white};
   border: 1px solid #e1e6eb;
   box-sizing: border-box;
   border-radius: ${themes.border.radius.small};
@@ -67,10 +69,13 @@ const Input = (props) => {
     placeholder,
     icon,
     label,
-    errors,
-    type,
     value,
     onChange,
+    type,
+    disable,
+    required,
+    errors,
+    maxlength,
   } = props;
   return (
     <InputGroup>
@@ -78,12 +83,14 @@ const Input = (props) => {
       <Error>{errors}</Error>
       <InputContainer {...props}>
         <IInput
-          onChange={onChange}
+          disable={disable}
           value={value}
+          onChange={onChange}
+          type={type}
           placeholder={placeholder}
           icon={icon}
-          type={type}
-          required
+          required={required}
+          maxlength={maxlength}
         />
         {icon}
       </InputContainer>

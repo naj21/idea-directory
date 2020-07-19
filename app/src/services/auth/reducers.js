@@ -1,38 +1,33 @@
 import actionTypes from './actionTypes';
-import { combineReducers } from 'redux';
 
 const initialState = {
   loading: false,
   data: null,
-  error: '',
+  error: null,
 };
 
-function signup(state = initialState, action) {
+function auth(state = initialState, action) {
   switch (action.type) {
     case 'SEND_REQUEST':
       return {
         ...state,
         loading: true,
       };
+
     case 'FETCH_USER_SUCCESS':
       return {
+        ...state,
         loading: false,
-        data: action.payload,
-        error: '',
+        data: action.payload.data,
       };
+
     case 'FETCH_USER_FAILURE':
       return {
+        ...state,
         loading: false,
-        data: [],
-        error: action.payload,
+        error: action.payload.error,
       };
-    default:
-      return state;
-  }
-}
 
-function login(state = initialState, action) {
-  switch (action.type) {
     case actionTypes.REQUEST_LOGIN:
       return { ...state, error: null, loading: true };
 
@@ -40,14 +35,14 @@ function login(state = initialState, action) {
       return { ...state, data: action.payload.data, loading: false };
 
     case actionTypes.REQUEST_LOGIN_FAILURE:
-      return { ...state, data: action.payload.error, loading: false };
+      return { ...state, error: action.payload.error, loading: false };
+
+    case actionTypes.LOGOUT:
+      return initialState;
 
     default:
       return state;
   }
 }
 
-export default combineReducers({
-  login,
-  signup,
-});
+export default auth;

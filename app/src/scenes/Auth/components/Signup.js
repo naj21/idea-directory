@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import Input from 'shared/Input';
 import Button from 'shared/Button';
 import Vector from 'globals/images/Vector.svg';
 import Link from 'shared/Link';
-import { createSignUp } from 'services/auth/actions';
+import { signupThunk } from 'services/auth/thunks';
 import Auth from '..';
+import { bindActionCreators } from 'redux';
 
 const SignUp = (props) => {
+  const { signupData, history } = props;
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const prevAuthRef = useRef();
+
+  useEffect(() => {
+    prevAuthRef.current = signupData;
+  }, [signupData]);
+  const prevAuth = prevAuthRef.current;
+
+  useEffect(() => {
+    if (prevAuth && prevAuth.loading && !signupData.loading && signupData.data) {
+      history.push('/signin');
+    }
+  }, [history, prevAuth, signupData]);
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
+
   const handleEmailChange = (e) => setEmail(e.target.value);
+
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleSubmit = (e) => {
@@ -90,12 +106,12 @@ const SignUp = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  signupData: state.auth.signup,
+  signupData: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signUp: (details) => dispatch(createSignUp(details)),
+    signUp: bindActionCreators(signupThunk, dispatch),
   };
 };
 

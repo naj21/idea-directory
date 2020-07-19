@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from 'globals/images/logo.svg';
 import Link from '../Link';
 import Button from '../Button';
@@ -9,6 +9,10 @@ import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
+import { openPublish } from 'services/publish/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { logoutThunk } from 'services/auth/thunks';
 
 const MenuContainer = styled.div`
   position: sticky;
@@ -19,7 +23,8 @@ const MenuContainer = styled.div`
   padding: 0 100px;
   align-items: ${(props) => (props.home ? 'flex-end' : 'center')};
   background: ${(props) => props.home && '#E6D3DF'};
-  box-shadow: ${(props) => !props.auth && '0px 1px 4px rgba(0, 0, 0, 0.25)'};
+  box-shadow: ${(props) =>
+    !props.auth && !props.home && '0px 1px 4px rgba(0, 0, 0, 0.25)'};
 
   > div {
     display: flex;
@@ -32,11 +37,6 @@ const MenuContainer = styled.div`
   a {
     align-self: center;
   }
-
-  button {
-    padding: 15 70px;
-    font-size: 18px;
-  }
 `;
 
 const HomeMenu = (props) => {
@@ -48,7 +48,12 @@ const HomeMenu = (props) => {
         <Link size="lg" to={'/signin'}>
           Sign In
         </Link>
-        <Button onClick={() => history.push('/signup')}>Get Started</Button>
+        <Button
+          onClick={() => history.push('/signup')}
+          style={{ padding: '0 30px', fontSize: '18px' }}
+        >
+          Get Started
+        </Button>
       </div>
     </MenuContainer>
   );
@@ -57,8 +62,15 @@ const HomeMenu = (props) => {
 export const UserMenu = (props) => {
   const {
     history: { location },
+    logout,
+    user,
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
+  const isPublish = location.pathname === '/idea';
+  const publish = () => {
+    props.openPublish(true);
+  };
+
   return (
     <MenuContainer auth={isAuth}>
       <Link to={'/'} exact>
@@ -66,15 +78,24 @@ export const UserMenu = (props) => {
       </Link>
       {!isAuth && (
         <div>
-          <SearchIcon />
-          <Dropdown>
-            <Options>
+          {!isPublish ? (
+            <SearchIcon />
+          ) : (
+            <Button
+              style={{ padding: '0 40px', fontSize: '15px' }}
+              onClick={publish}
+            >
+              Publish Idea
+            </Button>
+          )}
+          <Dropdown text={user && user.username[0].toUpperCase()}>
+            <Options onClick={() => props.history.push('/idea')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
             <Options>
               <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
             </Options>
-            <Options>
+            <Options onClick={() => logout()}>
               <StyledIcon icon={<Exit />}></StyledIcon> Sign out
             </Options>
           </Dropdown>
@@ -85,12 +106,32 @@ export const UserMenu = (props) => {
 };
 
 const Menu = (props) => {
-  console.log(props);
   const {
     history: { location },
   } = props;
+  const [auth, setAuth] = useState();
+
+  useEffect(() => {
+    const user = localStorage.getItem('ideaUser');
+    if (!auth && user) setAuth(JSON.parse(user).user);
+    if (
+      location.pathname !== '/' &&
+      location.pathname !== '/signup' &&
+      location.pathname !== '/signin' &&
+      !user
+    )
+      props.history.push('/signin');
+  }, [auth, location, props.history]);
+
   if (location.pathname === '/') return <HomeMenu {...props} />;
-  return <UserMenu {...props} />;
+  return <UserMenu user={auth} {...props} />;
 };
 
-export default Menu;
+function mapDispatchToProps(dispatch) {
+  return {
+    openPublish: bindActionCreators(openPublish, dispatch),
+    logout: bindActionCreators(logoutThunk, dispatch),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Menu);

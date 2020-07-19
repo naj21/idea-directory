@@ -18,6 +18,7 @@ const IconContainer = styled.div`
 
 const StyledIcon = (props) => {
   const { icon } = props;
+
   return <IconContainer {...props}> {icon}</IconContainer>;
 };
 

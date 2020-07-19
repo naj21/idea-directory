@@ -91,5 +91,9 @@
       "id": "e14cfb04-8d9e-402a-ab7b-0dce7956eda0",
       "url": "https://bepro-production.netlify.com/"
     }
+  },
+  "engines": {
+    "node": "10.x",
+    "npm": "6.x"
   }
 }
