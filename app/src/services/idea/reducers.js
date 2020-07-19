@@ -15,20 +15,20 @@ const publishReducer = (state = initialState, action) => {
         isOpen: action.payload.isOpen,
       };
 
-    case actionTypes.REQUEST_PUBLISH_IDEA:
+    case actionTypes.CREATE_IDEA:
       return {
         ...state,
         loading: true,
       };
 
-    case actionTypes.REQUEST_PUBLISH_IDEA_SUCCESS:
+    case actionTypes.CREATE_IDEA_SUCCESS:
       return {
         loading: false,
         data: action.payload.data,
         error: null,
       };
 
-    case actionTypes.REQUEST_PUBLISH_IDEA_FAILURE:
+    case actionTypes.CREATE_IDEA_FAILURE:
       return {
         ...state,
         loading: false,
@@ -59,7 +59,47 @@ function tags(state = initialTagsState, action) {
   }
 }
 
+const initialIdeaListState = {
+  loading: false,
+  data: [],
+  error: null,
+};
+
+function ideaList(state = initialIdeaListState, action) {
+  switch (action.type) {
+    case actionTypes.LIST_IDEAS:
+      return { ...state, loading: true, error: null };
+
+    case actionTypes.LIST_IDEAS_SUCCESS:
+      return { ...state, data: action.payload.data, loading: false };
+
+    case actionTypes.LIST_IDEAS_FAILURE:
+      return { ...state, loading: false, error: action.payload.error };
+
+    default:
+      return state;
+  }
+}
+
+function selectedIdea(state = initialState, action) {
+  switch (action.type) {
+    case actionTypes.GET_IDEA_FAILURE:
+      return { ...state, loading: true, error: null };
+
+    case actionTypes.GET_IDEA_SUCCESS:
+      return { ...state, data: action.payload.data, loading: false };
+
+    case actionTypes.GET_IDEA_FAILURE:
+      return { ...state, loading: false, error: action.payload.error };
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   publishReducer,
   tags,
+  ideaList,
+  selectedIdea,
 });

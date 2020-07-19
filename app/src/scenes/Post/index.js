@@ -1,42 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import './Post.scss';
 import { Heart } from '@styled-icons/feather/Heart';
 import { Heart as SolidHeart } from '@styled-icons/boxicons-solid/Heart';
 import { Comment } from '@styled-icons/evil/Comment';
 import StyledIcon from '../../shared/StyledIcon';
-
-const Icon = styled(StyledIcon)`
-  width: 26px;
-  height: 25px;
-`;
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getIdeaThunk } from 'services/idea/thunks';
 
 const RedHeart = styled(SolidHeart)`
   color: red;
 `;
 
 const Post = (props) => {
+  const {
+    idea,
+    getIdea,
+    match: { params },
+  } = props;
   const [isRed, setIsRed] = useState(false);
-  const likeIcon = <Icon icon={<Heart />} />;
-  const redLikeIcon = <Icon icon={<RedHeart />} />;
-  const commentIcon = <Icon icon={<Comment />} />;
-  return (
-    <div className="post">
-      <p className="topic"> Paper Making machine</p>
-      <div className="avatar">bs</div>
-      <p className="person"> By Babatunde Sanya</p>
-      <p className="date"> July 8th 2020</p>
+  const likeIcon = <StyledIcon icon={<Heart />} size={26} />;
+  const redLikeIcon = <StyledIcon icon={<RedHeart />} size={26} />;
+  const commentIcon = <StyledIcon icon={<Comment />} size={26} />;
 
-      <div className="content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu, sociis
-          tellus a a, rhoncus ullamcorper bibendum a. Adipiscing ipsum quam orci
-          risus, amet. Ipsum magna tellus quis tortor etiam hendrerit nunc. Vulputate
-          semper sapien, enim porttitor tristique egestas at. Sit laoreet massa
-          varius tellus duis vulputate ut ut placerat. Id eget nibh gravida malesuada
-          vivamus dignissim quam sit praesent. Feugiat metus arcu viverra sit
-          dignissim mi risus pharetr
-        </p>
+  useEffect(() => {
+    getIdea(params.ideaID);
+  }, [getIdea, params.ideaID]);
+
+  return (
+    <div className="idea">
+      <p className="idea__title">{idea.data && idea.data.title}</p>
+      <div className="idea__author">
+        <div className="avatar">bs</div>
+        <div>
+          <p className="person"> By Babatunde Sanya</p>
+          <p className="date"> July 13th 2020</p>
+        </div>
+      </div>
+      <div className="idea__content">
+        <p>{idea.data && idea.data.description}</p>
       </div>
       <div className="icons">
         <div className=" like-icon">
@@ -44,15 +47,33 @@ const Post = (props) => {
 
           {isRed && <div onClick={() => setIsRed(!isRed)}>{redLikeIcon}</div>}
 
-          <p>10</p>
+          <p>0</p>
         </div>
         <div className="comment-icon">
           <div>{commentIcon}</div>
-          <p>15</p>
+          <p>0</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Post;
+function mapStateToProps(state, ownProps) {
+  const ideaList = state.idea.ideaList.data;
+  const id = ownProps.match.params.ideaID;
+  let idea;
+  if (ideaList.length) {
+    idea = ideaList.find((idea) => idea.id == id);
+  }
+  return {
+    idea: state.idea.selectedIdea,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getIdea: bindActionCreators(getIdeaThunk, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

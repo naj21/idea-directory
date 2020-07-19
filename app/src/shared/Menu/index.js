@@ -9,7 +9,7 @@ import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
 import styled from 'styled-components';
-import { openPublish } from 'services/publish/actions';
+import { openPublish } from 'services/idea/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logoutThunk } from 'services/auth/thunks';
@@ -28,7 +28,7 @@ const MenuContainer = styled.div`
 
   > div {
     display: flex;
-    align-item: center;
+    align-items: center;
     > :not(:first-child) {
       margin-left: 20px;
     }
@@ -66,7 +66,7 @@ export const UserMenu = (props) => {
     user,
   } = props;
   const isAuth = location.pathname === '/signup' || location.pathname === '/signin';
-  const isPublish = location.pathname === '/idea';
+  const isPublish = location.pathname === '/post';
   const publish = () => {
     props.openPublish(true);
   };
@@ -89,7 +89,7 @@ export const UserMenu = (props) => {
             </Button>
           )}
           <Dropdown text={user && user.username[0].toUpperCase()}>
-            <Options onClick={() => props.history.push('/idea')}>
+            <Options onClick={() => props.history.push('/post')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
             <Options>
