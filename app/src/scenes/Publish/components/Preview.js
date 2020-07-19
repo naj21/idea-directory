@@ -94,7 +94,7 @@ const Publish = (props) => {
       document.removeEventListener('mousedown', handleClickOutside);
       clearTags(tags);
     };
-  }, [openPublish, ref, isOpen, clearTags, tags]);
+  }, [openPublish, ref, isOpen]);
 
   useEffect(() => {
     setIdeaTitle(title);

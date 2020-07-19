@@ -73,7 +73,7 @@ export const UserMenu = (props) => {
 
   return (
     <MenuContainer auth={isAuth}>
-      <Link to={'/'} exact>
+      <Link to={!user ? '/' : '/ideas'} exact>
         <img src={logo} alt="logo" />
       </Link>
       {!isAuth && (
