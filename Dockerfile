@@ -1,14 +1,9 @@
-FROM node:14.0.0-alpine AS builder
-WORKDIR /usr/src/idea-directory-app
-COPY app/package.json /usr/src/idea-directory-app
-RUN npm cache verify \
-    && npm install
-ADD  app /usr/src/idea-directory-app
+FROM node:14.0.0-alpine
+WORKDIR /usr/src/idea-directory
+COPY app/package.json /usr/src/idea-directory
+RUN npm install \
+    && npm cache verify
+ADD  app /usr/src/idea-directory
 RUN npm run build \
     && npm install -g serve
 CMD ["serve", "-s", "build"]
-# FROM nginx
-
-# EXPOSE 3000
-
-# COPY --from=builder usr/src/idea-directory-app/build /usr/share/nginx/html
