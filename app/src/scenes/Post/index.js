@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import './Post.scss';
 import { Heart } from '@styled-icons/feather/Heart';
@@ -16,10 +16,24 @@ const RedHeart = styled(SolidHeart)`
 `;
 
 const Post = (props) => {
+  const portalContainer = useRef();
+  const portalElement = document.getElementById('overlay-container');
   const [isRed, setIsRed] = useState(false);
   const likeIcon = <Icon icon={<Heart />} />;
   const redLikeIcon = <Icon icon={<RedHeart />} />;
   const commentIcon = <Icon icon={<Comment />} />;
+
+  const handleChange = () => {
+    portalContainer.current.classList.add('overlay');
+  };
+
+  useEffect(() => {
+    portalContainer.current = document.createElement('div');
+    portalElement.appendChild(portalContainer.current);
+    return () => {
+      portalElement.removeChild(portalContainer.current);
+    };
+  }, [portalElement]);
   return (
     <div className="post">
       <p className="topic"> Paper Making machine</p>
@@ -47,7 +61,7 @@ const Post = (props) => {
           <p>10</p>
         </div>
         <div className="comment-icon">
-          <div>{commentIcon}</div>
+          <div onClick={handleChange}>{commentIcon}</div>
           <p>15</p>
         </div>
       </div>
