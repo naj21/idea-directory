@@ -4,7 +4,7 @@ import About from './scenes/About';
 import Signin from 'scenes/Auth/components/Signin';
 import Signup from 'scenes/Auth/components/Signup';
 import PublishForm from './scenes/Publish/components/PublishForm';
-import Post from 'scenes/Post/Post/Post';
+import Post from 'scenes/Post/Post';
 
 const AppRoutes = [
   <Route key="about" path="/" component={About} exact />,

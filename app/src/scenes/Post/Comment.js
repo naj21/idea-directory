@@ -12,7 +12,7 @@ const CommentCard = styled(Card)`
   position: absolute;
   width: 407px;
   height: 950px;
-  left: 1078px;
+  left: 1073px;
   top: 0px;
   z-index: 1;
   background: #ffffff;
