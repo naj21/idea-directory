@@ -41,12 +41,6 @@ const InputGroup = styled.div`
   //  }
 `;
 
-const Error = styled.div`
-  font-size: 12px;
-  text-align: left;
-  margin-bottom: 6px;
-  color: red;
-`;
 
 const InputContainer = styled.div`
   display: flex;
@@ -74,13 +68,11 @@ const Input = (props) => {
     type,
     disable,
     required,
-    errors,
     maxlength,
   } = props;
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
-      <Error>{errors}</Error>
       <InputContainer {...props}>
         <IInput
           disable={disable}

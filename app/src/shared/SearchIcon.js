@@ -8,7 +8,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
-  width: 100%;
+  max-width: 100%;
 `;
 
 const SearchInput = styled(Input)`
@@ -39,6 +39,10 @@ const SearchIcon = (props) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
+  if (isOpen) {
+    const inputElement = ref.current.getElementsByTagName('INPUT');
+    console.log(ref.current, inputElement.item(0));
+  }
   return (
     <SearchContainer {...props} ref={ref}>
       {!isOpen && (

@@ -15,7 +15,7 @@ export function signupThunk(details) {
   return (dispatch) => {
     dispatch(sendRequest());
     axios
-      .post('http://api.hackthievist.com:80/register', details)
+      .post('https://api.hackthievist.com/register', details)
       .then((response) => {
         const data = response.data;
         dispatch(showMessage({ data: 'Signup Successfull', type: 'success' }));
@@ -36,7 +36,7 @@ export function loginThunk(username, password) {
   return (dispatch) => {
     dispatch(requestLogin());
     axios
-      .post('http://api.hackthievist.com:80/login', { username, password })
+      .post('https://api.hackthievist.com/login', { username, password })
       .then((response) => {
         dispatch(showMessage({ data: 'Login Successfull', type: 'success' }));
         setItem('ideaUser', response.data.data);

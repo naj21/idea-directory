@@ -6,8 +6,8 @@ import Input from '../../../shared/Input';
 import '../publish.scss';
 import Button from '../../../shared/Button';
 import { bindActionCreators } from 'redux';
-import { openPublish, toggleTags, clearTags } from 'services/publish/actions';
-import { publishIdeaThunk } from 'services/publish/thunks';
+import { openPublish, toggleTags, clearTags } from 'services/idea/actions';
+import { createIdeaThunk } from 'services/idea/thunks';
 import MultiSelect from 'shared/MultiSelect';
 import themes from 'globals/themes';
 
@@ -153,15 +153,15 @@ const Publish = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.publish.publishReducer.isOpen,
-    tags: state.publish.tags.data,
-    publishData: state.publish.publishReducer,
+    isOpen: state.idea.publishReducer.isOpen,
+    tags: state.idea.tags.data,
+    publishData: state.idea.publishReducer,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     openPublish: bindActionCreators(openPublish, dispatch),
-    publishIdea: bindActionCreators(publishIdeaThunk, dispatch),
+    publishIdea: bindActionCreators(createIdeaThunk, dispatch),
     toggleTags: bindActionCreators(toggleTags, dispatch),
     clearTags: bindActionCreators(clearTags, dispatch),
   };

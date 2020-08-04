@@ -7,7 +7,6 @@ const Idea = ({ isOpen, publishData }) => {
   const portalContainer = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const ref = useRef();
   const portalElement = document.getElementById('overlay-container');
   const prevPublishRef = useRef();
 
@@ -79,8 +78,8 @@ const Idea = ({ isOpen, publishData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.publish.publishReducer.isOpen,
-    publishData: state.publish.publishReducer,
+    isOpen: state.idea.publishReducer.isOpen,
+    publishData: state.idea.publishReducer,
   };
 };
 
