@@ -10,22 +10,18 @@ import { bindActionCreators } from 'redux';
 import {addCommentThunk, getCommentsThunk} from 'services/comment/thunk'
 import Button from 'shared/Button'
 
-const CommentCard = styled(Card)`
-  position: absolute;
-  width: 407px;
-  height: 950px;
-  left: 1032px;
-  top: 0px;
-  z-index: 1;
-  background: #ffffff;
-  overflow-x: hidden;
+// const CommentCard = styled(Card)`
+//   position: absolute;
+//   width: 407px;
+//   height: 950px;
+//   left: 1032px;
+//   top: 0px;
+//   z-index: 1;
+//   background: #ffffff;
+//   overflow-x: hidden;
 
-`;
+// `;
 
-const CloseIcon = styled(StyledIcon)`
-  margin-left: 227px;
-  cursor: pointer;
-`;
 
 
 const Comments = (props) => {
@@ -58,10 +54,10 @@ const Comments = (props) => {
   }
   
   return (
-    <CommentCard>
+    <Card className = "comment-card">
       <div class="header">
         <p >Comments</p>
-        <CloseIcon onClick={handleClose} icon={<Close />}></CloseIcon>
+        <StyledIcon className = "close-icon" onClick={handleClose} icon={<Close />}></StyledIcon>
       </div>
       
       <form onSubmit = {handleSubmit}>
@@ -113,7 +109,7 @@ const Comments = (props) => {
       </div>
     )))}
       </div>
-    </CommentCard>
+    </Card>
   );
 };
 

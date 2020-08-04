@@ -303,5 +303,31 @@
   background: rgba(131, 33, 97, 0.6) !important;
 }
 
+.icon {
+  width: 26px !important;
+  height: 25px !important;
+}
+
+.red-heart {
+  color:red !important;
+}
+
+.close-icon {
+  margin-left: 227px !important; 
+  cursor: pointer !important;
+}
+
+.comment-card {
+  position: absolute !important;
+  width: 407px !important;
+  height: 950px !important;
+  left: 1032px !important;
+  top: 0px !important;
+  z-index: 1 !important;
+  background: #ffffff !important;
+  overflow-x: hidden !important;
+
+}
+
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import styled from 'styled-components';
+
 import { Heart } from '@styled-icons/feather/Heart';
 import { Heart as SolidHeart } from '@styled-icons/boxicons-solid/Heart';
 import { Comment } from '@styled-icons/evil/Comment';
@@ -11,14 +11,6 @@ import { openComment } from 'services/comment/actions';
 import { getIdeaThunk } from 'services/idea/thunks';
 import './Post.scss';
 
-const Icon = styled(StyledIcon)`
-  width: 26px;
-  height: 25px;
-`;
-
-const RedHeart = styled(SolidHeart)`
-  color: red;
-`;
 
 const Post = (props) => {
   const {
@@ -31,9 +23,9 @@ const Post = (props) => {
   const portalContainer = useRef();
   const portalElement = document.getElementById('overlay-container');
   const [isRed, setIsRed] = useState(false);
-  const likeIcon = <Icon icon={<Heart />} />;
-  const redLikeIcon = <Icon icon={<RedHeart />} />;
-  const commentIcon = <Icon icon={<Comment />} />;
+  const likeIcon = <StyledIcon className = "icon" icon={<Heart />} />;
+  const redLikeIcon = <StyledIcon className = "icon" icon={<SolidHeart className = "red-heart" />} />;
+  const commentIcon = <StyledIcon className = "icon" icon={<Comment />} />;
 
   const handleChange = () => {
     portalContainer.current.classList.add('overlay');
