@@ -10,23 +10,10 @@ import { bindActionCreators } from 'redux';
 import {addCommentThunk, getCommentsThunk} from 'services/comment/thunk'
 import Button from 'shared/Button'
 
-// const CommentCard = styled(Card)`
-//   position: absolute;
-//   width: 407px;
-//   height: 950px;
-//   left: 1032px;
-//   top: 0px;
-//   z-index: 1;
-//   background: #ffffff;
-//   overflow-x: hidden;
-
-// `;
-
-
 
 const Comments = (props) => {
   const { ideaID, openComment, getComments, addCommentThunk,comments} = props;
-  
+  console.log(comments)
   const [body, setBody] = useState('')
   const handleClose = () => openComment(false);
   const ref = useRef();
@@ -45,9 +32,20 @@ const Comments = (props) => {
     getComments(ideaID);
   }, [getComments, ideaID]);
 
+  // useEffect(() => {
+  //   if (
+  //     comments &&
+  //     comments.loading &&
+  //     !comments.loading &&
+  //     comments.createCommentData
+  //   ) {
+  //     setBody('')
+  //   }
+  // }, [comments]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.persist()
     addCommentThunk({body}, ideaID)
     getComments(ideaID);
     
@@ -92,7 +90,7 @@ const Comments = (props) => {
       
 
       <div className = "comment-list">
-      {comments && comments.data && comments.data.length && comments.data.map((comment => (
+      {comments && comments.getCommentData && comments.getCommentData.length && comments.getCommentData.map((comment => (
       <div className = "commments">   
       <div className = "comment-author">
       <div className = "comment-avatar">bs</div>

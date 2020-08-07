@@ -31,9 +31,9 @@ const IButton = styled.button.attrs((props) => ({
  */
 
 const Button = React.forwardRef((props,ref) => {
-  const { children, loading, className, disabled } = props;
+  const { children, loading, className, disabled, onClick} = props;
   return (
-    <IButton className = {className} ref = {ref} disabled={disabled}>
+    <IButton className = {className} onClick = {onClick} ref = {ref} disabled={disabled}>
       {!loading ? children : 'Loading...'}
     </IButton>
 );

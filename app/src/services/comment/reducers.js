@@ -3,7 +3,8 @@ import actionTypes from './actionTypes';
 const initialState = {
   loading: false,
   isOpen: '',
-  data: null,
+  createCommentData: null,
+  getCommentData:null,
   error: null,
 };
 
@@ -24,7 +25,7 @@ const commentReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload.data
+        createCommentData: action.payload.data
       }
     case actionTypes.CREATE_COMMENT_FAILURE:
       return {
@@ -41,7 +42,7 @@ const commentReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload.data
+        getCommentData: action.payload.data
       }
     case actionTypes.GET_COMMENT_FAILURE:
       return {

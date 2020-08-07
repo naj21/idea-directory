@@ -190,6 +190,7 @@
   border-color: Transparent; 
   margin-bottom: 45px;
   padding-top:13px;
+  border-radius: 2px;
 }
 
 .comment-input-container:focus-within {
@@ -329,5 +330,15 @@
 
 }
 
+@media(max-width: 768px) {
+  .block {
+    display: flex;
+    flex-direction: column;
+  }
 
+  .idea {
+    margin-top: 0px;
+
+  }
+}
 

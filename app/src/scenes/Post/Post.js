@@ -55,7 +55,7 @@ const Post = (props) => {
 
 
   return (
-    <div>
+    <div className = "block">
       <div className="idea">
         <p className="idea__title">{idea.data && idea.data.title}</p>
         <div className="idea__author">

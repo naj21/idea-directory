@@ -33,6 +33,7 @@ export function getCommentsThunk(ideaId) {
         axios.get(`https://api.hackthievist.com/ideas/${ideaId}/comments`,
         {headers: {Authorization: `Bearer ${user.token}`}})
         .then(response => {
+            console.log(response.data)
             dispatch(getCommentSuccess(response.data))
         })
         .catch(e => {
