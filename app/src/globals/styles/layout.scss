@@ -1,0 +1,7 @@
+.is-half {
+  display: flex;
+  justify-content: space-between;
+  > * {
+    width: 47%;
+  }
+}

@@ -1,0 +1,19 @@
+export default {
+  REQUEST_LOGIN: 'auth/request_login',
+  REQUEST_LOGIN_SUCCESS: 'auth/request_login_success',
+  REQUEST_LOGIN_FAILURE: 'auth/request_login_failure',
+
+  LOGOUT: 'auth/logout',
+
+  UPDATE_USER: 'account/update_user',
+  UPDATE_USER_SUCCESS: 'account/update_user_success',
+  UPDATE_USER_FAILUIRE: 'account/update_user_failure',
+
+  REQUEST_RESET_LINK: 'REQUEST_RESET_LINK',
+  REQUEST_RESET_LINK_SUCCESS: 'REQUEST_RESET_LINK_SUCCESS',
+  REQUEST_RESET_LINK_FAILURE: 'REQUEST_RESET_LINK_FAILURE',
+
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  RESET_PASSWORD_SUCCESS: 'RESET_PASSWORD_SUCCESS',
+  RESET_PASSWORD_FAILURE: 'RESET_PASSWORD_FAILURE',
+};

@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { openPublish } from 'services/publish/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutThunk } from 'services/auth/thunks';
+import { logoutThunk } from 'services/account/thunks';
 
 const MenuContainer = styled.div`
   position: sticky;
@@ -92,7 +92,7 @@ export const UserMenu = (props) => {
             <Options onClick={() => props.history.push('/idea')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
-            <Options>
+            <Options onClick={() => props.history.push('/profile-update')}>
               <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
             </Options>
             <Options onClick={() => logout()}>
@@ -124,6 +124,7 @@ const Menu = (props) => {
   }, [auth, location, props.history]);
 
   if (location.pathname === '/') return <HomeMenu {...props} />;
+  if (location.pathname === '/reset-password') return null;
   return <UserMenu user={auth} {...props} />;
 };
 
