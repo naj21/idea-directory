@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import ReactDOM from "react-dom";
 import { Heart } from '@styled-icons/feather/Heart';
 import { Heart as SolidHeart } from '@styled-icons/boxicons-solid/Heart';
 import { Comment } from '@styled-icons/evil/Comment';
@@ -21,7 +21,9 @@ const Post = (props) => {
   } = props;
   const [isOpen, setOpen] = useState(false);
   const portalContainer = useRef();
+  const rightModalPortalContainer = document.createElement('div');
   const portalElement = document.getElementById('overlay-container');
+  const rightModalPortalElement = document.getElementById('right-modal');
   const [isRed, setIsRed] = useState(false);
   const likeIcon = <StyledIcon className = "icon" icon={<Heart />} />;
   const redLikeIcon = <StyledIcon className = "icon" icon={<SolidHeart className = "red-heart" />} />;
@@ -43,11 +45,16 @@ const Post = (props) => {
 
   useEffect(() => {
     portalContainer.current = document.createElement('div');
-    portalElement.appendChild(portalContainer.current);
+    portalElement.appendChild(portalContainer.current); 
+
     return () => {
       portalElement.removeChild(portalContainer.current);
     };
   }, [portalElement]);
+
+  useEffect(() => { 
+    isOpened && isOpen &&  rightModalPortalElement.appendChild(rightModalPortalContainer);
+  }, [rightModalPortalElement, rightModalPortalContainer, isOpen, isOpened]);
 
   useEffect(() => {
     getIdea(params.ideaID);
@@ -83,14 +90,14 @@ const Post = (props) => {
           </div>
         </div>
       </div>
-      {isOpened && isOpen && <Comments ideaID = {params.ideaID}></Comments>}
+      {ReactDOM.createPortal(<Comments ideaID = {params.ideaID} />, rightModalPortalContainer)}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    isOpened: state.commentReducer.isOpen,
+    isOpened: state.comment.commentList.isOpen,
     idea: state.idea.selectedIdea,
   };
 };

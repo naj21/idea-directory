@@ -22,27 +22,27 @@ export const createCommentSuccess = (data) => {
 
 export const createCommentFailure = (error) => {
   return {
-    type: actionTypes.GET_COMMENT_FAILURE,
+    type: actionTypes.CREATE_COMMENT_FAILURE,
     payload:error
   }
 }
 
 export const getComment = () => {
   return {
-    type:actionTypes.GET_COMMENT
+    type:actionTypes.GET_COMMENTS
   }
 }
 
 export const getCommentSuccess = (data) => {
   return {
-    type: actionTypes.GET_COMMENT_SUCCESS,
+    type: actionTypes.GET_COMMENTS_SUCCESS,
     payload: data
   }
 }
 
 export const getCommentFailure = (error) => {
   return {
-    type: actionTypes.COMMENT_FAILURE,
+    type: actionTypes.GET_COMMENTS_FAILURE,
     payload:error
   }
 }

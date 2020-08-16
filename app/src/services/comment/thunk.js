@@ -4,11 +4,9 @@ import {createComment,createCommentFailure,createCommentSuccess,getComment,getCo
 
 export function addCommentThunk(details,ideaId) {
     return (dispatch) => {
-        dispatch(createComment)
-        let user = JSON.parse(localStorage.getItem('ideaUser'));
+        dispatch(createComment())
         axios.post(`https://api.hackthievist.com/ideas/${ideaId}/comments`,
-        details,
-        {headers: {Authorization: `Bearer ${user.token}`}})
+        details)
         .then((response) => {
             dispatch(showMessage({ data: 'Comment created successfully', type: 'success' }));
             dispatch(createCommentSuccess(response.data));
@@ -17,7 +15,6 @@ export function addCommentThunk(details,ideaId) {
             
             if (e.response) {
                 const error = e.response.data.message;
-                console.log(error)
                 dispatch(showMessage({ data: error, type: 'warning' }));
                 return dispatch(createCommentFailure(error));
             }
@@ -29,11 +26,8 @@ export function addCommentThunk(details,ideaId) {
 export function getCommentsThunk(ideaId) {
     return (dispatch) => {
         dispatch(getComment)
-        let user = JSON.parse(localStorage.getItem('ideaUser'));
-        axios.get(`https://api.hackthievist.com/ideas/${ideaId}/comments`,
-        {headers: {Authorization: `Bearer ${user.token}`}})
+        axios.get(`https://api.hackthievist.com/ideas/${ideaId}/comments`)
         .then(response => {
-            console.log(response.data)
             dispatch(getCommentSuccess(response.data))
         })
         .catch(e => {

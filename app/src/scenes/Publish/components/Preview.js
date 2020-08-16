@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Card from '../../../shared/Card';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import Input from '../../../shared/Input';
 import '../publish.scss';
 import Button from '../../../shared/Button';
@@ -9,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import { openPublish, toggleTags, clearTags } from 'services/idea/actions';
 import { createIdeaThunk } from 'services/idea/thunks';
 import MultiSelect from 'shared/MultiSelect';
-
 import '../publish.scss';
 
 const Publish = (props) => {
