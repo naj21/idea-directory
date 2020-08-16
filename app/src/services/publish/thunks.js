@@ -12,7 +12,7 @@ export function publishIdeaThunk(details) {
     let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
       .post(
-        'http://api.hackthievist.com:80/ideas',
+        'https://api.hackthievist.com/ideas',
         { ...details },
         { headers: { Authorization: `Bearer ${user.token}` } }
       )

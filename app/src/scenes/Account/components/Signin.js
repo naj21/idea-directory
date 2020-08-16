@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Auth from '..';
+import Auth from '../containers/Auth';
 import login from 'globals/images/login.svg';
 import Input from 'shared/Input';
 import Button from 'shared/Button';
 import Link from 'shared/Link';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loginThunk } from 'services/auth/thunks';
+import { loginThunk } from 'services/account/thunks';
 
 class Signin extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class Signin extends Component {
           onChange={(e) => this.setState({ password: e.target.value })}
           required
         />
-        <Link to={''} size="sm">
+        <Link to={'/reset-password'} size="sm">
           Forgot Password?
         </Link>
         <div>
@@ -104,7 +104,7 @@ class Signin extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loginData: state.auth,
+  loginData: state.account.auth,
 });
 
 const mapDispatchToProps = (dispatch) => ({
