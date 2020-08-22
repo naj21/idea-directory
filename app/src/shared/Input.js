@@ -31,7 +31,7 @@ export const Label = styled.p`
   color: #5a646a;
 `;
 
-const InputGroup = styled.div`
+export const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -49,7 +49,6 @@ const InputContainer = styled.div`
   background: ${(props) =>
     props.colored ? themes.colors.gray : themes.colors.white};
   border: 1px solid #e1e6eb;
-  box-sizing: border-box;
   border-radius: ${themes.border.radius.small};
 `;
 

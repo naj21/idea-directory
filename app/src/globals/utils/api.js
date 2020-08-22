@@ -1,10 +1,14 @@
 // import { logoutThunk } from "services/auth/thunks";
 import axios from "axios";
 
+export function setAuthorization(authorization) {
+  axios.defaults.headers.common['Authorization'] = authorization
+}
+
 export function init() {
   axios.interceptors.request.use(function (config) {
     let user = JSON.parse(localStorage.getItem('ideaUser'));
-    axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+    config.headers.common['Authorization'] = `Bearer ${user.token}`;
     return config;
   });
 

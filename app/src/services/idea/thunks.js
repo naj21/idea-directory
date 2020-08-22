@@ -14,13 +14,8 @@ import { showMessage } from 'services/messaging/actions';
 export function createIdeaThunk(details) {
   return (dispatch) => {
     dispatch(createIdea());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .post(
-        'https://api.hackthievist.com/ideas',
-        { ...details },
-        { headers: { Authorization: `Bearer ${user.token}` } }
-      )
+      .post('https://api.hackthievist.com/ideas', { ...details })
       .then((response) => {
         dispatch(
           showMessage({ data: 'Idea created successfully', type: 'success' })
@@ -41,11 +36,8 @@ export function createIdeaThunk(details) {
 export function listIdeasThunk() {
   return (dispatch) => {
     dispatch(createIdea());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .get('https://api.hackthievist.com/ideas', {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get('https://api.hackthievist.com/ideas', {})
       .then((response) => {
         dispatch(listIdeasSuccess(response.data.data));
       })
@@ -63,11 +55,8 @@ export function listIdeasThunk() {
 export function getIdeaThunk(ideaId) {
   return (dispatch) => {
     dispatch(getIdea());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .get(`https://api.hackthievist.com/ideas/${ideaId}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get(`https://api.hackthievist.com/ideas/${ideaId}`)
       .then((response) => {
         dispatch(getIdeaSuccess(response.data.data));
       })
