@@ -17,8 +17,9 @@ const IconContainer = styled.div`
 `;
 
 const StyledIcon = (props) => {
-  const { icon } = props;
-  return <IconContainer {...props}> {icon}</IconContainer>;
+  const { icon , className, onClick } = props;
+
+  return <IconContainer className = {className} onClick = {onClick}> {icon}  </IconContainer>;
 };
 
 export default StyledIcon;

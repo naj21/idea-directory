@@ -1,4 +1,4 @@
 export default {
-  SHOW_MESSAGE: 'show_message',
-  CLEAR_MESSAGE: 'clear_message',
+  SHOW_MESSAGE: 'SHOW_MESSAGE',
+  CLEAR_MESSAGE: 'CLEAR_MESSAGE',
 };

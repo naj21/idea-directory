@@ -54,7 +54,7 @@ function resetLink(state = initialState, action) {
     case actionTypes.REQUEST_RESET_LINK_SUCCESS:
       return { ...state, data: action.payload.data, loading: false };
 
-    case actionTypes.REQUEST_RESET_LINK:
+    case actionTypes.REQUEST_RESET_LINK_FAILURE:
       return { ...state, error: action.payload.error, loading: false };
 
     default:
@@ -70,7 +70,7 @@ function resetPassword(state = initialState, action) {
     case actionTypes.RESET_PASSWORD_SUCCESS:
       return { ...state, data: action.payload.data, loading: false };
 
-    case actionTypes.RESET_PASSWORD_SUCCESS:
+    case actionTypes.RESET_PASSWORD_FAILURE:
       return { ...state, error: action.payload.error, loading: false };
 
     default:

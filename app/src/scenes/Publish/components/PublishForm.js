@@ -7,7 +7,6 @@ const Idea = ({ isOpen, publishData }) => {
   const portalContainer = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const ref = useRef();
   const portalElement = document.getElementById('overlay-container');
   const prevPublishRef = useRef();
 
@@ -17,34 +16,40 @@ const Idea = ({ isOpen, publishData }) => {
   const prevPublish = prevPublishRef.current;
 
   useEffect(() => {
-    if(prevPublish && prevPublish.loading && !publishData.loading && publishData.data) {
+    if (
+      prevPublish &&
+      prevPublish.loading &&
+      !publishData.loading &&
+      publishData.data
+    ) {
       setTitle('');
       setDescription('');
     }
-  }, [publishData])
+  }, [prevPublish, publishData]);
 
   useEffect(() => {
     portalContainer.current = document.createElement('div');
     portalElement.appendChild(portalContainer.current);
     return () => {
       portalElement.removeChild(portalContainer.current);
-    }
-    
-  }, [])
-
+    };
+  }, [portalElement]);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIdeaChange = (e) => setDescription(e.target.value);
 
   if (isOpen === true) {
     portalContainer.current.classList.add('overlay');
-  } else if (portalContainer.current && portalContainer.current.classList.contains('overlay')) {
+  } else if (
+    portalContainer.current &&
+    portalContainer.current.classList.contains('overlay')
+  ) {
     portalContainer.current.classList.remove('overlay');
   }
 
   return (
     <div>
-      <div ref={ref}>
+      <div>
         <form>
           <textarea
             onChange={handleTitleChange}
@@ -73,8 +78,8 @@ const Idea = ({ isOpen, publishData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.publish.publishReducer.isOpen,
-    publishData: state.publish.publishReducer,
+    isOpen: state.idea.publishReducer.isOpen,
+    publishData: state.idea.publishReducer,
   };
 };
 

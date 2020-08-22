@@ -24,7 +24,7 @@ export function signupThunk(details) {
   return (dispatch) => {
     dispatch(sendRequest());
     axios
-      .post('https://api.hackthievist.com:80/register', details)
+      .post('https://api.hackthievist.com/register', details)
       .then((response) => {
         const data = response.data;
         dispatch(showMessage({ data: 'Signup Successfull', type: 'success' }));
@@ -72,13 +72,8 @@ export function logoutThunk() {
 export function updateUserThunk(data) {
   return (dispatch) => {
     dispatch(updateUser());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .patch(
-        `https://api.hackthievist.com/users`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${user.token}` } }
-      )
+      .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
         dispatch(
           showMessage({ data: 'Idea created successfully', type: 'success' })
@@ -99,13 +94,8 @@ export function updateUserThunk(data) {
 export function requestResetLinkThunk(data) {
   return (dispatch) => {
     dispatch(requestResetLink());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .patch(
-        `https://api.hackthievist.com/users`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${user.token}` } }
-      )
+      .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
         dispatch(showMessage({ data: response.message, type: 'success' }));
         dispatch(requestResetLinkSuccess(response.data));
@@ -124,13 +114,8 @@ export function requestResetLinkThunk(data) {
 export function resetPasswordThunk(data) {
   return (dispatch) => {
     dispatch(resetPassword());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .patch(
-        `https://api.hackthievist.com/users`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${user.token}` } }
-      )
+      .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
         dispatch(showMessage({ data: response.message, type: 'success' }));
         dispatch(resetPasswordSuccess(response.data));

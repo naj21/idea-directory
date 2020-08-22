@@ -52,7 +52,7 @@ const MultipleSelectButton = styled.button`
   }
 
   > span {
-    color: ${themes.colors.gray}
+    color: ${themes.colors.gray};
   }
 
   svg {
@@ -204,7 +204,11 @@ export class MultiSelect extends Component {
               ))}
             </div>
           )}
-          {!this.state.optionsVisible ? <StyledIcon icon={<ArrowDown />} color={themes.colors.darkGray} /> : <StyledIcon icon={<ArrowUp />} color={themes.colors.darkGray} />}
+          {!this.state.optionsVisible ? (
+            <StyledIcon icon={<ArrowDown />} color={themes.colors.darkGray} />
+          ) : (
+            <StyledIcon icon={<ArrowUp />} color={themes.colors.darkGray} />
+          )}
         </MultipleSelectButton>
         {this.renderOptionsPortal()}
       </div>

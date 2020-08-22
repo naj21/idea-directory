@@ -1,3 +1,4 @@
+
 .preview {
     padding-top: 68px;
     padding-bottom: 70px;
@@ -24,8 +25,6 @@
     }
 }
 
-
-
 .idea-text {   
     border-style: none; 
     border-color: Transparent; 
@@ -45,5 +44,47 @@
         color: rgba(0, 0, 0, 0.3);          
       }
     
-  }
+	}
+	
+	.publish-card {
+		position: absolute !important;
+		width: 1047px;
+		height: 558px;
+		left: 195px;
+		top: 121px;
+		background: #ffffff;
+		padding: 0 87px 0 95px;
+		z-index: 1;
+	
+		section {
+			display: grid;
+			grid-template-columns: 1.4fr 1fr;
+		}
+	}
+
+	.title-input {
+		width: 316px !important;
+		height: 40px;
+		background: rgba(225, 230, 235, 0.35) !important;
+		border-radius: 3px;
+		margin-bottom: 40px;
+		margin-right: 70px;
+	}
+	
+	.summary-field {
+		width: 316px !important;
+		height: 82px;
+		border-radius: 3px;
+		margin-bottom: 40px;
+		background: rgba(225, 230, 235, 0.35) !important;
+		margin-right: 70px;
+		border-color: #E1E6EB;
+		padding: 10px;
+		outline: none;
+
+	}
+
+	.publish-button {
+		margin-top: 85px;
+	}
 
