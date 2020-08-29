@@ -1,21 +1,21 @@
 import actionTypes from './actionTypes';
 
-export function sendRequest() {
+export function createUser() {
   return {
-    type: 'SEND_REQUEST',
+    type: actionTypes.CREATE_USER,
   };
 }
 
-export function fetchUserSuccess(data) {
+export function createUserSuccess(data) {
   return {
-    type: 'FETCH_USER_SUCCESS',
+    type: actionTypes.CREATE_USER_SUCCESS,
     payload: data,
   };
 }
 
-export function fetchUserFailure(error) {
+export function createUserFailure(error) {
   return {
-    type: 'FETCH_USER_FAILURE',
+    type: actionTypes.CREATE_USER_FAILURE,
     payload: error,
   };
 }
@@ -44,9 +44,24 @@ export function requestLoginFailure(error) {
   };
 }
 
-export function logout() {
+export function requestLogout() {
   return {
-    type: actionTypes.LOGOUT,
+    type: actionTypes.REQUEST_LOGOUT,
+  };
+}
+
+export function requestLogoutSuccess() {
+  return {
+    type: actionTypes.REQUEST_LOGOUT_SUCCESS,
+  };
+}
+
+export function requestLogoutFailure(error) {
+  return {
+    type: actionTypes.REQUEST_LOGOUT_FAILURE,
+    payload: {
+      error,
+    },
   };
 }
 

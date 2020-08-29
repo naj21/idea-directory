@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import logo from 'globals/images/logo.svg';
-import Link from '../Link';
-import Button from '../Button';
-import SearchIcon from '../SearchIcon';
-import Dropdown, { Options } from '../Dropdown';
-import StyledIcon from '../StyledIcon';
+import Link from './Link';
+import Button from './Button';
+import SearchIcon from './SearchIcon';
+import Dropdown, { Options } from './Dropdown';
+import StyledIcon from './StyledIcon';
 import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
@@ -28,7 +28,7 @@ const MenuContainer = styled.div`
 
   > div {
     display: flex;
-    align-items: center;
+    align-item: center;
     > :not(:first-child) {
       margin-left: 20px;
     }
@@ -36,6 +36,14 @@ const MenuContainer = styled.div`
 
   a {
     align-self: center;
+  }
+
+  @media(max-width: 797px) {
+    padding: 0 50px;
+  }
+
+  @media(max-width: 395px) {
+    padding: 0 30px;
   }
 `;
 
@@ -73,7 +81,7 @@ export const UserMenu = (props) => {
 
   return (
     <MenuContainer auth={isAuth}>
-      <Link to={!user ? '/' : '/ideas'} exact>
+      <Link to={'/'} exact>
         <img src={logo} alt="logo" />
       </Link>
       {!isAuth && (
@@ -82,7 +90,7 @@ export const UserMenu = (props) => {
             <SearchIcon />
           ) : (
             <Button
-              style={{ padding: '0 40px', fontSize: '15px' }}
+              style={{ fontSize: '15px' }}
               onClick={publish}
             >
               Publish Idea

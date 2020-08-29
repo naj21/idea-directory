@@ -1,18 +1,24 @@
 
-.preview {
-    padding-top: 68px;
+.preview-text {
     padding-bottom: 70px;
+}
+
+.post {
+	form {
+		max-width: 800px;
+		margin-left: 10%;
+		margin-top: 50px;
+
+		>* {
+			width: 100%;
+		}
+	}
 }
 
 .title {
     border-style: none; 
     border-color: Transparent; 
-    // overflow-y: hidden;
-    margin-top: 93px;     
-    margin-left: 195px;
-    width :1000px;
     height:65px;
-    outline: none;
     line-height: 65px;
     font-size:40px;
     font-weight:500;
@@ -28,12 +34,9 @@
 .idea-text {   
     border-style: none; 
     border-color: Transparent; 
-    // overflow-y: hidden;     
-    margin-left: 195px;
     margin-top:15px;
     width :1000px;
     height:300px;
-    outline: none;
     resize: none;
     line-height: 55px;
     font-size:25px;
@@ -46,14 +49,18 @@
     
 	}
 	
-	.publish-card {
-		position: absolute !important;
-		width: 1047px;
-		height: 558px;
-		left: 195px;
-		top: 121px;
-		background: #ffffff;
-		padding: 0 87px 0 95px;
+	.preview {
+		position: absolute;
+		max-width: 1047px;
+		min-height: 500px;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		background: #ffff;
+		padding: 60px 70px 40px;
 		z-index: 1;
 	
 		section {
@@ -63,7 +70,7 @@
 	}
 
 	.title-input {
-		width: 316px !important;
+		max-width: 316px !important;
 		height: 40px;
 		background: rgba(225, 230, 235, 0.35) !important;
 		border-radius: 3px;
@@ -72,7 +79,7 @@
 	}
 	
 	.summary-field {
-		width: 316px !important;
+		max-width: 316px !important;
 		height: 82px;
 		border-radius: 3px;
 		margin-bottom: 40px;
@@ -85,6 +92,41 @@
 	}
 
 	.publish-button {
-		margin-top: 85px;
+		margin-top: 75px;
 	}
 
+@media(max-width: 767px) {
+	.post {
+		form {
+			max-width: 800px;
+			margin-left: 10%;
+			margin-top: 20px;
+		}
+	}
+
+
+	.preview {
+		padding: 40px 70px 20px;
+	
+		section {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	.preview-text {
+    padding-bottom: 50px;
+}
+}
+
+@media(max-width: 375px) {
+	.post {
+		form {
+			margin-left: 0%;
+		}
+	}
+
+	.publish-button {
+		margin-top: 45px;
+	}
+}

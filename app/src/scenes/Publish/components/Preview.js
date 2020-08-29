@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import Card from '../../../shared/Card';
 import { connect } from 'react-redux';
 import Input from '../../../shared/Input';
 import '../publish.scss';
@@ -9,6 +8,7 @@ import { openPublish, toggleTags, clearTags } from 'services/idea/actions';
 import { createIdeaThunk } from 'services/idea/thunks';
 import MultiSelect from 'shared/MultiSelect';
 import '../publish.scss';
+import TextArea from 'shared/TextArea';
 
 const Publish = (props) => {
   const {
@@ -53,70 +53,66 @@ const Publish = (props) => {
       document.removeEventListener('mousedown', handleClickOutside);
       clearTags(tags);
     };
-  }, [openPublish, ref, isOpen, clearTags, tags]);
+  }, [openPublish, ref, isOpen]);
 
   useEffect(() => {
     setIdeaTitle(title);
     setSummary(description.substring(0, 50));
   }, [title, description]);
 
-  return (
-    <div>
-      {isOpen && (
-        <form onSubmit={handleSubmit}>
-          <Card className = "publish-card" ref={ref}>
-            <p class="preview">Preview</p>
-            <section>
-              <div>
-                <Input
-                  type="text"
-                  value={ideaTitle}
-                  colored
-                  label="Title"
-                  name="title"
-                  onChange={handleIdeaTitle}
-                  className = "title-input"
-                />
-                <textarea
-                  name="summary"
-                  maxlength="50"
-                  value={summary}
-                  onChange={handleSummary}
-                  className = "summary-field"
-                ></textarea>
-              </div>
-              <div>
-                <MultiSelect
-                  options={[
-                    'tech',
-                    'frontend',
-                    'backend',
-                    'ios',
-                    'andriod',
-                    'design',
-                    'illustration',
-                  ]}
-                  closeOnSelect={false}
-                  selected={tags}
-                  placeholder={'Add tags'}
-                  onSelectOption={(opt) => toggleTags(opt)}
-                  label={'Add tags so readers know what your idea is about'}
-                />
-                <Button className = "publish-button" loading={publishData.loading}>Publish</Button>
-              </div>
-            </section>
-          </Card>
-        </form>
-      )}
-    </div>
-  );
+  return isOpen ? (
+    <form onSubmit={handleSubmit} className="preview" ref={ref}>
+      <p className="preview-text">Preview</p>
+      <section>
+        <div>
+          <Input
+            type="text"
+            value={ideaTitle}
+            colored
+            label="Title"
+            name="title"
+            onChange={handleIdeaTitle}
+            className="title-input"
+          />
+          <TextArea
+            label="Summary"
+            maxlength="50"
+            value={summary}
+            onChange={handleSummary}
+            className="summary-field"
+          />
+        </div>
+        <div>
+          <MultiSelect
+            options={[
+              'tech',
+              'frontend',
+              'backend',
+              'ios',
+              'andriod',
+              'design',
+              'illustration',
+            ]}
+            closeOnSelect={false}
+            selected={tags}
+            placeholder={'Add tags'}
+            onSelectOption={(opt) => toggleTags(opt)}
+            label={'Add tags so readers know what your idea is about'}
+          />
+          <Button className="publish-button" loading={publishData.loading}>
+            Publish
+          </Button>
+        </div>
+      </section>
+    </form>
+  ) : null;
 };
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.idea.publishReducer.isOpen,
+    isOpen: state.idea.publish.isOpen,
     tags: state.idea.tags.data,
-    publishData: state.idea.publishReducer,
+    publishData: state.idea.publish,
   };
 };
 const mapDispatchToProps = (dispatch) => {

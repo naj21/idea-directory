@@ -1,13 +1,19 @@
 export default {
-  REQUEST_LOGIN: 'auth/request_login',
-  REQUEST_LOGIN_SUCCESS: 'auth/request_login_success',
-  REQUEST_LOGIN_FAILURE: 'auth/request_login_failure',
+  CREATE_USER: 'CREATE_USER',
+  CREATE_USER_SUCCESS: 'CREATE_USER_SUCCESS',
+  CREATE_USER_FAILURE: 'CREATE_USER_FAILURE',
+        
+  REQUEST_LOGIN: 'request_login',
+  REQUEST_LOGIN_SUCCESS: 'request_login_success',
+  REQUEST_LOGIN_FAILURE: 'request_login_failure',
 
-  LOGOUT: 'auth/logout',
+  REQUEST_LOGOUT: 'request_logout',
+  REQUEST_LOGOUT_SUCCESS: 'request_logout_success',
+  REQUEST_LOGOUT_FAILURE: 'request_logout_failure',
 
-  UPDATE_USER: 'account/update_user',
-  UPDATE_USER_SUCCESS: 'account/update_user_success',
-  UPDATE_USER_FAILUIRE: 'account/update_user_failure',
+  UPDATE_USER: 'update_user',
+  UPDATE_USER_SUCCESS: 'update_user_success',
+  UPDATE_USER_FAILUIRE: 'update_user_failure',
 
   REQUEST_RESET_LINK: 'REQUEST_RESET_LINK',
   REQUEST_RESET_LINK_SUCCESS: 'REQUEST_RESET_LINK_SUCCESS',
