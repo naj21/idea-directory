@@ -1,5 +1,6 @@
 .idea {
-  padding: 100px 100px 50px 195px;
+  padding: 50px 0 50px 10%;
+  max-width: 856px;
 }
 
 .idea__title {
@@ -277,15 +278,15 @@
 
 }
 
-@media(max-width: 768px) {
+@media(max-width: 395px) {
+  .idea {
+    padding: 0;
+  }
+}
+
+@media(max-width: 767px) {
   .block {
     display: flex;
     flex-direction: column;
   }
-
-  .idea {
-    margin-top: 0px;
-
-  }
 }
-

@@ -7,7 +7,7 @@ const IButton = styled.button.attrs((props) => ({
 }))`
   min-height: 40px;
   color: white;
-  padding: 0 100px;
+  padding: 0 50px;
   background: ${themes.colors.primary};
   border: none;
   border-radius: ${themes.border.radius.small};

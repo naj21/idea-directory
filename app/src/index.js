@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { init } from 'globals/utils/api';
 
 const store = configureStore();
-init()
+init(store)
 
 ReactDOM.render(
   <Provider store={store}>

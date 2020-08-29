@@ -1,5 +1,5 @@
 .auth {
-  padding: 70px 130px 70px 100px;
+  // padding: 70px 130px 70px 100px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   
@@ -143,8 +143,7 @@
   }
 }
 
-
-@media(max-width: 768px) {
+@media(max-width: 767px) {
   .auth {
     display: flex;
     flex-direction: column;
@@ -155,6 +154,22 @@
 
     img {
       display: none;
+    }
+  }
+}
+
+@media(max-width: 395px) {
+  .reset-password {
+    top: 15%;
+  }
+
+  .auth__form {
+    > :last-child {
+      display: flex;
+      flex-direction: column;
+      p {
+        margin-bottom: 20px;
+      }
     }
   }
 }
