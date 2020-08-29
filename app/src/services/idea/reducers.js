@@ -7,7 +7,7 @@ const initialState = {
   error: null,
 };
 
-const publishReducer = (state = initialState, action) => {
+const publish = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.OPEN_PUBLISH:
       return {
@@ -98,7 +98,7 @@ function selectedIdea(state = initialState, action) {
 }
 
 export default combineReducers({
-  publishReducer,
+  publish,
   tags,
   ideaList,
   selectedIdea,

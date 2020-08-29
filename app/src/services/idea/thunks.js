@@ -23,12 +23,8 @@ export function createIdeaThunk(details) {
         dispatch(createIdeaSuccess(response.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(createIdeaFailure(error));
-        }
-        dispatch(createIdeaFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(createIdeaFailure(e));
       });
   };
 }
@@ -42,12 +38,8 @@ export function listIdeasThunk() {
         dispatch(listIdeasSuccess(response.data.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(listIdeasFailure(error));
-        }
-        dispatch(listIdeasFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(listIdeasFailure(e));
       });
   };
 }
@@ -61,12 +53,8 @@ export function getIdeaThunk(ideaId) {
         dispatch(getIdeaSuccess(response.data.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(getIdeaFailure(error));
-        }
-        dispatch(getIdeaFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(getIdeaFailure(e));
       });
   };
 }

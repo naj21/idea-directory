@@ -3,10 +3,10 @@ import {
   requestLogin,
   requestLoginSuccess,
   requestLoginFailure,
-  logout,
-  sendRequest,
-  fetchUserSuccess,
-  fetchUserFailure,
+  requestLogout,
+  createUser,
+  createUserSuccess,
+  createUserFailure,
   updateUser,
   updateUserFailure,
   updateUserSuccess,
@@ -16,27 +16,25 @@ import {
   resetPassword,
   resetPasswordSuccess,
   resetPasswordFailure,
+  requestLogoutFailure,
+  requestLogoutSuccess,
 } from './actions';
 import { showMessage } from 'services/messaging/actions';
 import { setItem, removeItem } from 'globals/utils/localStorage';
 
 export function signupThunk(details) {
   return (dispatch) => {
-    dispatch(sendRequest());
+    dispatch(createUser());
     axios
       .post('https://api.hackthievist.com/register', details)
       .then((response) => {
         const data = response.data;
         dispatch(showMessage({ data: 'Signup Successfull', type: 'success' }));
-        dispatch(fetchUserSuccess(data));
+        dispatch(createUserSuccess(data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(fetchUserFailure(error));
-        }
-        dispatch(fetchUserFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(createUserFailure(e));
       });
   };
 }
@@ -47,25 +45,32 @@ export function loginThunk(username, password) {
     axios
       .post('https://api.hackthievist.com/login', { username, password })
       .then((response) => {
-        dispatch(showMessage({ data: 'Login Successfull', type: 'success' }));
+        console.log(response)
+        dispatch(showMessage({ data: response.data.message, type: 'success' }));
         setItem('ideaUser', response.data.data);
         dispatch(requestLoginSuccess(response.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(requestLoginFailure(error));
-        }
-        dispatch(requestLoginFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(requestLoginFailure(e));
       });
   };
 }
 
 export function logoutThunk() {
   return (dispatch) => {
-    removeItem('ideaUser');
-    dispatch(logout());
+    dispatch(requestLogout());
+    axios
+      .get('https://api.hackthievist.com/logout')
+      .then((response) => {
+        dispatch(showMessage({ data: response.data.message, type: 'success' }));
+        removeItem('ideaUser');
+        dispatch(requestLogoutSuccess());
+      })
+      .catch((e) => {
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(requestLogoutFailure(e));
+      });
   };
 }
 
@@ -76,17 +81,13 @@ export function updateUserThunk(data) {
       .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
         dispatch(
-          showMessage({ data: 'Idea created successfully', type: 'success' })
+          showMessage({ data: response.data.message, type: 'success' })
         );
         dispatch(updateUserSuccess(response.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(updateUserFailure(error));
-        }
-        dispatch(updateUserFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(updateUserFailure(e));
       });
   };
 }
@@ -97,16 +98,12 @@ export function requestResetLinkThunk(data) {
     axios
       .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
-        dispatch(showMessage({ data: response.message, type: 'success' }));
+        dispatch(showMessage({ data: response.data.message, type: 'success' }));
         dispatch(requestResetLinkSuccess(response.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(requestResetLinkFailure(error));
-        }
-        dispatch(requestResetLinkFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(requestResetLinkFailure(e));
       });
   };
 }
@@ -117,16 +114,12 @@ export function resetPasswordThunk(data) {
     axios
       .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
-        dispatch(showMessage({ data: response.message, type: 'success' }));
+        dispatch(showMessage({ data: response.data.message, type: 'success' }));
         dispatch(resetPasswordSuccess(response.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(resetPasswordFailure(error));
-        }
-        dispatch(resetPasswordFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(resetPasswordFailure(e));
       });
   };
 }
