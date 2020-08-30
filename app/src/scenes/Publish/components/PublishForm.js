@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import '../publish.scss';
 import Preview from './Preview';
 
-const Idea = ({ isOpen, publishData }) => {
+const Idea = ({ isOpen, publishData, history }) => {
   const portalContainer = useRef();
   const previewPortalContainer = document.createElement('div');
   const previewPortalElement = document.getElementById('preview-modal');
@@ -27,6 +27,7 @@ const Idea = ({ isOpen, publishData }) => {
     ) {
       setTitle('');
       setDescription('');
+      history.push(`/ideas/${publishData.data.id}`)
     }
   }, [prevPublish, publishData]);
 

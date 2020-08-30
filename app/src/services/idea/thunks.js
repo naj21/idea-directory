@@ -19,9 +19,9 @@ export function createIdeaThunk(details) {
       .post('https://api.hackthievist.com/ideas', { ...details })
       .then((response) => {
         dispatch(
-          showMessage({ data: 'Idea created successfully', type: 'success' })
+          showMessage({ data: response.data.message, type: 'success' })
         );
-        dispatch(createIdeaSuccess(response.data));
+        dispatch(createIdeaSuccess(response.data.data));
       })
       .catch((e) => {
         dispatch(showMessage({ data: e, type: 'warning' }));
