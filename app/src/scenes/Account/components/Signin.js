@@ -23,7 +23,7 @@ class Signin extends Component {
       !this.props.loginData.loading &&
       this.props.loginData.data
     ) {
-      this.props.history.push('/post');
+      this.props.history.push('/ideas');
     }
   }
 

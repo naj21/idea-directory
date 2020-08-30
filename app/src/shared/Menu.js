@@ -38,11 +38,11 @@ const MenuContainer = styled.div`
     align-self: center;
   }
 
-  @media(max-width: 797px) {
+  @media (max-width: 797px) {
     padding: 0 50px;
   }
 
-  @media(max-width: 395px) {
+  @media (max-width: 395px) {
     padding: 0 30px;
   }
 `;
@@ -79,6 +79,11 @@ export const UserMenu = (props) => {
     props.openPublish(true);
   };
 
+  const handleLogout = () => {
+    logout();
+    props.history.push('/signin');
+  };
+
   return (
     <MenuContainer auth={isAuth}>
       <Link to={'/'} exact>
@@ -89,10 +94,7 @@ export const UserMenu = (props) => {
           {!isPublish ? (
             <SearchIcon />
           ) : (
-            <Button
-              style={{ fontSize: '15px' }}
-              onClick={publish}
-            >
+            <Button style={{ fontSize: '15px' }} onClick={publish}>
               Publish Idea
             </Button>
           )}
@@ -103,7 +105,7 @@ export const UserMenu = (props) => {
             <Options onClick={() => props.history.push('/profile-update')}>
               <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
             </Options>
-            <Options onClick={() => logout()}>
+            <Options onClick={() => handleLogout()}>
               <StyledIcon icon={<Exit />}></StyledIcon> Sign out
             </Options>
           </Dropdown>
@@ -122,13 +124,6 @@ const Menu = (props) => {
   useEffect(() => {
     const user = localStorage.getItem('ideaUser');
     if (!auth && user) setAuth(JSON.parse(user).user);
-    if (
-      location.pathname !== '/' &&
-      location.pathname !== '/signup' &&
-      location.pathname !== '/signin' &&
-      !user
-    )
-      props.history.push('/signin');
   }, [auth, location, props.history]);
 
   if (location.pathname === '/') return <HomeMenu {...props} />;

@@ -8,6 +8,7 @@ import {
   getIdea,
   getIdeaFailure,
   getIdeaSuccess,
+  listIdeas,
 } from './actions';
 import { showMessage } from 'services/messaging/actions';
 
@@ -29,11 +30,11 @@ export function createIdeaThunk(details) {
   };
 }
 
-export function listIdeasThunk() {
+export function listIdeasThunk(tag) {
   return (dispatch) => {
-    dispatch(createIdea());
+    dispatch(listIdeas());
     axios
-      .get('https://api.hackthievist.com/ideas', {})
+      .get('https://api.hackthievist.com/ideas', { params: { tag } })
       .then((response) => {
         dispatch(listIdeasSuccess(response.data.data));
       })
