@@ -9,20 +9,20 @@ const initialState = {
 
 function auth(state = initialState, action) {
   switch (action.type) {
-    case 'SEND_REQUEST':
+    case actionTypes.CREATE_USER:
       return {
         ...state,
         loading: true,
       };
 
-    case 'FETCH_USER_SUCCESS':
+    case actionTypes.CREATE_USER_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload.data,
       };
 
-    case 'FETCH_USER_FAILURE':
+    case actionTypes.CREATE_USER_FAILURE:
       return {
         ...state,
         loading: false,
@@ -38,11 +38,21 @@ function auth(state = initialState, action) {
     case actionTypes.REQUEST_LOGIN_FAILURE:
       return { ...state, error: action.payload.error, loading: false };
 
-    case actionTypes.LOGOUT:
+    case actionTypes.REQUEST_LOGOUT:
       return initialState;
 
+    case actionTypes.UPDATE_USER:
+      return { ...state, error: null, loading: true };
+
+    case actionTypes.UPDATE_USER_SUCCESS:
+      return { ...state, data: action.payload.data, loading: false };
+
+    case actionTypes.UPDATE_USER_FAILUIRE:
+      return { ...state, error: action.payload.error, loading: false };
+
     default:
-      return state;
+      const auth = JSON.parse(localStorage.getItem('ideaUser'));
+      return { ...state, data: state.data || auth && auth.user };
   }
 }
 
