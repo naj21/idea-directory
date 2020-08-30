@@ -39,10 +39,7 @@ const SearchIcon = (props) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
-  if (isOpen) {
-    const inputElement = ref.current.getElementsByTagName('INPUT');
-    console.log(ref.current, inputElement.item(0));
-  }
+
   return (
     <SearchContainer {...props} ref={ref}>
       {!isOpen && (

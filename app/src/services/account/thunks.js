@@ -28,9 +28,10 @@ export function signupThunk(details) {
     axios
       .post('https://api.hackthievist.com/register', details)
       .then((response) => {
-        const data = response.data;
-        dispatch(showMessage({ data: 'Signup Successfull', type: 'success' }));
-        dispatch(createUserSuccess(data));
+        const { data, message } = response.data;
+        dispatch(showMessage({ data: message, type: 'success' }));
+        setItem('ideaUser', data);
+        dispatch(createUserSuccess(data.user));
       })
       .catch((e) => {
         dispatch(showMessage({ data: e, type: 'warning' }));
@@ -45,10 +46,10 @@ export function loginThunk(username, password) {
     axios
       .post('https://api.hackthievist.com/login', { username, password })
       .then((response) => {
-        console.log(response)
-        dispatch(showMessage({ data: response.data.message, type: 'success' }));
-        setItem('ideaUser', response.data.data);
-        dispatch(requestLoginSuccess(response.data));
+        const { data, message } = response.data;
+        dispatch(showMessage({ data: message, type: 'success' }));
+        setItem('ideaUser', data);
+        dispatch(requestLoginSuccess(data.user));
       })
       .catch((e) => {
         dispatch(showMessage({ data: e, type: 'warning' }));
@@ -80,9 +81,12 @@ export function updateUserThunk(data) {
     axios
       .patch(`https://api.hackthievist.com/users`, { ...data })
       .then((response) => {
-        dispatch(
-          showMessage({ data: response.data.message, type: 'success' })
-        );
+        dispatch(showMessage({ data: response.data.message, type: 'success' }));
+        const auth = JSON.parse(localStorage.getItem('ideaUser'));
+        setItem('ideaUser', {
+          ...auth,
+          user: { ...auth.user, ...response.data.data },
+        });
         dispatch(updateUserSuccess(response.data));
       })
       .catch((e) => {

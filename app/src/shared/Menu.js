@@ -34,10 +34,6 @@ const MenuContainer = styled.div`
     }
   }
 
-  a {
-    align-self: center;
-  }
-
   @media (max-width: 797px) {
     padding: 0 50px;
   }
@@ -86,7 +82,7 @@ export const UserMenu = (props) => {
 
   return (
     <MenuContainer auth={isAuth}>
-      <Link to={'/'} exact>
+      <Link to={!user ? '/' : '/ideas'} exact>
         <img src={logo} alt="logo" />
       </Link>
       {!isAuth && (

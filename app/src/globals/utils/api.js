@@ -3,9 +3,7 @@ import axios from 'axios';
 import Signin from 'scenes/Account/components/Signin';
 
 export function setAuthorization(authorization) {
-  console.log(axios.defaults.headers);
   axios.defaults.headers.common['Authorization'] = authorization;
-  console.log(axios.defaults.headers);
 }
 
 export function init() {
