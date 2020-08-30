@@ -52,7 +52,7 @@ function auth(state = initialState, action) {
 
     default:
       const auth = JSON.parse(localStorage.getItem('ideaUser'));
-      return { ...state, data: state.data || auth && auth.user };
+      return { ...state, data: state.data || (auth && auth.user) };
   }
 }
 
