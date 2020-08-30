@@ -10,12 +10,17 @@ import TextArea from 'shared/TextArea';
 class ProfileUpdate extends Component {
   constructor(props) {
     super(props);
+    const {
+      user: {
+        data: { username, email, location, bio },
+      },
+    } = this.props;
     this.state = {
-      username: '',
-      email: '',
+      username,
+      email,
       password: '',
-      location: '',
-      bio: '',
+      location,
+      bio,
     };
   }
 
@@ -25,10 +30,13 @@ class ProfileUpdate extends Component {
   };
   render() {
     const { username, password, email, location, bio } = this.state;
+    const {
+      user: { data, loading },
+    } = this.props;
     return (
       <article className="profile-update">
         <p>EDIT PROFILE</p>
-        <h3>Popoola Kolawole</h3>
+        <h3>{data.username}</h3>
         <form className="profile-update__form" onSubmit={this.handleSubmit}>
           <Input
             label="Username"
@@ -64,13 +72,21 @@ class ProfileUpdate extends Component {
           />
 
           <div className="is-half">
-            <Button type="submit">Save Changes</Button>
-            <Button outline>Cancel</Button>
+            <Button type="submit" loading={loading}>
+              Save Changes
+            </Button>
+            {/* <Button outline>Cancel</Button> */}
           </div>
         </form>
       </article>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    user: state.account.auth,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -79,4 +95,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ProfileUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);
