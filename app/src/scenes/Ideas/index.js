@@ -17,28 +17,28 @@ const Ideas = (props) => {
   return (
     <article className="ideas">
       <nav>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas()}>
           HOME
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('tech')}>
           TECH
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('frontend')}>
           FRONTEND
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('backend')}>
           BACKEND
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('ios')}>
           IOS
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('andriod')}>
           ANDROID
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('design')}>
           DESIGN
         </Link>
-        <Link to="" secondary>
+        <Link to="/ideas" secondary onClick={() => loadIdeas('illustration')}>
           ILLUSTRATION
         </Link>
       </nav>

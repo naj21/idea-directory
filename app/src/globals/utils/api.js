@@ -1,5 +1,6 @@
-import { logoutThunk } from 'services/account/thunks';
+import React from 'react';
 import axios from 'axios';
+import Signin from 'scenes/Account/components/Signin';
 
 export function setAuthorization(authorization) {
   console.log(axios.defaults.headers);
@@ -22,7 +23,7 @@ export function init() {
     },
     function (error) {
       if (error.response && error.response.status === 401) {
-        logoutThunk();
+        return <Signin />;
       }
       return Promise.reject(error.response && error.response.data.message);
     }

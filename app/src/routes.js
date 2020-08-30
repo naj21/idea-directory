@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import About from './scenes/About';
 import Signin from 'scenes/Account/components/Signin';
 import Signup from 'scenes/Account/components/Signup';
@@ -11,12 +11,17 @@ import ResetPassword from 'scenes/Account/containers/ResetPassword';
 
 const AppRoutes = [
   <Route key="about" path="/" component={About} exact />,
-  <Route key="login" path="/signin" component={Signin} exact />,
-  <Route key="signup" path="/signup" component={Signup} exact />,
-  <Route key="ideas" path="/ideas" component={Ideas} exact />,
-  <Route key="idea" path="/ideas/:ideaID" component={Post} />,
-  <Route key="post" path="/post" component={PublishForm} exact />,
-  <Route key="user-update" path="/profile-update" component={ProfileUpdate} exact />,
+  <UnauthenticatedRoute key="login" path="/signin" component={Signin} exact />,
+  <UnauthenticatedRoute key="signup" path="/signup" component={Signup} exact />,
+  <AuthenticatedRoute key="ideas" path="/ideas" component={Ideas} exact />,
+  <AuthenticatedRoute key="idea" path="/ideas/:ideaID" component={Post} />,
+  <AuthenticatedRoute key="post" path="/post" component={PublishForm} exact />,
+  <AuthenticatedRoute
+    key="user-update"
+    path="/profile-update"
+    component={ProfileUpdate}
+    exact
+  />,
   <Route key="reset-link" path="/reset-password" component={ResetPassword} exact />,
   <Route
     key="reset-password"
@@ -25,5 +30,48 @@ const AppRoutes = [
     exact
   />,
 ];
+
+function AuthenticatedRoute({ component: Component, ...rest }) {
+  const currentUser = localStorage.getItem('ideaUser');
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!currentUser) {
+          return (
+            <Redirect
+              to={{ pathname: '/signin', state: { from: props.location } }}
+            />
+          );
+        }
+        return <Component {...props} />;
+      }}
+    />
+  );
+}
+
+function UnauthenticatedRoute({ component: Component, ...rest }) {
+  const currentUser = localStorage.getItem('ideaUser');
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        if (currentUser) {
+          return (
+            <Redirect
+              to={{
+                pathname:
+                  props.location && props.location.state
+                    ? props.location.state.from.pathname
+                    : '/ideas',
+              }}
+            />
+          );
+        }
+        return <Component {...props} />;
+      }}
+    />
+  );
+}
 
 export default AppRoutes;
