@@ -21,8 +21,8 @@ const SignUp = (props) => {
   const prevAuth = prevAuthRef.current;
 
   useEffect(() => {
-    if (prevAuth && prevAuth.loading && !signupData.loading && signupData.data) {
-      history.push('/signin');
+    if (prevAuth && prevAuth.loading && !signupData.loading && !signupData.error) {
+      history.push('/ideas');
     }
   }, [history, prevAuth, signupData]);
 
