@@ -28,10 +28,14 @@ const MenuContainer = styled.div`
 
   > div {
     display: flex;
-    align-item: center;
+    align-items: center;
     > :not(:first-child) {
       margin-left: 20px;
     }
+  }
+
+  img {
+    cursor: pointer;
   }
 
   @media (max-width: 797px) {
@@ -54,7 +58,7 @@ const HomeMenu = (props) => {
         </Link>
         <Button
           onClick={() => history.push('/signup')}
-          style={{ padding: '0 30px', fontSize: '18px' }}
+          style={{ padding: '0 35px', fontSize: '18px' }}
         >
           Get Started
         </Button>

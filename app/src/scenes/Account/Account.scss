@@ -110,6 +110,7 @@
 
   > img {
     margin-bottom: 60px;
+    cursor: pointer;
   }
 
 }
@@ -134,7 +135,7 @@
   &__msg {
     display: flex;
     flex-direction: column;
-    margin-left: 60px;
+    margin-left: 80px;
     align-items: center;
     text-align: center;
 
