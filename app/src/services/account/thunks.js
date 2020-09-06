@@ -96,13 +96,12 @@ export function updateUserThunk(data) {
   };
 }
 
-export function requestResetLinkThunk(data) {
+export function requestResetLinkThunk(email) {
   return (dispatch) => {
     dispatch(requestResetLink());
     axios
-      .post('/request-password-reset', { ...data })
+      .post('/request-password-reset', { email })
       .then((response) => {
-        dispatch(showMessage({ data: response.data.message, type: 'success' }));
         dispatch(requestResetLinkSuccess(response.data));
       })
       .catch((e) => {
@@ -116,7 +115,7 @@ export function resetPasswordThunk(data) {
   return (dispatch) => {
     dispatch(resetPassword());
     axios
-      .post('/reset-password', { ...data })
+      .post('/reset-password', data)
       .then((response) => {
         dispatch(showMessage({ data: response.data.message, type: 'success' }));
         dispatch(resetPasswordSuccess(response.data));

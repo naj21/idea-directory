@@ -7,35 +7,53 @@ import { requestResetLinkThunk, resetPasswordThunk } from 'services/account/thun
 import logo from 'globals/images/logo.svg';
 import mail from 'globals/images/mail.svg';
 import '../Account.scss';
+import { finishedSuccessfully } from 'globals/utils/functions';
 
 class ProfileUpdate extends Component {
   constructor(props) {
     super(props);
+    const { search } = this.props.location;
     this.state = {
       email: '',
       password: '',
       hasLink: false,
+      token: search && search.split('=')[1],
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      resetPassword,
+      resetLink,
+      history: { push },
+    } = this.props;
+    if (finishedSuccessfully(prevProps.resetLink, resetLink)) {
+      this.setState({ hasLink: true });
+    }
+    if (finishedSuccessfully(prevProps.resetPassword, resetPassword)) {
+      push('/signin');
+    }
+  }
+
   handleSubmit = (e) => {
-    const { email, password } = this.state;
+    const { email, password, token } = this.state;
     e.preventDefault();
-    this.props.match.params.token
-      ? this.onResetPassword(email)
-      : this.onRequestLink(password);
+    token ? this.onResetPassword({ password, token }) : this.onRequestLink(email);
   };
 
   onRequestLink = (email) => {
     this.props.requestResetLink(email);
   };
 
-  onResetPassword = (password) => {
-    this.props.requestResetPassword(password);
+  onResetPassword = (data) => {
+    this.props.requestResetPassword(data);
   };
 
   renderResetPassword = () => {
     const { password } = this.state;
+    const {
+      resetPassword: { loading },
+    } = this.props;
 
     return (
       <>
@@ -45,10 +63,13 @@ class ProfileUpdate extends Component {
           <Input
             label="New Password"
             placeholder="*******"
+            type="password"
             value={password}
             onChange={(e) => this.setState({ password: e.target.value })}
           />
-          <Button type="submit">Proceed</Button>
+          <Button type="submit" loading={loading}>
+            Proceed
+          </Button>
         </form>
       </>
     );
@@ -56,6 +77,9 @@ class ProfileUpdate extends Component {
 
   renderResetLink = () => {
     const { email, hasLink } = this.state;
+    const {
+      resetLink: { loading },
+    } = this.props;
 
     return !hasLink ? (
       <>
@@ -68,10 +92,13 @@ class ProfileUpdate extends Component {
           <Input
             label="Email"
             placeholder="idea@yuhu.co"
+            type="email"
             value={email}
             onChange={(e) => this.setState({ email: e.target.value })}
           />
-          <Button type="submit">Proceed</Button>
+          <Button type="submit" loading={loading}>
+            Proceed
+          </Button>
         </form>
       </>
     ) : (
@@ -87,13 +114,14 @@ class ProfileUpdate extends Component {
   };
 
   render() {
+    const { token } = this.state;
+    const { push } = this.props.history;
+
     return (
       <article className="reset-password">
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" onClick={() => push('/signin')} />
         <section className="reset-password__section">
-          {!this.props.match.params.token
-            ? this.renderResetLink()
-            : this.renderResetPassword()}
+          {!token ? this.renderResetLink() : this.renderResetPassword()}
         </section>
       </article>
     );

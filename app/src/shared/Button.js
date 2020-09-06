@@ -22,6 +22,11 @@ const IButton = styled.button.attrs((props) => ({
       color: ${themes.colors.primary};
       background: white;
     `}
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
 `;
 
 /**
@@ -33,7 +38,7 @@ const IButton = styled.button.attrs((props) => ({
 const Button = React.forwardRef((props,ref) => {
   const { children, loading, className, disabled, onClick} = props;
   return (
-    <IButton className = {className} onClick = {onClick} ref = {ref} disabled={disabled}>
+    <IButton className = {className} onClick = {onClick} ref = {ref} disabled={disabled || loading}>
       {!loading ? children : 'Loading...'}
     </IButton>
 );
