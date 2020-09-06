@@ -13,7 +13,7 @@ export function addCommentThunk(details, ideaId) {
   return (dispatch) => {
     dispatch(createComment());
     axios
-      .post(`https://api.hackthievist.com/ideas/${ideaId}/comments`, details)
+      .post(`/ideas/${ideaId}/comments`, details)
       .then((response) => {
         dispatch(
           showMessage({ data: 'Comment created successfully', type: 'success' })
@@ -31,7 +31,7 @@ export function getCommentsThunk(ideaId) {
   return (dispatch) => {
     dispatch(getComment);
     axios
-      .get(`https://api.hackthievist.com/ideas/${ideaId}/comments`)
+      .get(`/ideas/${ideaId}/comments`)
       .then((response) => {
         dispatch(getCommentSuccess(response.data));
       })

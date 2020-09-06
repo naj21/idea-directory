@@ -21,7 +21,7 @@ class ProfileUpdate extends Component {
   handleSubmit = (e) => {
     const { email, password } = this.state;
     e.preventDefault();
-    this.props.match.params
+    this.props.match.params.token
       ? this.onResetPassword(email)
       : this.onRequestLink(password);
   };
@@ -91,7 +91,7 @@ class ProfileUpdate extends Component {
       <article className="reset-password">
         <img src={logo} alt="logo" />
         <section className="reset-password__section">
-          {!this.props.match.params
+          {!this.props.match.params.token
             ? this.renderResetLink()
             : this.renderResetPassword()}
         </section>

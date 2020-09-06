@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { init } from 'globals/utils/api';
 
 const store = configureStore();
-init(store)
+init({baseURL: 'https://api.hackthievist.com'}, store.dispatch)
 
 ReactDOM.render(
   <Provider store={store}>

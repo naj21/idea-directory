@@ -1,17 +1,16 @@
-import React from 'react';
 import axios from 'axios';
-import Signin from 'scenes/Account/components/Signin';
 
 export function setAuthorization(authorization) {
   axios.defaults.headers.common['Authorization'] = authorization;
 }
 
-export function init() {
+export function init(initConfig, dispatch) {
   axios.interceptors.request.use(function (config) {
     let user = JSON.parse(localStorage.getItem('ideaUser'));
     if (user) {
       config.headers.common['Authorization'] = `Bearer ${user.token}`;
     }
+    config.baseURL= initConfig.baseURL
     return config;
   });
 
@@ -21,7 +20,8 @@ export function init() {
     },
     function (error) {
       if (error.response && error.response.status === 401) {
-        return <Signin />;
+        localStorage.removeItem('ideaUser');
+        return Promise.reject('Session expired');
       }
       return Promise.reject(error.response && error.response.data.message);
     }

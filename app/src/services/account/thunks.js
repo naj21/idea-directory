@@ -26,7 +26,7 @@ export function signupThunk(details) {
   return (dispatch) => {
     dispatch(createUser());
     axios
-      .post('https://api.hackthievist.com/register', details)
+      .post('/register', details)
       .then((response) => {
         const { data, message } = response.data;
         dispatch(showMessage({ data: message, type: 'success' }));
@@ -44,7 +44,7 @@ export function loginThunk(username, password) {
   return (dispatch) => {
     dispatch(requestLogin());
     axios
-      .post('https://api.hackthievist.com/login', { username, password })
+      .post('/login', { username, password })
       .then((response) => {
         const { data, message } = response.data;
         dispatch(showMessage({ data: message, type: 'success' }));
@@ -62,7 +62,7 @@ export function logoutThunk() {
   return (dispatch) => {
     dispatch(requestLogout());
     axios
-      .get('https://api.hackthievist.com/logout')
+      .get('/logout')
       .then((response) => {
         dispatch(showMessage({ data: response.data.message, type: 'success' }));
         removeItem('ideaUser');
@@ -79,7 +79,7 @@ export function updateUserThunk(data) {
   return (dispatch) => {
     dispatch(updateUser());
     axios
-      .patch(`https://api.hackthievist.com/users`, { ...data })
+      .patch('/users', { ...data })
       .then((response) => {
         dispatch(showMessage({ data: response.data.message, type: 'success' }));
         const auth = JSON.parse(localStorage.getItem('ideaUser'));
@@ -100,7 +100,7 @@ export function requestResetLinkThunk(data) {
   return (dispatch) => {
     dispatch(requestResetLink());
     axios
-      .patch(`https://api.hackthievist.com/users`, { ...data })
+      .post('/request-password-reset', { ...data })
       .then((response) => {
         dispatch(showMessage({ data: response.data.message, type: 'success' }));
         dispatch(requestResetLinkSuccess(response.data));
@@ -116,7 +116,7 @@ export function resetPasswordThunk(data) {
   return (dispatch) => {
     dispatch(resetPassword());
     axios
-      .patch(`https://api.hackthievist.com/users`, { ...data })
+      .post('/reset-password', { ...data })
       .then((response) => {
         dispatch(showMessage({ data: response.data.message, type: 'success' }));
         dispatch(resetPasswordSuccess(response.data));

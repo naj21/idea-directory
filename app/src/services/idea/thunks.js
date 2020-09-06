@@ -16,7 +16,7 @@ export function createIdeaThunk(details) {
   return (dispatch) => {
     dispatch(createIdea());
     axios
-      .post('https://api.hackthievist.com/ideas', { ...details })
+      .post('/ideas', { ...details })
       .then((response) => {
         dispatch(
           showMessage({ data: response.data.message, type: 'success' })
@@ -34,7 +34,7 @@ export function listIdeasThunk(tag) {
   return (dispatch) => {
     dispatch(listIdeas());
     axios
-      .get('https://api.hackthievist.com/ideas', { params: { tag } })
+      .get('/ideas', { params: { tag } })
       .then((response) => {
         dispatch(listIdeasSuccess(response.data.data));
       })
@@ -49,7 +49,7 @@ export function getIdeaThunk(ideaId) {
   return (dispatch) => {
     dispatch(getIdea());
     axios
-      .get(`https://api.hackthievist.com/ideas/${ideaId}`)
+      .get(`/ideas/${ideaId}`)
       .then((response) => {
         dispatch(getIdeaSuccess(response.data.data));
       })

@@ -23,7 +23,7 @@ export const createCommentSuccess = (data) => {
 export const createCommentFailure = (error) => {
   return {
     type: actionTypes.CREATE_COMMENT_FAILURE,
-    payload:error
+    payload: {error}
   }
 }
 
@@ -43,6 +43,6 @@ export const getCommentSuccess = (data) => {
 export const getCommentFailure = (error) => {
   return {
     type: actionTypes.GET_COMMENTS_FAILURE,
-    payload:error
+    payload: {error}
   }
 }

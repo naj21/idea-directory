@@ -16,7 +16,7 @@ export function createUserSuccess(data) {
 export function createUserFailure(error) {
   return {
     type: actionTypes.CREATE_USER_FAILURE,
-    payload: error,
+    payload: {error},
   };
 }
 
@@ -81,7 +81,7 @@ export function updateUserSuccess(data) {
 export function updateUserFailure(error) {
   return {
     type: actionTypes.UPDATE_USER_FAILUIRE,
-    payload: error,
+    payload: {error},
   };
 }
 
@@ -101,7 +101,7 @@ export function requestResetLinkSuccess(data) {
 export function requestResetLinkFailure(error) {
   return {
     type: actionTypes.REQUEST_RESET_LINK_FAILURE,
-    payload: error,
+    payload: {error},
   };
 }
 
@@ -121,6 +121,6 @@ export function resetPasswordSuccess(data) {
 export function resetPasswordFailure(error) {
   return {
     type: actionTypes.RESET_PASSWORD_FAILURE,
-    payload: error,
+    payload: {error},
   };
 }
