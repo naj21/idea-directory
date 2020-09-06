@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import themes from '../globals/themes';
+import { EyeOffOutline } from '@styled-icons/evaicons-outline/EyeOffOutline';
+import { EyeOutline } from '@styled-icons/evaicons-outline/EyeOutline';
+import StyledIcon from 'shared/StyledIcon';
 
 const IInput = styled.input.attrs((props) => ({
   type: props.type || 'text',
@@ -41,7 +44,6 @@ export const InputGroup = styled.div`
   //  }
 `;
 
-
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
@@ -50,6 +52,14 @@ const InputContainer = styled.div`
     props.colored ? themes.colors.gray : themes.colors.white};
   border: 1px solid #e1e6eb;
   border-radius: ${themes.border.radius.small};
+  align-items: center;
+
+  > :nth-child(2) {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
 `;
 
 /**
@@ -69,6 +79,21 @@ const Input = (props) => {
     required,
     maxlength,
   } = props;
+
+  const [inputType, setInputType] = useState(type);
+
+  const switchIcon = () => {
+    if (inputType === type) return setInputType('text');
+    setInputType(type);
+  };
+
+  const passwordIcon = (
+    <StyledIcon
+      icon={inputType === 'text' ? <EyeOffOutline /> : <EyeOutline />}
+      onClick={switchIcon}
+    />
+  );
+
   return (
     <InputGroup>
       {!hideLabel && <Label>{label}</Label>}
@@ -77,13 +102,13 @@ const Input = (props) => {
           disable={disable}
           value={value}
           onChange={onChange}
-          type={type}
+          type={inputType}
           placeholder={placeholder}
           icon={icon}
           required={required}
           maxlength={maxlength}
         />
-        {icon}
+        {type === 'password' ? passwordIcon : icon}
       </InputContainer>
     </InputGroup>
   );
