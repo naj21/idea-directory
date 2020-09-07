@@ -38,7 +38,7 @@ class ProfileUpdate extends Component {
   handleSubmit = (e) => {
     const { email, password, token } = this.state;
     e.preventDefault();
-    token ? this.onResetPassword({ password, token }) : this.onRequestLink(email);
+    token ? this.onResetPassword({ newPassword: password, token }) : this.onRequestLink(email);
   };
 
   onRequestLink = (email) => {
