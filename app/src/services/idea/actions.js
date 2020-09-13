@@ -79,3 +79,23 @@ export function getIdeaFailure(error) {
     payload: { error },
   };
 }
+
+export function likeIdea(){
+  return {
+    type: actionTypes.LIKE_IDEA
+  }
+}
+
+export function likeIdeaSuccess(){
+  return {
+    type:actionTypes.LIKE_IDEA_SUCCESS,
+    payload: {}
+  }
+}
+
+export function likeIdeaFailure(error){
+  return {
+    type: actionTypes.LIKE_IDEA_FAILURE,
+    payload: error
+  }
+}

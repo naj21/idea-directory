@@ -9,11 +9,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {addCommentThunk, getCommentsThunk} from 'services/comment/thunk'
 import Button from 'shared/Button'
+import moment from 'moment';
 
 
 const Comments = (props) => {
-  const { ideaID, openComment, getComments, addCommentThunk,comments} = props;
-  console.log(comments)
+  const { ideaID, openComment, getComments, addCommentThunk,comments,idea} = props;
+  console.log(idea)
+//  console.log(moment(comment.data.author.created_at.substr(0, 10), "YYYYMMDD").fromNow())
   const [body, setBody] = useState('')
   const handleClose = () => openComment(false);
   const ref = useRef();
@@ -32,22 +34,11 @@ const Comments = (props) => {
     getComments(ideaID);
   }, [getComments, ideaID]);
 
-  // useEffect(() => {
-  //   if (
-  //     comments &&
-  //     comments.loading &&
-  //     !comments.loading &&
-  //     comments.createCommentData
-  //   ) {
-  //     setBody('')
-  //   }
-  // }, [comments]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     e.persist()
     addCommentThunk({body}, ideaID)
-    getComments(ideaID);
     
   }
   
@@ -61,8 +52,8 @@ const Comments = (props) => {
       <form onSubmit = {handleSubmit}>
       <div className = "comment-input-container">
        <div className = "comment-input-header">
-        <div className = "comment-input-avatar">BS</div>
-        <p className = "comment-name">Sanya Babatunde</p>
+        <div className = "comment-input-avatar">{idea.data && idea.data.author.username.slice(0, 1)}</div>
+        <p className = "comment-name">{idea.data && idea.data.author.username}</p>
         </div>
         
       <textarea
@@ -90,13 +81,13 @@ const Comments = (props) => {
       
 
       <div className = "comment-list">
-      {comments && comments.getCommentData && comments.getCommentData.length && comments.getCommentData.map((comment => (
+      {comments && comments.data && comments.data.length && comments.data.map((comment => (
       <div className = "commments">   
       <div className = "comment-author">
-      <div className = "comment-avatar">bs</div>
+      <div className = "comment-avatar">{comment.author.username.slice(0, 1)}</div>
       <div>
       <p className = "comment-name">{comment.author.username}</p>
-      <p className = "comment-date"> 2 days ago</p>
+      <p className = "comment-date"> {comment.author && moment(comment.author.created_at.slice(0, 10), "YYYY-MM-DD").fromNow()}</p>
       </div>
       </div>
      
@@ -113,7 +104,8 @@ const Comments = (props) => {
 
 function mapStateToProps(state) {
   return {
-    comments: state.commentReducer
+    comments: state.comment.commentList,
+    idea: state.idea.selectedIdea
   };
 }
 const mapDispatchToProps = (dispatch) => {
