@@ -3,11 +3,12 @@ import { Route, Redirect } from 'react-router-dom';
 import About from './scenes/About';
 import Signin from 'scenes/Account/components/Signin';
 import Signup from 'scenes/Account/components/Signup';
-import ProfileUpdate from 'scenes/Account/containers/ProfileUpdate';
+import ProfileUpdate from 'scenes/Profile/components/ProfileUpdate';
 import PublishForm from './scenes/Publish/components/PublishForm';
 import Ideas from 'scenes/Ideas';
 import Post from 'scenes/Post/Post';
 import ResetPassword from 'scenes/Account/containers/ResetPassword';
+import ProfileView from 'scenes/Profile/components/ProfileView';
 
 const AppRoutes = [
   <Route key="about" path="/" component={About} exact />,
@@ -17,8 +18,14 @@ const AppRoutes = [
   <AuthenticatedRoute key="idea" path="/ideas/:ideaID" component={Post} />,
   <AuthenticatedRoute key="post" path="/post" component={PublishForm} exact />,
   <AuthenticatedRoute
+    key="profile"
+    path="/profile"
+    component={ProfileView}
+    exact
+  />,
+  <AuthenticatedRoute
     key="user-update"
-    path="/profile-update"
+    path="/profile/edit"
     component={ProfileUpdate}
     exact
   />,

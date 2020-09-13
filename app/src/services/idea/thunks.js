@@ -9,6 +9,9 @@ import {
   getIdeaFailure,
   getIdeaSuccess,
   listIdeas,
+  loadUserIdeas,
+  loadUserIdeasSuccess,
+  loadUserIdeasFailure,
 } from './actions';
 import { showMessage } from 'services/messaging/actions';
 
@@ -56,6 +59,21 @@ export function getIdeaThunk(ideaId) {
       .catch((e) => {
         dispatch(showMessage({ data: e, type: 'warning' }));
         return dispatch(getIdeaFailure(e));
+      });
+  };
+}
+
+export function loadUserIdeasThunk(tag) {
+  return (dispatch) => {
+    dispatch(loadUserIdeas());
+    axios
+      .get('/users/ideas')
+      .then((response) => {
+        dispatch(loadUserIdeasSuccess(response.data.data));
+      })
+      .catch((e) => {
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(loadUserIdeasFailure(e));
       });
   };
 }

@@ -71,10 +71,25 @@ function ideaList(state = initialIdeaListState, action) {
       return { ...state, loading: true, error: null };
 
     case actionTypes.LIST_IDEAS_SUCCESS:
-      console.log(action.payload)
       return { ...state, data: action.payload.data, loading: false };
 
     case actionTypes.LIST_IDEAS_FAILURE:
+      return { ...state, loading: false, error: action.payload.error };
+
+    default:
+      return state;
+  }
+}
+
+function userIdeas(state = initialIdeaListState, action) {
+  switch (action.type) {
+    case actionTypes.LOAD_USER_IDEAS:
+      return { ...state, loading: true, error: null };
+
+    case actionTypes.LOAD_USER_IDEAS_SUCCESS:
+      return { ...state, data: action.payload.data, loading: false };
+
+    case actionTypes.LOAD_USER_IDEAS_FAILURE:
       return { ...state, loading: false, error: action.payload.error };
 
     default:
@@ -103,4 +118,5 @@ export default combineReducers({
   tags,
   ideaList,
   selectedIdea,
+  userIdeas,
 });

@@ -102,7 +102,7 @@ export const UserMenu = (props) => {
             <Options onClick={() => props.history.push('/post')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
-            <Options onClick={() => props.history.push('/profile-update')}>
+            <Options onClick={() => props.history.push('/profile/edit')}>
               <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
             </Options>
             <Options onClick={() => handleLogout()}>

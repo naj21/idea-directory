@@ -79,3 +79,23 @@ export function getIdeaFailure(error) {
     payload: { error },
   };
 }
+
+export function loadUserIdeas() {
+  return {
+    type: actionTypes.LOAD_USER_IDEAS,
+  };
+}
+
+export function loadUserIdeasSuccess(data) {
+  return {
+    type: actionTypes.LOAD_USER_IDEAS_SUCCESS,
+    payload: { data },
+  };
+}
+
+export function loadUserIdeasFailure(error) {
+  return {
+    type: actionTypes.LOAD_USER_IDEAS_FAILURE,
+    payload: { error },
+  };
+}

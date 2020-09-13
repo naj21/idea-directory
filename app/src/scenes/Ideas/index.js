@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import './Ideas.scss';
 import Link from 'shared/Link';
 import Button from 'shared/Button';
 import Card from 'shared/Card';
 import { bindActionCreators } from 'redux';
 import { listIdeasThunk } from 'services/idea/thunks';
 import { connect } from 'react-redux';
+import IdeaCard from './components/IdeaCard';
+import './Ideas.scss';
+import Loader from 'shared/Loader';
 
 const Ideas = (props) => {
   const { loadIdeas, ideas, history } = props;
@@ -48,22 +50,13 @@ const Ideas = (props) => {
         <Button onClick={() => history.push('/post')}>New Idea</Button>
       </div>
       <p>POPULAR POSTS</p>
-      <section className="ideas-list">
-        <Card rounded>
-          <h4>Idea 1</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua...
-          </p>
-          <Link to="/ideas">View more</Link>
-        </Card>
-        {ideas.data.map((idea) => (
-          <Card rounded>
-            <h4>{idea.title}</h4>
-            <p>{idea.description.substr(0, 50)}..</p>
-            <Link to={`/ideas/${idea.id}`}>View more</Link>
-          </Card>
-        ))}
+      <section className="ideas__list">
+        {!ideas.loading ? 
+        ideas.data.map((idea) => (
+          <IdeaCard idea={idea} />
+        ))
+      : <Loader />
+      }
       </section>
     </article>
   );

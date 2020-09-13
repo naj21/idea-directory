@@ -5,9 +5,9 @@ import themes from '../globals/themes';
 const IButton = styled.button.attrs((props) => ({
   type: props.type,
 }))`
-  min-height: 40px;
+  min-height: ${props => props.sm ? '30px' : '40px'};
   color: white;
-  padding: 0 50px;
+  padding: ${props => props.sm ? '0 20px' : '0 40px'};
   background: ${themes.colors.primary};
   border: none;
   border-radius: ${themes.border.radius.small};

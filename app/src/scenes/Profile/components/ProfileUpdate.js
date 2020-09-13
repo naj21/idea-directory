@@ -4,8 +4,8 @@ import Input from 'shared/Input';
 import { bindActionCreators } from 'redux';
 import { updateUserThunk } from 'services/account/thunks';
 import { connect } from 'react-redux';
-import '../Account.scss';
 import TextArea from 'shared/TextArea';
+import '../Profile.scss';
 
 class ProfileUpdate extends Component {
   constructor(props) {
