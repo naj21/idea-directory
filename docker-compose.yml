@@ -7,7 +7,17 @@ services:
     tty: true
     image: idea-directory-image
     volumes:
-      - ./app:/usr/src/idea-directory
+      - type: bind
+        source: ./app
+        target: /usr/src/idea-directory
+        consistency: delegated
+      - type: volume
+        source: node-modules-volume
+        target: /usr/src/idea-directory/node_modules
+        consistency: delegated
     ports:
       - 3000:3000
+volumes: 
+  node-modules-volume:
+    name: idea-directory-node-modules
 

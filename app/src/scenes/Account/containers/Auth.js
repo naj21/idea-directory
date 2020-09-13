@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'shared/Card';
-import './Auth.scss';
+import '../Account.scss';
 
 const Auth = (props) => {
   const { hero, header, content, onSubmit } = props;

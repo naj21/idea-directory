@@ -11,54 +11,42 @@ import {
   likeIdea,
   likeIdeaSuccess,
   likeIdeaFailure,
+  listIdeas,
+  loadUserIdeas,
+  loadUserIdeasSuccess,
+  loadUserIdeasFailure,
 } from './actions';
 import { showMessage } from 'services/messaging/actions';
 
 export function createIdeaThunk(details) {
   return (dispatch) => {
     dispatch(createIdea());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .post(
-        'https://api.hackthievist.com/ideas',
-        { ...details },
-        { headers: { Authorization: `Bearer ${user.token}` } }
-      )
+      .post('/ideas', { ...details })
       .then((response) => {
         dispatch(
-          showMessage({ data: 'Idea created successfully', type: 'success' })
+          showMessage({ data: response.data.message, type: 'success' })
         );
-        dispatch(createIdeaSuccess(response.data));
+        dispatch(createIdeaSuccess(response.data.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(createIdeaFailure(error));
-        }
-        dispatch(createIdeaFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(createIdeaFailure(e));
       });
   };
 }
 
-export function listIdeasThunk() {
+export function listIdeasThunk(tag) {
   return (dispatch) => {
-    dispatch(createIdea());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
+    dispatch(listIdeas());
     axios
-      .get('https://api.hackthievist.com/ideas', {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get('/ideas', { params: { tag } })
       .then((response) => {
         dispatch(listIdeasSuccess(response.data.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(listIdeasFailure(error));
-        }
-        dispatch(listIdeasFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(listIdeasFailure(e));
       });
   };
 }
@@ -66,21 +54,29 @@ export function listIdeasThunk() {
 export function getIdeaThunk(ideaId) {
   return (dispatch) => {
     dispatch(getIdea());
-    let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .get(`https://api.hackthievist.com/ideas/${ideaId}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get(`/ideas/${ideaId}`)
       .then((response) => {
         dispatch(getIdeaSuccess(response.data.data));
       })
       .catch((e) => {
-        if (e.response) {
-          const error = e.response.data.message;
-          dispatch(showMessage({ data: error, type: 'warning' }));
-          return dispatch(getIdeaFailure(error));
-        }
-        dispatch(getIdeaFailure(e));
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(getIdeaFailure(e));
+      });
+  };
+}
+
+export function loadUserIdeasThunk(tag) {
+  return (dispatch) => {
+    dispatch(loadUserIdeas());
+    axios
+      .get('/users/ideas')
+      .then((response) => {
+        dispatch(loadUserIdeasSuccess(response.data.data));
+      })
+      .catch((e) => {
+        dispatch(showMessage({ data: e, type: 'warning' }));
+        return dispatch(loadUserIdeasFailure(e));
       });
   };
 }
@@ -90,11 +86,10 @@ export function likeIdeaThunk(ideaId) {
     dispatch(likeIdea());
     let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .put(`https://api.hackthievist.com/ideas/${ideaId}/likes`, {}, {
+      .put(`/ideas/${ideaId}/likes`, {}, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
-        console.log(response)
         dispatch(likeIdeaSuccess());
       })
       .catch((e) => {

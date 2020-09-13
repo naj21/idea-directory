@@ -4,8 +4,8 @@ import Input from 'shared/Input';
 import Button from 'shared/Button';
 import Vector from 'globals/images/Vector.svg';
 import Link from 'shared/Link';
-import { signupThunk } from 'services/auth/thunks';
-import Auth from '..';
+import { signupThunk } from 'services/account/thunks';
+import Auth from '../containers/Auth';
 import { bindActionCreators } from 'redux';
 
 const SignUp = (props) => {
@@ -21,8 +21,8 @@ const SignUp = (props) => {
   const prevAuth = prevAuthRef.current;
 
   useEffect(() => {
-    if (prevAuth && prevAuth.loading && !signupData.loading && signupData.data) {
-      history.push('/signin');
+    if (prevAuth && prevAuth.loading && !signupData.loading && !signupData.error) {
+      history.push('/ideas');
     }
   }, [history, prevAuth, signupData]);
 
@@ -106,7 +106,7 @@ const SignUp = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  signupData: state.auth,
+  signupData: state.account.auth,
 });
 
 const mapDispatchToProps = (dispatch) => {

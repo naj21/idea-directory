@@ -5,9 +5,9 @@ import themes from '../globals/themes';
 const IButton = styled.button.attrs((props) => ({
   type: props.type,
 }))`
-  min-height: 40px;
+  min-height: ${props => props.sm ? '30px' : '40px'};
   color: white;
-  padding: 0 100px;
+  padding: ${props => props.sm ? '0 20px' : '0 40px'};
   background: ${themes.colors.primary};
   border: none;
   border-radius: ${themes.border.radius.small};
@@ -22,6 +22,11 @@ const IButton = styled.button.attrs((props) => ({
       color: ${themes.colors.primary};
       background: white;
     `}
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
 `;
 
 /**
@@ -30,13 +35,13 @@ const IButton = styled.button.attrs((props) => ({
  * @example ./docs/Button.md
  */
 
-const Button = React.forwardRef((props,ref) => {
-  const { children, loading, className, disabled, onClick} = props;
+const Button = React.forwardRef((props, ref) => {
+  const { children, loading, disabled, ...rest } = props;
   return (
-    <IButton className = {className} onClick = {onClick} ref = {ref} disabled={disabled}>
+    <IButton ref={ref} disabled={disabled || loading} {...rest}>
       {!loading ? children : 'Loading...'}
     </IButton>
-);
+  );
 });
 
 /** @component */

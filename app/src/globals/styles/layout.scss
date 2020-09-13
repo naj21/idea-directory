@@ -1,0 +1,20 @@
+.is-half {
+  display: flex;
+  justify-content: space-between;
+  > * {
+    width: 47%;
+  }
+}
+
+@media (max-width: 767px) {
+  .is-half {
+    flex-direction: column;
+    > * {
+      width: 100%;
+    }
+
+    :not(:last-child) {
+      margin-bottom: 40px;
+    }
+  }
+}

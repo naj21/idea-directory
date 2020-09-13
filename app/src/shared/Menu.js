@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import logo from 'globals/images/logo.svg';
-import Link from '../Link';
-import Button from '../Button';
-import SearchIcon from '../SearchIcon';
-import Dropdown, { Options } from '../Dropdown';
-import StyledIcon from '../StyledIcon';
+import Link from './Link';
+import Button from './Button';
+import SearchIcon from './SearchIcon';
+import Dropdown, { Options } from './Dropdown';
+import StyledIcon from './StyledIcon';
 import { Stack } from '@styled-icons/remix-line/Stack';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { Exit } from '@styled-icons/icomoon/Exit';
@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { openPublish } from 'services/idea/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutThunk } from 'services/auth/thunks';
+import { logoutThunk } from 'services/account/thunks';
 
 const MenuContainer = styled.div`
   position: sticky;
@@ -34,8 +34,16 @@ const MenuContainer = styled.div`
     }
   }
 
-  a {
-    align-self: center;
+  img {
+    cursor: pointer;
+  }
+
+  @media (max-width: 797px) {
+    padding: 0 50px;
+  }
+
+  @media (max-width: 395px) {
+    padding: 0 30px;
   }
 `;
 
@@ -50,7 +58,7 @@ const HomeMenu = (props) => {
         </Link>
         <Button
           onClick={() => history.push('/signup')}
-          style={{ padding: '0 30px', fontSize: '18px' }}
+          style={{ padding: '0 35px', fontSize: '18px' }}
         >
           Get Started
         </Button>
@@ -71,6 +79,11 @@ export const UserMenu = (props) => {
     props.openPublish(true);
   };
 
+  const handleLogout = () => {
+    logout();
+    props.history.push('/signin');
+  };
+
   return (
     <MenuContainer auth={isAuth}>
       <Link to={!user ? '/' : '/ideas'} exact>
@@ -81,10 +94,7 @@ export const UserMenu = (props) => {
           {!isPublish ? (
             <SearchIcon />
           ) : (
-            <Button
-              style={{ padding: '0 40px', fontSize: '15px' }}
-              onClick={publish}
-            >
+            <Button style={{ fontSize: '15px' }} onClick={publish}>
               Publish Idea
             </Button>
           )}
@@ -92,10 +102,10 @@ export const UserMenu = (props) => {
             <Options onClick={() => props.history.push('/post')}>
               <StyledIcon icon={<Pencil />}></StyledIcon> New Idea
             </Options>
-            <Options>
+            <Options onClick={() => props.history.push('/profile/edit')}>
               <StyledIcon icon={<Stack />}></StyledIcon> Edit Profile
             </Options>
-            <Options onClick={() => logout()}>
+            <Options onClick={() => handleLogout()}>
               <StyledIcon icon={<Exit />}></StyledIcon> Sign out
             </Options>
           </Dropdown>
@@ -114,16 +124,10 @@ const Menu = (props) => {
   useEffect(() => {
     const user = localStorage.getItem('ideaUser');
     if (!auth && user) setAuth(JSON.parse(user).user);
-    if (
-      location.pathname !== '/' &&
-      location.pathname !== '/signup' &&
-      location.pathname !== '/signin' &&
-      !user
-    )
-      props.history.push('/signin');
   }, [auth, location, props.history]);
 
   if (location.pathname === '/') return <HomeMenu {...props} />;
+  if (location.pathname === '/reset-password') return null;
   return <UserMenu user={auth} {...props} />;
 };
 

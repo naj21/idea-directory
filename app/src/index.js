@@ -6,8 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { init } from 'globals/utils/api';
 
 const store = configureStore();
+init({baseURL: 'https://api.hackthievist.com'}, store.dispatch)
 
 ReactDOM.render(
   <Provider store={store}>

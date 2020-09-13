@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import auth from 'services/auth/reducers';
+import account from 'services/account/reducers';
 import message from 'services/messaging/reducers';
 import comment from 'services/comment/reducers';
 import idea from 'services/idea/reducers';
 
 const rootReducer = combineReducers({
-  auth,
+  account,
   message,
   comment,
   idea,
