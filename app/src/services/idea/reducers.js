@@ -108,8 +108,37 @@ function selectedIdea(state = initialState, action) {
     case actionTypes.GET_IDEA_FAILURE:
       return { ...state, loading: false, error: action.payload.error };
 
+    case actionTypes.LIKE_IDEA_SUCCESS:
+      const data = {...state.data, is_liked : !state.data.is_liked }
+      data.likes_count = data.is_liked ? data.likes_count + 1 :  data.likes_count - 1
+      return {...state, loading:false, data}
+
     default:
       return state;
+  }
+}
+
+const initialLikeIdeaState = {
+  loading: false,
+  data: null,
+  error: null,
+}
+
+
+function likeIdea(state = initialLikeIdeaState, action) {
+  switch(action.type) {
+    case actionTypes.LIKE_IDEA:
+      return {...state, loading: true, error: null}
+  
+    case actionTypes.LIKE_IDEA_SUCCESS:
+  
+      return {...state, loading:false}
+    
+    case actionTypes.LIKE_IDEA_FAILURE:
+      return {...state, loading: false, error: action.payload.error}
+    default: 
+      return state;
+
   }
 }
 
@@ -118,5 +147,6 @@ export default combineReducers({
   tags,
   ideaList,
   selectedIdea,
+  likeIdea,
   userIdeas,
 });

@@ -1,6 +1,6 @@
 import actionTypes from './actionTypes';
 
-export const openPublish = (isOpen) => {
+export function openPublish(isOpen) {
   return {
     type: actionTypes.OPEN_PUBLISH,
     payload: { isOpen },
@@ -78,6 +78,26 @@ export function getIdeaFailure(error) {
     type: actionTypes.GET_IDEA_FAILURE,
     payload: { error },
   };
+}
+
+export function likeIdea(){
+  return {
+    type: actionTypes.LIKE_IDEA
+  }
+}
+
+export function likeIdeaSuccess(){
+  return {
+    type:actionTypes.LIKE_IDEA_SUCCESS,
+    payload: {}
+  }
+}
+
+export function likeIdeaFailure(error){
+  return {
+    type: actionTypes.LIKE_IDEA_FAILURE,
+    payload: error
+  }
 }
 
 export function loadUserIdeas() {

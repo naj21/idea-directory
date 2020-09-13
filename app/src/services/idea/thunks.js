@@ -8,6 +8,9 @@ import {
   getIdea,
   getIdeaFailure,
   getIdeaSuccess,
+  likeIdea,
+  likeIdeaSuccess,
+  likeIdeaFailure,
   listIdeas,
   loadUserIdeas,
   loadUserIdeasSuccess,
@@ -77,3 +80,26 @@ export function loadUserIdeasThunk(tag) {
       });
   };
 }
+
+export function likeIdeaThunk(ideaId) {
+  return (dispatch) => {
+    dispatch(likeIdea());
+    let user = JSON.parse(localStorage.getItem('ideaUser'));
+    axios
+      .put(`/ideas/${ideaId}/likes`, {}, {
+        headers: { Authorization: `Bearer ${user.token}` },
+      })
+      .then((response) => {
+        dispatch(likeIdeaSuccess());
+      })
+      .catch((e) => {
+        if (e.response) {
+          const error = e.response.data.message;
+         // dispatch(showMessage({ data: error, type: 'warning' }));
+          return dispatch(likeIdeaFailure(error));
+        }
+        dispatch(likeIdeaFailure(e));
+      });
+    };
+    
+  }

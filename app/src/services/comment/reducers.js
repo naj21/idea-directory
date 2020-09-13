@@ -66,7 +66,7 @@ const commentList = (state = initialCommentListState, action) => {
       return {
         ...state,
         data: state.data.length
-          ? [...state.data, action.payload.data]
+          ? [action.payload.data, ...state.data]
           : [action.payload.data],
         loading: false,
       };
@@ -77,5 +77,5 @@ const commentList = (state = initialCommentListState, action) => {
 
 export default combineReducers({
   createdComment,
-  commentList,
-});
+  commentList
+})

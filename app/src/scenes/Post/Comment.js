@@ -7,8 +7,9 @@ import { openComment } from 'services/comment/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addCommentThunk, getCommentsThunk } from 'services/comment/thunk';
-import Button from 'shared/Button';
 import { finishedSuccessfully } from 'globals/utils/functions';
+import Button from 'shared/Button';
+import moment from 'moment';
 
 const Comments = (props) => {
   const {
@@ -18,6 +19,7 @@ const Comments = (props) => {
     addComment,
     comments,
     createdComment,
+    idea,
   } = props;
   const [body, setBody] = useState('');
   const prevCreatedCommentRef = useRef();
@@ -45,12 +47,11 @@ const Comments = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addComment({ body }, ideaID);
-    getComments(ideaID);
   };
 
   return (
     <Card className="comment-card">
-      <div class="header">
+      <div className="header">
         <p>Comments</p>
         <StyledIcon
           className="close-icon"
@@ -62,8 +63,10 @@ const Comments = (props) => {
       <form onSubmit={handleSubmit}>
         <div className="comment-input-container">
           <div className="comment-input-header">
-            <div className="comment-input-avatar">BS</div>
-            <p className="comment-name">Sanya Babatunde</p>
+            <div className="comment-input-avatar">
+              {idea.data && idea.data.author.username.slice(0, 1)}
+            </div>
+            <p className="comment-name">{idea.data && idea.data.author.username}</p>
           </div>
 
           <textarea
@@ -89,12 +92,18 @@ const Comments = (props) => {
       {comments.data.length ? (
         <div className="comment-list">
           {comments.data.map((comment) => (
-            <div className="comment">
+            <div className="comment" key={comment.id}>
               <div className="comment-author">
-                <div className="comment-avatar">bs</div>
+                <div className="comment-avatar">{comment.author.username.slice(0, 1)}</div>
                 <div>
                   <p className="comment-name">{comment.author.username}</p>
-                  <p className="comment-date"> 2 days ago</p>
+                  <p className="comment-date">
+                    {comment.author &&
+                      moment(
+                        comment.author.created_at.slice(0, 10),
+                        'YYYY-MM-DD'
+                      ).fromNow()}
+                  </p>
                 </div>
               </div>
 
@@ -112,6 +121,7 @@ const Comments = (props) => {
 function mapStateToProps(state) {
   return {
     comments: state.comment.commentList,
+    idea: state.idea.selectedIdea,
     createdComment: state.comment.createdComment,
   };
 }

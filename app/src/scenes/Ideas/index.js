@@ -11,7 +11,7 @@ import Loader from 'shared/Loader';
 
 const Ideas = (props) => {
   const { loadIdeas, ideas, history } = props;
-
+console.log(ideas)
   useEffect(() => {
     !ideas.data.length && loadIdeas();
   }, [ideas.data.length, loadIdeas]);
