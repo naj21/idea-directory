@@ -100,9 +100,11 @@ const Post = (props) => {
             </div>
             <div className="icons">
               <div className=" like-icon">
-                {!isRed  && <div onClick={toggleLike}>{likeIcon}</div>}
-
-                {isRed && idea.data && idea.data.is_liked && <div onClick={toggleUnlike}>{redLikeIcon}</div>}
+              {idea.data && idea.data.is_liked ? (
+              <div onClick={toggleUnlike}>{redLikeIcon}</div>
+            ) : (
+              <div onClick={toggleLike}>{likeIcon}</div>
+            )}
 
                     <p>{idea.data && idea.data.likes_count}</p>
               </div>

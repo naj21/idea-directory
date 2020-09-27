@@ -112,6 +112,11 @@ function selectedIdea(state = initialState, action) {
       const data = {...state.data, is_liked : !state.data.is_liked }
       data.likes_count = data.is_liked ? data.likes_count + 1 :  data.likes_count - 1
       return {...state, loading:false, data}
+    
+    // case actionTypes.UNLIKE_IDEA_SUCCESS:
+    //   const unlike = {...state.data, is_liked : state.data.is_liked }
+    //   unlike.likes_count = !unlike.is_liked ? unlike.likes_count - 1 :  unlike.likes_count + 1
+    //   return {...state, loading:false, unlike}
 
     default:
       return state;
