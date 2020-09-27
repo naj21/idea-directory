@@ -125,6 +125,8 @@ const initialLikeIdeaState = {
 }
 
 
+
+
 function likeIdea(state = initialLikeIdeaState, action) {
   switch(action.type) {
     case actionTypes.LIKE_IDEA:
@@ -142,11 +144,36 @@ function likeIdea(state = initialLikeIdeaState, action) {
   }
 }
 
+const initialunLikeIdeaState = {
+  loading: false,
+  data: null,
+  error: null,
+}
+function unlikeIdea(state = initialunLikeIdeaState, action) {
+  switch(action.type) {
+    case actionTypes.UNLIKE_IDEA:
+      return {...state, loading: true, error: null}
+  
+    case actionTypes.UNLIKE_IDEA_SUCCESS:
+  
+      return {...state, loading:false}
+    
+    case actionTypes.UNLIKE_IDEA_FAILURE:
+      return {...state, loading: false, error: action.payload.error}
+    default: 
+      return state;
+
+  }
+}
+
+
+
 export default combineReducers({
   publish,
   tags,
   ideaList,
   selectedIdea,
   likeIdea,
+  unlikeIdea,
   userIdeas,
 });

@@ -5,6 +5,8 @@ import {
   createIdeaFailure,
   listIdeasSuccess,
   listIdeasFailure,
+  unlikeIdeaSuccess,
+  unlikeIdeaFailure,
   getIdea,
   getIdeaFailure,
   getIdeaSuccess,
@@ -81,12 +83,12 @@ export function loadUserIdeasThunk(tag) {
   };
 }
 
-export function likeIdeaThunk(ideaId) {
+export function likeIdeaThunk(idea_id) {
   return (dispatch) => {
     dispatch(likeIdea());
     let user = JSON.parse(localStorage.getItem('ideaUser'));
     axios
-      .put(`/ideas/${ideaId}/likes`, {}, {
+      .post(`/ideas/likes`, {idea_id}, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -103,3 +105,27 @@ export function likeIdeaThunk(ideaId) {
     };
     
   }
+
+  export function unlikeIdeaThunk(idea_id) {
+    return (dispatch) => {
+      dispatch(likeIdea());
+      let user = JSON.parse(localStorage.getItem('ideaUser'));
+      axios
+        .post(`/ideas/unlikes`, {idea_id}, {
+          headers: { Authorization: `Bearer ${user.token}` },
+        })
+        .then((response) => {
+          dispatch(unlikeIdeaSuccess());
+        })
+        .catch((e) => {
+          if (e.response) {
+            const error = e.response.data.message;
+           // dispatch(showMessage({ data: error, type: 'warning' }));
+            return dispatch(unlikeIdeaFailure(error));
+          }
+          dispatch(unlikeIdeaFailure(e));
+        });
+      };
+      
+    }
+  

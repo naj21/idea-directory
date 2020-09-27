@@ -100,6 +100,26 @@ export function likeIdeaFailure(error){
   }
 }
 
+export function unlikeIdea(){
+  return {
+    type: actionTypes.UNLIKE_IDEA
+  }
+}
+
+export function unlikeIdeaSuccess(){
+  return {
+    type:actionTypes.UNLIKE_IDEA_SUCCESS,
+    payload: {}
+  }
+}
+
+export function unlikeIdeaFailure(error){
+  return {
+    type: actionTypes.UNLIKE_IDEA_FAILURE,
+    payload: error
+  }
+}
+
 export function loadUserIdeas() {
   return {
     type: actionTypes.LOAD_USER_IDEAS,

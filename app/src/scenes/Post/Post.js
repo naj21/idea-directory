@@ -8,7 +8,7 @@ import { Comment } from '@styled-icons/evil/Comment';
 import StyledIcon from '../../shared/StyledIcon';
 import Comments from './Comment';
 import { openComment } from 'services/comment/actions';
-import { getIdeaThunk, likeIdeaThunk } from 'services/idea/thunks';
+import { getIdeaThunk, likeIdeaThunk, unlikeIdeaThunk } from 'services/idea/thunks';
 import './Post.scss';
 import moment from 'moment';
 
@@ -27,12 +27,13 @@ const Post = (props) => {
     getIdea,
     match: { params },
   } = props;
+  console.log(idea)
   const portalContainer = useRef();
   const rightModalPortalContainer = document.createElement('div');
   const portalElement = document.getElementById('overlay-container');
   const rightModalPortalElement = document.getElementById('right-modal');
   const [isRed, setIsRed] = useState(false);
-
+  
   const handleChange = () => {
     portalContainer.current.classList.add('overlay');
     props.openComment(true);
@@ -42,6 +43,11 @@ const Post = (props) => {
     setIsRed(!isRed);
     props.likeIdea(params.ideaID);
   };
+
+  const toggleUnlike = () => {
+    setIsRed(!isRed);
+    props.unlikeIdea(params.ideaID);
+  }
 
   if (
     isOpened === false &&
@@ -94,11 +100,11 @@ const Post = (props) => {
             </div>
             <div className="icons">
               <div className=" like-icon">
-                {!isRed && <div onClick={toggleLike}>{likeIcon}</div>}
+                {!isRed  && <div onClick={toggleLike}>{likeIcon}</div>}
 
-                {isRed && <div onClick={toggleLike}>{redLikeIcon}</div>}
+                {isRed && idea.data && idea.data.is_liked && <div onClick={toggleUnlike}>{redLikeIcon}</div>}
 
-                <p>10</p>
+                    <p>{idea.data && idea.data.likes_count}</p>
               </div>
               <div className="comment-icon">
                 <div onClick={handleChange}>{commentIcon}</div>
@@ -130,6 +136,7 @@ const mapDispatchToProps = (dispatch) => {
     openComment: bindActionCreators(openComment, dispatch),
     getIdea: bindActionCreators(getIdeaThunk, dispatch),
     likeIdea: bindActionCreators(likeIdeaThunk, dispatch),
+    unlikeIdea: bindActionCreators(unlikeIdeaThunk, dispatch)
   };
 };
 
