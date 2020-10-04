@@ -42,10 +42,11 @@
     content: '';
     position: absolute;
     width: 100%;
-    border: .5px solid #E1E6EB;
+    border: 1px solid #E1E6EB;
     left: 0;
     top: 85px;
     transform: skew(-0.6deg);
+    opacity: .5;
   }
 }
 

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'shared/Link';
 import Button from 'shared/Button';
-import Card from 'shared/Card';
 import { bindActionCreators } from 'redux';
 import { listIdeasThunk } from 'services/idea/thunks';
 import { connect } from 'react-redux';

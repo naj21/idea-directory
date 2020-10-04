@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from 'globals/images/logo.svg';
 import Link from './Link';
 import Button from './Button';
-import SearchIcon from './SearchIcon';
+// import SearchIcon from './SearchIcon';
 import Dropdown, { Options } from './Dropdown';
 import StyledIcon from './StyledIcon';
 import { Stack } from '@styled-icons/remix-line/Stack';
@@ -16,12 +16,12 @@ import { logoutThunk } from 'services/account/thunks';
 
 const MenuContainer = styled.div`
   position: sticky;
-  height: ${(props) => (props.auth && props.home ? '90px' : '75px')};
+  height: 75px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 100px;
-  align-items: ${(props) => (props.home ? 'flex-end' : 'center')};
+  align-items: ${({auth, home}) => ((home || auth) ? 'flex-end' : 'center')};
   background: ${(props) => props.home && '#E6D3DF'};
   box-shadow: ${(props) =>
     !props.auth && !props.home && '0px 1px 4px rgba(0, 0, 0, 0.25)'};
@@ -92,7 +92,8 @@ export const UserMenu = (props) => {
       {!isAuth && (
         <div>
           {!isPublish ? (
-            <SearchIcon />
+            null
+            // <SearchIcon />
           ) : (
             <Button style={{ fontSize: '15px' }} onClick={publish}>
               Publish Idea

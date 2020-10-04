@@ -85,7 +85,7 @@ class Signin extends Component {
   hero = () => (
     <>
       <h1>
-        Welcome friend, <span>Log in to your account</span>
+        Welcome Friend, <span>Log in to your account</span>
       </h1>
       <img src={login} alt="login" />
     </>
