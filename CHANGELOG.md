@@ -1,0 +1,21 @@
+# WIP
+
+- Setup docker
+- Setup ESlint and Prettier with a precommit
+- Set up redux by creating a 2 middlewares and one enhancer
+- The redux-thunk middleware, which allows simple asynchronous use of dispatch.
+- A middleware which logs dispatched actions and the resulting new state(logger)
+- An enhancer which logs the time taken for the reducers to process each action(monitor reducer)
+- Setup react styleguidist
+- Add display for landing page
+- Add support for user login
+- Add support for user signup
+- Add support for user signout
+- Add display for list of all ideas
+- Add display for list of ideas based on selected tag
+- Add display for details of an idea
+- Add support for liking an idea
+- Add support for commenting on an idea
+- Add support for adding a post
+- Add display for profile details
+- Add display for editing profile 
