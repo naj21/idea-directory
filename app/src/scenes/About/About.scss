@@ -1,0 +1,133 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(0.53deg, rgba(230, 211, 223, 0) 0.21%, #E6D3DF 100.87%);
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  h1 {
+    font-size: 64px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  button {
+    font-size: 18px;
+  }
+}
+
+.about__hero {
+  align-self: center;
+  text-align: center;
+  margin-bottom: 150px;
+
+  h1 {
+    max-width: 500px;
+    margin-bottom: 50px;
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 50px;
+  }
+}
+
+.about__section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px 0;
+  margin-bottom: 150px;
+
+  &:nth-of-type(odd) {
+    div {
+      padding-left: 70px;
+    }
+  }
+
+  h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 48px;
+    margin-bottom: 40px;
+  }
+
+  p {
+    font-size: 24px;
+    max-width: 500px;
+    line-height: 36px;
+  }
+
+}
+
+.about__section-image {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background: rgba(131, 33, 97, 0.2);
+    transform: translate(-20px, -20px);
+  }
+
+  &:nth-of-type(even) {
+    &::before {
+      transform: translate(20px, -20px);
+    }
+  }
+}
+
+.about__footer {
+  text-align: center;
+
+  h1 {
+    margin-bottom: 30px;
+  }
+}
+
+@media(max-width: 768px) {
+  .about__section {
+    margin-bottom: 100px;
+  
+    &:nth-of-type(odd) {
+      div {
+        padding-left: unset;
+        grid-row-start: 1;
+      }
+
+      .about__section-image {
+        grid-row-start: 2;
+
+        &:nth-of-type(even) {
+          &::before {
+            transform: translate(20px, -20px);
+          }
+        }
+      }
+    }
+  }
+
+  .about__hero {
+    margin-bottom: 100px;
+  }  
+}
+
+@media(max-width: 395px) {
+  .about__section {
+    gap: 40px 0;
+    margin-bottom: 70px;
+  }
+
+  .about__hero {
+    margin-bottom: 80px;
+  } 
+  
+  .about__section-image {
+    width: calc(100vw - 40px);
+    height: 300px;
+  }
+}

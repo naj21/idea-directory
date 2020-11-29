@@ -1,0 +1,48 @@
+@import './globals/styles/base.scss';
+@import './globals/styles/layout.scss';
+
+@font-face {
+  font-family: 'id-normal';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Rubik-Regular'), url('./globals/fonts/Rubik-Regular.ttf') format('woff');
+  }
+
+@font-face {
+  font-family: 'id-medium';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Rubik-Medium'), url('./globals/fonts/Rubik-Medium.ttf') format('woff');
+  }
+
+html {
+  --borderGray: #E0E0E0;
+  --gray: #828282;
+  --primary: #832161;
+
+  .no-focus-outline a:focus,
+  .no-focus-outline button:focus {
+    outline: none;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'id-normal', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%; 
+  height: 100%; 
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5); 
+  cursor: pointer;
+}

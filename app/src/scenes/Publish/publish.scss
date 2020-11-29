@@ -1,0 +1,132 @@
+
+.preview-text {
+    padding-bottom: 70px;
+}
+
+.post {
+	form {
+		max-width: 800px;
+		margin-left: 10%;
+		margin-top: 50px;
+
+		>* {
+			width: 100%;
+		}
+	}
+}
+
+.title {
+    border-style: none; 
+    border-color: Transparent; 
+    height:65px;
+    line-height: 65px;
+    font-size:40px;
+    font-weight:500;
+    resize: none;
+
+    &::placeholder {
+        font-family: 'id-normal';
+        font-weight:'normal';
+        color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.idea-text {   
+    border-style: none; 
+    border-color: Transparent; 
+    margin-top:15px;
+    width :1000px;
+    height:300px;
+    resize: none;
+    line-height: 55px;
+    font-size:25px;
+    
+
+    &::placeholder{
+        font-family: 'id-normal';     
+        color: rgba(0, 0, 0, 0.3);          
+      }
+    
+	}
+	
+	.preview {
+		position: absolute;
+		max-width: 1047px;
+		min-height: 500px;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		background: #ffff;
+		padding: 60px 70px 40px;
+		z-index: 1;
+	
+		section {
+			display: grid;
+			grid-template-columns: 1.4fr 1fr;
+		}
+	}
+
+	.title-input {
+		max-width: 316px !important;
+		height: 40px;
+		background: rgba(225, 230, 235, 0.35) !important;
+		border-radius: 3px;
+		margin-bottom: 40px;
+		margin-right: 70px;
+	}
+	
+	.summary-field {
+		max-width: 316px !important;
+		height: 82px;
+		border-radius: 3px;
+		margin-bottom: 40px;
+		background: rgba(225, 230, 235, 0.35) !important;
+		margin-right: 70px;
+		border-color: #E1E6EB;
+		padding: 10px;
+		outline: none;
+
+	}
+
+	.publish-button {
+		margin-top: 75px;
+	}
+
+@media(max-width: 767px) {
+	.post {
+		form {
+			max-width: 800px;
+			margin-left: 10%;
+			margin-top: 20px;
+		}
+	}
+
+
+	.preview {
+		padding: 40px 70px 20px;
+	
+		section {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	.preview-text {
+    padding-bottom: 50px;
+}
+}
+
+@media(max-width: 375px) {
+	.post {
+		form {
+			margin-left: 0%;
+		}
+	}
+
+	.publish-button {
+		margin-top: 45px;
+	}
+}

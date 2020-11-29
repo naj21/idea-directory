@@ -1,0 +1,153 @@
+.auth {
+  // padding: 70px 130px 70px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+}
+
+.auth__hero {
+  margin-top: 80px;
+  h1 {
+    font-size: 45px;
+    color: #832161;
+    margin-bottom: 50px;
+    line-height: 65px;
+  }
+
+  span {
+    display: block;
+    color: gray;
+  }
+}
+
+.auth__form-header {
+  p {
+    &:first-of-type {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    &:nth-of-type(2) {
+      font-size: 12px;
+      color: grey;
+    }
+  }
+}
+
+.auth__card {
+  position: relative;
+  padding: 30px 10% 30px 30px;
+  box-shadow:  0px 2px 10px rgba(0, 0, 0, 0.05) !important;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    border: 1px solid #E1E6EB;
+    left: 0;
+    top: 85px;
+    transform: skew(-0.6deg);
+    opacity: .5;
+  }
+}
+
+.auth__form {
+  padding: 45px 0 0;
+  > *{
+    margin-bottom: 45px;
+  }
+
+  > :last-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+    p {
+      color: gray;
+      font-size: 13px;
+    }
+  }
+
+  > a {
+    display: block;
+    margin: -35px 0 0;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 0 50px;
+  }
+}
+
+.reset-password {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  > img {
+    margin-bottom: 60px;
+    cursor: pointer;
+  }
+
+}
+
+.reset-password__section {
+  max-width: 440px;
+
+  h3 {
+    font-family: "id-medium", sans-serif;
+    margin-bottom: 15px;
+  }
+
+  form {
+    margin-top: 50px;
+  }
+
+  button {
+    font-size: 15px;
+    margin-top: 55px;
+  }
+
+  &__msg {
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+    align-items: center;
+    text-align: center;
+
+    h3 {
+      margin: 43px 0 18px;
+    }
+  }
+}
+
+@media(max-width: 767px) {
+  .auth {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .auth__hero {
+    margin-top: 0px;
+
+    img {
+      display: none;
+    }
+  }
+}
+
+@media(max-width: 395px) {
+  .reset-password {
+    top: 15%;
+  }
+
+  .auth__form {
+    > :last-child {
+      display: flex;
+      flex-direction: column;
+      p {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
