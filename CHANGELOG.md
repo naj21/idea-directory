@@ -1,4 +1,4 @@
-# WIP
+# 0.1.0
 
 - Setup docker
 - Setup ESlint and Prettier with a precommit
